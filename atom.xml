@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-29T15:15:16.400Z</updated>
+  <updated>2019-11-29T15:29:12.804Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,18 +21,20 @@
     <link href="http://yoursite.com/2019/11/29/ceshi/"/>
     <id>http://yoursite.com/2019/11/29/ceshi/</id>
     <published>2019-11-29T15:14:05.380Z</published>
-    <updated>2019-11-29T15:15:16.400Z</updated>
+    <updated>2019-11-29T15:29:12.804Z</updated>
     
-    <content type="html"><![CDATA[<hr><p>title: ceshi<br>date: 2019-11-29 23:14:05<br>tags:<br>categories: life</p><hr>]]></content>
+    <content type="html"><![CDATA[<p>﻿—<br>title: ceshi<br>date: 2019-11-29 23:14:05<br>toc: true<br>categories: </p><ul><li>云服务器<br>tags: </li><li>a</li><li>b</li></ul><hr>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-&lt;p&gt;title: ceshi&lt;br&gt;date: 2019-11-29 23:14:05&lt;br&gt;tags:&lt;br&gt;categories: life&lt;/p&gt;
-&lt;hr&gt;
-
+        &lt;p&gt;﻿—&lt;br&gt;title: ceshi&lt;br&gt;date: 2019-11-29 23:14:05&lt;br&gt;toc: true&lt;br&gt;categories: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务器&lt;br&gt;tags: &lt;/li&gt;
+&lt;li&gt;a&lt;/li&gt;
+&lt;li&gt;b&lt;/li&gt;
+&lt;/ul&gt;
       
     
     </summary>
