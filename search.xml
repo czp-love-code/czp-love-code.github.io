@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>朴素字符串匹配算法</title>
+    <url>/2019/12/01/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定两个字符串A和B，我们要判断A中是否包含B，并找到A与B相等的第一个位置下标</p>
+<h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>我们将两个字符串都从头开始扫描，然后若是扫描的两个位置字符相同，则两个字符串继续往后扫描。若是扫描的位置字符不相同，那么我们就将字符串B从头开始扫描，而字符串A就从刚才扫描它的初始位置往后挪一位接着扫描</p>
+<a id="more"></a>
+<h2 id="算法实现（C-）"><a href="#算法实现（C-）" class="headerlink" title="算法实现（C++）"></a>算法实现（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;朴素字符串匹配算法</span></pre></td></tr><tr><td class="code"><pre><span class="line">int match(string A, string B) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	int m &#x3D; A.size(), i &#x3D; 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	while (i &lt; m &amp;&amp; j &lt; n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		if (A[i] &#x3D;&#x3D; B[j]) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">			i++;</span></pre></td></tr><tr><td class="code"><pre><span class="line">			j++;	&#x2F;&#x2F;若匹配，两个字符串同时往后扫描</span></pre></td></tr><tr><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		else &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">			i &#x3D; i-j+1;	&#x2F;&#x2F;字符串A扫描回到原点并后移一位</span></pre></td></tr><tr><td class="code"><pre><span class="line">			j &#x3D; 0;		&#x2F;&#x2F;重置字符串B的扫描</span></pre></td></tr><tr><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		return i - j;	&#x2F;&#x2F;若值大于m-n时不存在匹配</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;                             </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>朴素算法至多迭代m-n+1轮，各轮至多n次比对，因n&gt;&gt;m，所以其时间复杂度为O（nm)</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>字符串匹配</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>插入排序</title>
     <url>/2019/12/01/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<h2 id="插入排序的原理"><a href="#插入排序的原理" class="headerlink" title="插入排序的原理"></a>插入排序的原理</h2><p>插入排序其实就像是我们平时玩扑克牌时的取牌操作，初始时我们手中没有任何牌，拿到第一张牌之后自然就不用做任何的移动操作。接着我们继续拿到牌，将每次新拿到的牌跟前面（已排序）的牌依次进行对比，然后将之放到正确的位置上。</p>
