@@ -20,7 +20,8 @@
 <p>空间复杂度上， 二分插入排序也是就地排序算法，它的空间复杂度为O（1）.</p>
 ]]></content>
       <categories>
-        <category>-算法 -排序算法</category>
+        <category>算法</category>
+        <category>排序算法</category>
       </categories>
       <tags>
         <tag>排序</tag>
