@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-02T01:43:40.873Z</updated>
+  <updated>2019-12-02T08:14:04.103Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++ PPrimer 16 模板</title>
+    <link href="http://yoursite.com/2019/12/02/C++%20Primer-16(%E4%B8%8A%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/12/02/C++%20Primer-16(%E4%B8%8A%EF%BC%89/</id>
+    <published>2019-12-02T08:14:03.000Z</published>
+    <updated>2019-12-02T08:14:04.103Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>堆排序</title>
