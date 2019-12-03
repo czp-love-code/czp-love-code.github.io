@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-03T05:08:22.648Z</updated>
+  <updated>2019-12-03T13:38:59.169Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C Primer 17(上）</title>
+    <link href="http://yoursite.com/2019/12/03/C++%20Primer%2017/"/>
+    <id>http://yoursite.com/2019/12/03/C++%20Primer%2017/</id>
+    <published>2019-12-03T07:30:31.000Z</published>
+    <updated>2019-12-03T13:38:59.169Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>tuple类型和它的伴随类型都在tuple头文件中<br>初始化tuple</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span></pre></td></tr></table></figure><a id="more"></a><p>访问tuple</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">get&lt;i&gt;(t)&#x2F;&#x2F;返回引用，若t为左值，则左值引用，否则右值引用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;i必须是一个常量表达式</span></pre></td></tr></table></figure><p>tuple成员的数量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple_size&lt;tupleType&gt;::value;&#x2F;&#x2F;返回size_t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注意：tupleType不是tuple对象，而是类型</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">typedef decltype(item) trans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">size_t sz&#x3D;tuple_size&lt;trans&gt;::value;</span></pre></td></tr></table></figure><p>tuple成员的类型</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple_element&lt;i,tupleType&gt;::type;</span></pre></td></tr></table></figure><p>只有两个tuple具有相同数量成员才可以进行比较<br>默认情况下，equal_range使用&lt;运算符来比较元素</p><h2 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h2><p>定义在头文件bitset中<br>初始化bitset</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(u);&#x2F;&#x2F;这两个是constexpr的构造函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(s,pos,m,zero,one);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(cp,pos,m,zero,one);</span></pre></td></tr></table></figure><p>当用一个整型值来初始化bitset时，它会被转换为unsigned long long类型并当作位模式处理<br>操作bitset</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">b.any();b.all();b.none();b.count()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">b.size();&#x2F;&#x2F;constexpr函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">b.text(pos);b.set(pos,v)b.set()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">b.reset(pos)b.reset()b.flip(pos)b.flip();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">b[pos]&#x2F;&#x2F;若b为const，返回bool值，否则可用来操作位</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">b.to_ulong()b.to_ullong()b.to_string(zero,one)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">os&lt;&lt;bis&gt;&gt;b;</span></pre></td></tr></table></figure><h2 id="正则表达式（RE）"><a href="#正则表达式（RE）" class="headerlink" title="正则表达式（RE）"></a>正则表达式（RE）</h2><p>RE库定义在头文件regex中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string pattern(&quot;[^c]ei&quot;);&#x2F;&#x2F;任意非c后接ei</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">pattern&#x3D;&quot;[[:alpha:]]*&quot;+pattern+&quot;[[:alpha:]]*&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;0个或多个，若*换+，则表示1个或多个</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">regex r(pattern);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">smatch results;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">string test_str&#x3D;&quot;receipt freind theif receive&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">if(regex_search(test_str,results,r))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;result.str()&lt;&lt;endl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;输出freind</span></pre></td></tr></table></figure><p>regex_search 找到一个匹配子串就会停止查找</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">regex(re,f)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">r1.assign(re,f)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">r.mark_count()&#x2F;&#x2F;r中子表达式的数目</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">r.flags() &#x2F;&#x2F;返回r的标志集</span></pre></td></tr></table></figure><p>三个标志特别记忆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">icase</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">nosubs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">optimize&#x2F;&#x2F;执行速度优先于构造速度</span></pre></td></tr></table></figure><p>使用标志</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">regex r(&quot;[[:alnum:]]+\\.(cpp|cxx|cc)$&quot;,regex::icase);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;反斜线和点在C++中都是特殊字符，需要先用一个反斜线去掉其特殊含义</span></pre></td></tr></table></figure><p>正则表达式是在运行时，当一个regex对象被初始化或赋予一个新模式才被“编译”的，即是说，一个正则表达式的语法是否正确是在运行时解析的（特别耗时）<br>若是编写的正则表达式存在错误，那么在运行时标准库会抛出regex_error的异常，它有what()和code()成员，来描述错误和某个错误类型对应的数值编码</p><p>容器参数的类型要与输入序列的类型一致</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string-&gt;regex,smatch,ssub_match,sregex_iterator</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">const char*-&gt;regex,cmatch,csub_match,cregex_iterator</span></pre></td></tr></table></figure><p>使用sregex_iterator</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">for(sregex_iterator it(file.begin(),file.end(),r),end_it;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">it!&#x3D;end_it;++it)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;it-&gt;str()&lt;&lt;endl;</span></pre></td></tr></table></figure><p>查找上下文</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">for....</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">auto pos &#x3D; it-&gt;prefix().length();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">pos&#x3D;pos&gt;40?pos-40:0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;it-&gt;prefix().str().substr(pos)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;&lt;&quot;\n\t\t&gt;&gt;&gt;&quot;&lt;&lt;it-&gt;str()&lt;&lt;&quot;&lt;&lt;&lt;\n&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;&lt;it-&gt;suffix().str().substr(0,40)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&lt;&lt;endl;</span></pre></td></tr></table></figure><p>smatch操作</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">m.ready()m.size()m.empty()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">m.prefix()m.suffix()m.format(...)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">m.length(n)m.position(n)&#x2F;&#x2F;第n个子表达式序列距开始的距离</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">m.str(n)m[n]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;m.str(0) 保存完整的匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">m.begin(),m.end()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">m.cbegin(),m.cend()</span></pre></td></tr></table></figure><p>？sub_match操作</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">matchedfirstsecondlength()str()</span></pre></td></tr></table></figure><p>使用regex_replace</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string fmt&#x3D;&quot;$2.$5.$7&quot;&#x2F;&#x2F;表某个子表达式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;regex_replace(s,r,fmt)&lt;&lt;endl;</span></pre></td></tr></table></figure><p>匹配和格式化标志的类型为match_flag_type，定义在regex_constants的命名空间，也在std中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">using std::regex_constants::format_no_copy;</span></pre></td></tr></table></figure><p>使用格式标志</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;regex_replace(s,r,fmt,format_no_copy)&lt;&lt;endl;</span></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;tuple&quot;&gt;&lt;a href=&quot;#tuple&quot; class=&quot;headerlink&quot; title=&quot;tuple&quot;&gt;&lt;/a&gt;tuple&lt;/h2&gt;&lt;p&gt;tuple类型和它的伴随类型都在tuple头文件中&lt;br&gt;初始化tuple&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#x3D;&amp;#123;1,2,3&amp;#125;;&amp;#x2F;&amp;#x2F;错误&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#123;1,2,3&amp;#125;&amp;#x2F;&amp;#x2F;正确，也可值初始化&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="C++ Primer" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="语言" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ Primer 16 (下)</title>
@@ -127,9 +157,9 @@
       <category term="排序算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
-    
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
     
   </entry>
   
@@ -231,29 +261,6 @@
     
     
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>暗夜--撕裂</title>
-    <link href="http://yoursite.com/2019/11/29/%E6%9A%97%E5%A4%9C--%E6%92%95%E8%A3%82/"/>
-    <id>http://yoursite.com/2019/11/29/%E6%9A%97%E5%A4%9C--%E6%92%95%E8%A3%82/</id>
-    <published>2019-11-29T15:14:05.380Z</published>
-    <updated>2019-11-30T08:26:53.163Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h2><h3 id="搭建这个网站的初衷"><a href="#搭建这个网站的初衷" class="headerlink" title="搭建这个网站的初衷"></a>搭建这个网站的初衷</h3><p>作为一个半路出家（终于回到正轨）的伪程序员来说，找工作是一大难关，然后我就考虑到找工作时设计简历的问题，看到网上的大神说简历上附上自己的博客和github比较好，所以我就猛的一脚踹开了博客大门。</p><a id="more"></a><h3 id="为什么要自己搭建博客"><a href="#为什么要自己搭建博客" class="headerlink" title="为什么要自己搭建博客"></a>为什么要自己搭建博客</h3><p>其实这是挺奇怪的事情，我没有用CSDN，也没有用其他的博客，但是偶然看到网上教人搭建博客的视频，一时心血来潮就动起手来了，这两天的时间什么事情都没干就在搞这个。其实框架倒是挺好搭建的，就是配置的优化实在是不好搞（主要还是因为我没学过前端吧哈哈）。</p><p>像是网站的小图标我就搞了一小时，结果才知道要部署到Github上才会显示网站图标，气摔！之前还出了一个发布不了文章的Bug，但是我搞很久都没搞定就直接全部重头开始了。还有今天才解决的显示页面的问题，网上看了很多大神的博客都没解决，到群上问，各大神也都不知道怎么搞。结果一个比我还弱鸡的人让换个编辑器试试，我抱着大不了重头开始的想法试了一下，最后居然解决了哈哈哈哈哈。</p><p>感谢群里的各位大神和弱鸡。</p><p>这个网站大概就这模样了，其他的我就不搞了，不搞版权也不搞赞赏，评论我也不搞，可能后面会优化一下搜索引擎吧。</p><h3 id="我会发布什么内容"><a href="#我会发布什么内容" class="headerlink" title="我会发布什么内容"></a>我会发布什么内容</h3><p>之前我是用oneNote记录的，里面有很多基础的东西，其他的也都是网上可以搜到的，感觉好像就没什么再PO到网上的必要。但是后面会进行精简吧，在复习的过程中我会把一些（对我来说）比较难的点PO上来，或者利用这个网站重新系统化自己学过的东西。</p><p>当然，也不排除情绪低落的时候跑到这里发Sao的可能，毕竟对生活的记录也是很重要的嘛。</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望每个进来这里的人能够找到需要的答案<br>希望所有夜里挣扎的人都能找到自己的方向</p><p>谢谢。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;欢迎来到我的博客&quot;&gt;&lt;a href=&quot;#欢迎来到我的博客&quot; class=&quot;headerlink&quot; title=&quot;欢迎来到我的博客&quot;&gt;&lt;/a&gt;欢迎来到我的博客&lt;/h2&gt;&lt;h3 id=&quot;搭建这个网站的初衷&quot;&gt;&lt;a href=&quot;#搭建这个网站的初衷&quot; class=&quot;headerlink&quot; title=&quot;搭建这个网站的初衷&quot;&gt;&lt;/a&gt;搭建这个网站的初衷&lt;/h3&gt;&lt;p&gt;作为一个半路出家（终于回到正轨）的伪程序员来说，找工作是一大难关，然后我就考虑到找工作时设计简历的问题，看到网上的大神说简历上附上自己的博客和github比较好，所以我就猛的一脚踹开了博客大门。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
