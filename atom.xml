@@ -157,9 +157,9 @@
       <category term="排序算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
       <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
+    
+      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
