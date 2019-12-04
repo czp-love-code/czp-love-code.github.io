@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C Primer 17(上）</title>
+    <title>C++ Primer 17(下)</title>
+    <url>/2019/12/04/C++%20Primer%2017(%E4%B8%8B)/</url>
+    <content><![CDATA[<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><h3 id="随机数引擎类"><a href="#随机数引擎类" class="headerlink" title="随机数引擎类"></a>随机数引擎类</h3><p>函数对象类，定义了调用运算符，不接受参数并返回一个随机数unsigned整数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default_random_engine e;</span></pre></td></tr><tr><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;10;i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		cout&lt;&lt;e()&lt;&lt;endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="随机数引擎操作"><a href="#随机数引擎操作" class="headerlink" title="随机数引擎操作"></a>随机数引擎操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Engine e(s)		&#x2F;&#x2F;使用整型值s作为种子</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.seed(s)		&#x2F;&#x2F;使用种子s重置引擎的状态</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#x2F;&#x2F;使用相同种子的引擎将生成相同的序列</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.min()		e.max()</span></pre></td></tr><tr><td class="code"><pre><span class="line">Engine::result_type		&#x2F;&#x2F;此引擎可生成的值类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.discard(ull)	&#x2F;&#x2F;将引擎推进Ull步，这个值是unsigned long long</span></pre></td></tr></table></figure>
+<h3 id="使用分布类"><a href="#使用分布类" class="headerlink" title="使用分布类"></a>使用分布类</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uniform_int_distribution&lt;unsigned&gt; u(0,9);</span></pre></td></tr><tr><td class="code"><pre><span class="line">default_random_engine e;</span></pre></td></tr><tr><td class="code"><pre><span class="line">u(e);</span></pre></td></tr></table></figure>
+<p>对于一个给定的随机数发生器，每次运行程序它都会返回相同的数值序列，可以通过将e和u定义为static，然后就可以在函数调用中保持状态</p>
+<h3 id="使用系统函数time"><a href="#使用系统函数time" class="headerlink" title="使用系统函数time"></a>使用系统函数time</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义在ctime头文件中，返回从一个特定时刻到当前经过了多少秒</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;函数time接受单个指针参数，指向用于写入时间的数据结构</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果此指针为空，则简单地返回时间</span></pre></td></tr><tr><td class="code"><pre><span class="line">default_random_engine e(time(0));</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果程序作为自动过程地一部分，则种子不变</span></pre></td></tr></table></figure>
+<h3 id="生成随机实数"><a href="#生成随机实数" class="headerlink" title="生成随机实数"></a>生成随机实数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;double&gt; u(0,1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;&gt;	u(0,1)	&#x2F;&#x2F;默认生成double类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">u(e);</span></pre></td></tr></table></figure>
+<h3 id="分布类型的操作"><a href="#分布类型的操作" class="headerlink" title="分布类型的操作"></a>分布类型的操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">d.min()		d.max()</span></pre></td></tr><tr><td class="code"><pre><span class="line">d.reset();&#x2F;&#x2F;重建d的状态，使得随后对d的使用不依赖于d已经生成的值</span></pre></td></tr></table></figure>
+<h3 id="生成非均匀分布的随机数"><a href="#生成非均匀分布的随机数" class="headerlink" title="生成非均匀分布的随机数"></a>生成非均匀分布的随机数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">normal_distribution&lt;&gt; n(4,1.5);</span></pre></td></tr><tr><td class="code"><pre><span class="line">n(e);</span></pre></td></tr></table></figure>
+<h3 id="使用lround函数"><a href="#使用lround函数" class="headerlink" title="使用lround函数"></a>使用lround函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义在cmath中</span></pre></td></tr><tr><td class="code"><pre><span class="line">unsigned v&#x3D;lround(n(e));</span></pre></td></tr></table></figure>
+<h3 id="bernoulli-distribution类"><a href="#bernoulli-distribution类" class="headerlink" title="bernoulli_distribution类"></a>bernoulli_distribution类</h3><p>不接受模板参数，返回bool值，概率默认0.5</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bernoulli_distribution	b;&#x2F;&#x2F;默认true概率0.5</span></pre></td></tr><tr><td class="code"><pre><span class="line">bernoulli_distribution  b(.55)	&#x2F;&#x2F;true为0.55</span></pre></td></tr></table></figure>
+<h2 id="IO库再探"><a href="#IO库再探" class="headerlink" title="IO库再探"></a>IO库再探</h2><h3 id="操纵符"><a href="#操纵符" class="headerlink" title="操纵符"></a>操纵符</h3><p>函数或对象，影响流的状态，返回处理的流对象<br>用于控制数值的输出以及控制补白的数量和位置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">boolalpha	noboolalpha		showbase noshowbase</span></pre></td></tr><tr><td class="code"><pre><span class="line">showpoint 	noshowpoint 	showpos noshowpos</span></pre></td></tr><tr><td class="code"><pre><span class="line">uppercase 	nouppercase		dec		hex 	oct</span></pre></td></tr><tr><td class="code"><pre><span class="line">left	right	internal	&#x2F;&#x2F;在值的左右&#x2F;符号和值之间填充字符</span></pre></td></tr><tr><td class="code"><pre><span class="line">fixed	scientific	hexfloat	defaultfloat</span></pre></td></tr><tr><td class="code"><pre><span class="line">unitbuf	nounitbuf	skipws	noskipws</span></pre></td></tr><tr><td class="code"><pre><span class="line">flush	ends	endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">setfill(ch)	setprecision(ch)	setw(w)	setbase(b)</span></pre></td></tr></table></figure>
+<p>默认情况下，输入运算符会忽略空白符</p>
+<h3 id="单字节操作"><a href="#单字节操作" class="headerlink" title="单字节操作"></a>单字节操作</h3><p>单字节底层IO操作会读取而不是忽略空白符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">is.get(ch)	</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.get()	&#x2F;&#x2F;返回int	</span></pre></td></tr><tr><td class="code"><pre><span class="line">os.put(ch)</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.putback(ch)	is.unget()	</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.peek();	&#x2F;&#x2F;返回Int</span></pre></td></tr></table></figure>
+<p>返回int是因为这样可以返回文件尾标记<br>标准库用负值表示文件尾<br>头文件cstdio定义了EOF，这是一个const</p>
+<h3 id="多字节底层操作"><a href="#多字节底层操作" class="headerlink" title="多字节底层操作"></a>多字节底层操作</h3><p>自己分配并管理用来保存和提取数据的字符数组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">is.get(sink,size,delim)</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.getline(sink,size,delim)</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.read(sink.size)</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.gcount()	&#x2F;&#x2F;从上一个操作读取的字节数</span></pre></td></tr><tr><td class="code"><pre><span class="line">os.write(source,size)</span></pre></td></tr><tr><td class="code"><pre><span class="line">is.isgnore(size,delim)	&#x2F;&#x2F;size默认1，delim默认EOF</span></pre></td></tr></table></figure>
+<h3 id="流的随机访问"><a href="#流的随机访问" class="headerlink" title="流的随机访问"></a>流的随机访问</h3><p>只用于sstream和fstream</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tellg()	tellp()</span></pre></td></tr><tr><td class="code"><pre><span class="line">seekg(pos)	seekp(pos)	&#x2F;&#x2F;将标记定位到绝对地址</span></pre></td></tr><tr><td class="code"><pre><span class="line">seekg(off,from)	seekp(off,from)</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;from是stream::beg&#x2F;cur&#x2F;end</span></pre></td></tr></table></figure>
+<p>标记只有一个，表示缓冲区中的当前位置，标准库将p和g版本的读写位置都映射到这个单一的标记，在读写操作间切换时，就必须进行seek进行重定位标记</p>
+<p>pos的类型是pos_type<br>off的类型是off_type        //可以是负的<br>它们定义在头文件istream和ostream中</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>语言</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Primer 17(上）</title>
     <url>/2019/12/03/C++%20Primer%2017(%E4%B8%8A%EF%BC%89/</url>
     <content><![CDATA[<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>tuple类型和它的伴随类型都在tuple头文件中<br>初始化tuple</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span></pre></td></tr><tr><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span></pre></td></tr></table></figure>
