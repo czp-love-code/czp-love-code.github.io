@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/tubiao.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/tubiao16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="控制内存分配定义new&#x2F;delete全局作用域或类作用域当定义为类的成员时，是隐式static的，无须显式声明 当将delete定义为类的成员时，可以包含第二个size_t的形参，它是第一个指针形参所指对象的字节数，此也可以用于继承体系中的对象，由动态类型决定字节数">
+<meta name="keywords" content="C++,语言,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ Primer 19(上)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;C++%20Primer%2019(%E4%B8%8A%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="门内技墓">
+<meta property="og:description" content="控制内存分配定义new&#x2F;delete全局作用域或类作用域当定义为类的成员时，是隐式static的，无须显式声明 当将delete定义为类的成员时，可以包含第二个size_t的形参，它是第一个指针形参所指对象的字节数，此也可以用于继承体系中的对象，由动态类型决定字节数">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-05T06:41:57.391Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/05/C++%20Primer%2019(%E4%B8%8A%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>C++ Primer 19(上) | 门内技墓</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="门内技墓" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">门内技墓</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Always keep it positive</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/C++%20Primer%2019(%E4%B8%8A%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/weixintouxiang.jpg">
+      <meta itemprop="name" content="耐清">
+      <meta itemprop="description" content="一个热爱技术与生活的geek">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="门内技墓">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ Primer 19(上)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-05 10:02:39 / 修改时间：14:41:57" itemprop="dateCreated datePublished" datetime="2019-12-05T10:02:39+08:00">2019-12-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/" itemprop="url" rel="index">
+                    <span itemprop="name">C++ Primer</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="控制内存分配"><a href="#控制内存分配" class="headerlink" title="控制内存分配"></a>控制内存分配</h2><h3 id="定义new-delete"><a href="#定义new-delete" class="headerlink" title="定义new/delete"></a>定义new/delete</h3><p>全局作用域或类作用域<br>当定义为类的成员时，是隐式static的，无须显式声明</p>
+<p>当将delete定义为类的成员时，可以包含第二个size_t的形参，它是第一个指针形参所指对象的字节数，此也可以用于继承体系中的对象，由动态类型决定字节数</p>
+<a id="more"></a>
+<p>new的第一个形参必须是size_t，并且不能有默认实参，传入的是对象字节数或所有元素所需的空间</p>
+<p>不能重载<code>void *operator new(size_t,void*);</code></p>
+<h3 id="new-delete的查找"><a href="#new-delete的查找" class="headerlink" title="new/delete的查找"></a>new/delete的查找</h3><p>如果被分配/释放的是类类型，则编译器首先在类及其基类的作用域中查找，然后才在全局中查找</p>
+<h3 id="不抛出异常"><a href="#不抛出异常" class="headerlink" title="不抛出异常"></a>不抛出异常</h3><p>类型nothrow_t是new头文件中的一个struct，在这个类型中不包含任何成员，new头文件中还有一个nothrow的const对象，用户通过这个对象请求new的非抛出版本<br>析构函数和delete都不允许抛出异常<br>当重载delete的时候，必须使用noexcept指定其不抛出异常</p>
+<h3 id="使用malloc和free"><a href="#使用malloc和free" class="headerlink" title="使用malloc和free"></a>使用malloc和free</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">void *operator new(size_t size)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	if(void *mem&#x3D;malloc(size))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		return mem;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	else</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		throw bad_alloc();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">void operator delete(void *mem)noexcept&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	free(mem);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="使用定位new"><a href="#使用定位new" class="headerlink" title="使用定位new"></a>使用定位new</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">new(place_address)type[size]&#123;initializer_list&#125;;</span></pre></td></tr></table></figure>
+<p>当仅通过一个地址调用时，使用<code>operator new(size_t,void *)</code>，这个函数不分配任何内存，只是简单返回指针实参，然后在该地址初始化对象</p>
+<h3 id="construct与定位new"><a href="#construct与定位new" class="headerlink" title="construct与定位new"></a>construct与定位new</h3><p>传给construct的指针必须指向同一个allocator对象分配的空间<br>传给定位new的则不用，甚至不用指向动态内存</p>
+<h3 id="指针调用析构函数"><a href="#指针调用析构函数" class="headerlink" title="指针调用析构函数"></a>指针调用析构函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string *sp&#x3D;new string(&quot;a value&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sp-&gt;~string();</span></pre></td></tr></table></figure>
+<p>清除给定的对象，但不会释放内存空间，可以重新使用该空间</p>
+<h2 id="运行时类型识别"><a href="#运行时类型识别" class="headerlink" title="运行时类型识别"></a>运行时类型识别</h2><h3 id="使用dynamic-cast"><a href="#使用dynamic-cast" class="headerlink" title="使用dynamic_cast"></a>使用dynamic_cast</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;转换目标为指针类型</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">if(Derived *dp&#x3D;dynamic_cast&lt;Derived *&gt;(bp))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;else&#123;----&#125;</span></pre></td></tr></table></figure>
+<p>如果转换失败结果为0<br>可以对一个空指针执行该操作，结果是所需类型的空指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;转换目标为引用类型</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">void f(const Base &amp;b)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	try&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		const Derived &amp;d&#x3D;dynamic_cast&lt;const Derived&amp;&gt;(b);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	&#125;catch(bad_cast)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>如果转换失败抛出std::bad_cast，该异常在typeinfo中</p>
+<h3 id="使用typeid"><a href="#使用typeid" class="headerlink" title="使用typeid"></a>使用typeid</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">if(typeid(*bp)&#x3D;&#x3D;typeid(Derived))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	---------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>实参是对象，而不是指针<br>作用于数组和函数时不会执行到指针的转换<br>当运算对象是带有虚函数的类时，编译器才会在运行时对表达式进行求值，此时指针必须是有效指针，空指针的话会抛出bad_typeid异常<br>其他情况不会对表达式进行求值，直接返回静态类型</p>
+<h3 id="type-info类"><a href="#type-info类" class="headerlink" title="type_info类"></a>type_info类</h3><p>定义在typeinfo头文件中<br>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">t1&#x3D;t2	t1!&#x3D;t2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">t.name()	t1.before(t2)&#x2F;&#x2F;返回bool</span></pre></td></tr></table></figure>
+<p>没有默认构造函数，type_info类的拷贝、移动、赋值函数都被定义成删除的，只能通过typeid创建它的对象</p>
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">enum color&#123;red,yellow,green&#125;;&#x2F;&#x2F;不限定作用域</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">enum class peppers&#123;red,yellow,green&#125;&#x2F;&#x2F;限定作用域</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">color eyes&#x3D;green;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">peppers p&#x3D;peppers::red;</span></pre></td></tr></table></figure>
+<p>默认情况下，枚举值从0开始，依次加1<br>可以定义枚举类型的constexpr变量<br>可以作为case标签，也能将枚举类型作为非类型模板形参，还能在类的定义中初始化枚举类型的静态数据成员<br>只能用该类型的一个枚举成员或者另一个对象来赋值</p>
+<h3 id="指定enum的大小"><a href="#指定enum的大小" class="headerlink" title="指定enum的大小"></a>指定enum的大小</h3><p>不限定作用域的枚举类型的对象或枚举成员会自动隐式转换为int，而限定作用域的枚举类型不会进行这样的隐式转换<br>不限定作用域的枚举类型，它的枚举成员不存在默认类型，我们指定潜在类型时要注意，枚举成员的值必须在指定的类型取值范围内，不然就会出错<br>而限定作用域默认情况下是int</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">enum a:unsigned long long&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	-------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="前置声明"><a href="#前置声明" class="headerlink" title="前置声明"></a>前置声明</h3><p>前置声明必须与它的定义一致，无论是作用域是否限定还是指定的潜在类型，不然就会报错</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag"># 语言</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/04/C++%20Primer%2018(%E4%B8%8A)/" rel="prev" title="C++ Primer 18(上)">
+      <i class="fa fa-chevron-left"></i> C++ Primer 18(上)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制内存分配"><span class="nav-number">1.</span> <span class="nav-text">控制内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义new-delete"><span class="nav-number">1.1.</span> <span class="nav-text">定义new/delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-delete的查找"><span class="nav-number">1.2.</span> <span class="nav-text">new/delete的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不抛出异常"><span class="nav-number">1.3.</span> <span class="nav-text">不抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用malloc和free"><span class="nav-number">1.4.</span> <span class="nav-text">使用malloc和free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用定位new"><span class="nav-number">1.5.</span> <span class="nav-text">使用定位new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#construct与定位new"><span class="nav-number">1.6.</span> <span class="nav-text">construct与定位new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针调用析构函数"><span class="nav-number">1.7.</span> <span class="nav-text">指针调用析构函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时类型识别"><span class="nav-number">2.</span> <span class="nav-text">运行时类型识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用dynamic-cast"><span class="nav-number">2.1.</span> <span class="nav-text">使用dynamic_cast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用typeid"><span class="nav-number">2.2.</span> <span class="nav-text">使用typeid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type-info类"><span class="nav-number">2.3.</span> <span class="nav-text">type_info类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">3.</span> <span class="nav-text">枚举类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定enum的大小"><span class="nav-number">3.2.</span> <span class="nav-text">指定enum的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前置声明"><span class="nav-number">3.3.</span> <span class="nav-text">前置声明</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="耐清"
+      src="/images/weixintouxiang.jpg">
+  <p class="site-author-name" itemprop="name">耐清</p>
+  <div class="site-description" itemprop="description">一个热爱技术与生活的geek</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czp-love-code" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czp-love-code" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15626274773@163.com" title="E-Mail → mailto:15626274773@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3568741210" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3568741210" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">耐清</span>
+</div>
+  <div class="powered-by">
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

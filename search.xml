@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++ Primer 18(下)</title>
-    <url>/2019/12/04/C++%20Primer%2018(%E4%B8%8B)/</url>
-    <content><![CDATA[<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace x&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span></pre></td></tr></table></figure>
-<p>不能定义在函数或类的内部<br>命名空间成员的定义可以在外部，但是必须在所属命名空间的外层命名空间中</p>
+    <title>C++ Primer 19(上)</title>
+    <url>/2019/12/05/C++%20Primer%2019(%E4%B8%8A%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="控制内存分配"><a href="#控制内存分配" class="headerlink" title="控制内存分配"></a>控制内存分配</h2><h3 id="定义new-delete"><a href="#定义new-delete" class="headerlink" title="定义new/delete"></a>定义new/delete</h3><p>全局作用域或类作用域<br>当定义为类的成员时，是隐式static的，无须显式声明</p>
+<p>当将delete定义为类的成员时，可以包含第二个size_t的形参，它是第一个指针形参所指对象的字节数，此也可以用于继承体系中的对象，由动态类型决定字节数</p>
 <a id="more"></a>
-<h3 id="模板特例化"><a href="#模板特例化" class="headerlink" title="模板特例化"></a>模板特例化</h3><p>模板特例化必须定义在原始模板所属的命名空间中，只要在该命名空间中声明了特例化，就可以在外部定义它了</p>
-<h3 id="内联命名空间"><a href="#内联命名空间" class="headerlink" title="内联命名空间"></a>内联命名空间</h3><p>可以直接被外层命名空间使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">inline namespace x&#123;--------&#125;</span></pre></td></tr></table></figure>
-<p>inline必须出现在第一次定义的时候，后续打开可不写</p>
-<h3 id="未命名的命名空间"><a href="#未命名的命名空间" class="headerlink" title="未命名的命名空间"></a>未命名的命名空间</h3><p>静态生命周期，第一次使用前创建，直到程序结束销毁</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#123;--------&#125;</span></pre></td></tr></table></figure>
-<p>不能跨越多个文件，一个包含了未命名的命名空间的头文件被多个文件使用时，在这多个文件里的名字将对应不同的实体<br>它的名字可以直接使用，因此当处于最外层作用域时，它里面的名字要区分于全局作用域中的名字</p>
-<h3 id="using-声明"><a href="#using-声明" class="headerlink" title="using 声明"></a>using 声明</h3><p>一次引入一个命名空间的一个成员名字<br>当它出现在类的作用域中时，这个声明只能指向基类成员</p>
-<h3 id="using-指示"><a href="#using-指示" class="headerlink" title="using 指示"></a>using 指示</h3><p>一次引入一个命名空间所有名字，可以说是将名字都注入到外层作用域中，using指示不能出现在类的作用域中</p>
-<h3 id="头文件与using"><a href="#头文件与using" class="headerlink" title="头文件与using"></a>头文件与using</h3><p>头文件应该只负责定义接口的名字，所以只能在它的函数或命名空间内使用using声明和指示</p>
-<h3 id="实参查找与类类型形参"><a href="#实参查找与类类型形参" class="headerlink" title="实参查找与类类型形参"></a>实参查找与类类型形参</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">operator&gt;&gt;(std::cin,s);</span></pre></td></tr></table></figure>
-<p>当编译器发现&gt;&gt;时，首先在当前作用域查找，然后在外层作用域查找，最后由于&gt;&gt;的形参是类类型的，所以编译器还会在cin和s的类所属的命名空间查找</p>
-<h3 id="实参查找与友元"><a href="#实参查找与友元" class="headerlink" title="实参查找与友元"></a>实参查找与友元</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace A&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	class C&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">			&#x2F;&#x2F;隐式成为命名空间A的成员</span></pre></td></tr><tr><td class="code"><pre><span class="line">		friend void f2();</span></pre></td></tr><tr><td class="code"><pre><span class="line">		friend void f(const C&amp;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">int main()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	A::C cobj;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	f(cobj);	&#x2F;&#x2F;正确，通过形参C找到A的命名空间</span></pre></td></tr><tr><td class="code"><pre><span class="line">	f2();	&#x2F;&#x2F;错误，找不到它的声明</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h3 id="使用using"><a href="#使用using" class="headerlink" title="使用using"></a>使用using</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">using NS::print(int);</span></pre></td></tr><tr><td class="code"><pre><span class="line">using NS::print;</span></pre></td></tr></table></figure>
-<p>using声明会引入函数到本作用域<br>如果using声明引入一个同名同参的函数，会报错<br>而using指示不会<br>using指示是将命名空间的成员提升到外层作用域</p>
-<h2 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h2><h3 id="继承构造函数"><a href="#继承构造函数" class="headerlink" title="继承构造函数"></a>继承构造函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">using Base1::Base1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">using Base2::Base2;</span></pre></td></tr></table></figure>
-<p>如果继承了相同形参列表的构造函数，会报错，这时我们需要为该形参再自己定义一个构造函数，既然定义了构造函数，那么这个时候最好也定义一个默认构造函数</p>
-<h3 id="派生类的控制成员"><a href="#派生类的控制成员" class="headerlink" title="派生类的控制成员"></a>派生类的控制成员</h3><p>如果定义了自己的拷贝/赋值构造函数和赋值运算符，必须在完整的对象上执行拷贝、移动、赋值操作<br>如果使用的是合成的，就会对其基类部分执行这些操作</p>
-<h3 id="静态类型与操作"><a href="#静态类型与操作" class="headerlink" title="静态类型与操作"></a>静态类型与操作</h3><p>对象、指针和引用的静态类型决定能够使用哪些成员，例如一个指向基类的指针，只能使用基类部分的成员</p>
-<h3 id="多重继承的二义性调用"><a href="#多重继承的二义性调用" class="headerlink" title="多重继承的二义性调用"></a>多重继承的二义性调用</h3><p>当从多个基类继承了同名函数时，调用需要指明哪个作用域下的函数，不然就会出现二义性错误，也可以再本作用域下再定义一个同名函数</p>
-<h3 id="使用虚继承"><a href="#使用虚继承" class="headerlink" title="使用虚继承"></a>使用虚继承</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Bear:virtual public zoo&#123;------&#125;;</span></pre></td></tr></table></figure>
-<p>派生类中只有虚继承的类一个实例</p>
-<h3 id="虚基类的构造"><a href="#虚基类的构造" class="headerlink" title="虚基类的构造"></a>虚基类的构造</h3><p>虚基类是由最低层的派生类初始化的，如果有多个虚基类，则按照在派生列表中中出现的顺序初始化，然后才按顺序初始化其他基类<br>析构顺序与构造顺序相反</p>
+<p>new的第一个形参必须是size_t，并且不能有默认实参，传入的是对象字节数或所有元素所需的空间</p>
+<p>不能重载<code>void *operator new(size_t,void*);</code></p>
+<h3 id="new-delete的查找"><a href="#new-delete的查找" class="headerlink" title="new/delete的查找"></a>new/delete的查找</h3><p>如果被分配/释放的是类类型，则编译器首先在类及其基类的作用域中查找，然后才在全局中查找</p>
+<h3 id="不抛出异常"><a href="#不抛出异常" class="headerlink" title="不抛出异常"></a>不抛出异常</h3><p>类型nothrow_t是new头文件中的一个struct，在这个类型中不包含任何成员，new头文件中还有一个nothrow的const对象，用户通过这个对象请求new的非抛出版本<br>析构函数和delete都不允许抛出异常<br>当重载delete的时候，必须使用noexcept指定其不抛出异常</p>
+<h3 id="使用malloc和free"><a href="#使用malloc和free" class="headerlink" title="使用malloc和free"></a>使用malloc和free</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void *operator new(size_t size)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	if(void *mem&#x3D;malloc(size))</span></pre></td></tr><tr><td class="code"><pre><span class="line">		return mem;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	else</span></pre></td></tr><tr><td class="code"><pre><span class="line">		throw bad_alloc();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">void operator delete(void *mem)noexcept&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	free(mem);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="使用定位new"><a href="#使用定位new" class="headerlink" title="使用定位new"></a>使用定位new</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">new(place_address)type[size]&#123;initializer_list&#125;;</span></pre></td></tr></table></figure>
+<p>当仅通过一个地址调用时，使用<code>operator new(size_t,void *)</code>，这个函数不分配任何内存，只是简单返回指针实参，然后在该地址初始化对象</p>
+<h3 id="construct与定位new"><a href="#construct与定位new" class="headerlink" title="construct与定位new"></a>construct与定位new</h3><p>传给construct的指针必须指向同一个allocator对象分配的空间<br>传给定位new的则不用，甚至不用指向动态内存</p>
+<h3 id="指针调用析构函数"><a href="#指针调用析构函数" class="headerlink" title="指针调用析构函数"></a>指针调用析构函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">string *sp&#x3D;new string(&quot;a value&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">sp-&gt;~string();</span></pre></td></tr></table></figure>
+<p>清除给定的对象，但不会释放内存空间，可以重新使用该空间</p>
+<h2 id="运行时类型识别"><a href="#运行时类型识别" class="headerlink" title="运行时类型识别"></a>运行时类型识别</h2><h3 id="使用dynamic-cast"><a href="#使用dynamic-cast" class="headerlink" title="使用dynamic_cast"></a>使用dynamic_cast</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;转换目标为指针类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">if(Derived *dp&#x3D;dynamic_cast&lt;Derived *&gt;(bp))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;else&#123;----&#125;</span></pre></td></tr></table></figure>
+<p>如果转换失败结果为0<br>可以对一个空指针执行该操作，结果是所需类型的空指针</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;转换目标为引用类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">void f(const Base &amp;b)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	try&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		const Derived &amp;d&#x3D;dynamic_cast&lt;const Derived&amp;&gt;(b);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;catch(bad_cast)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		------</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>如果转换失败抛出std::bad_cast，该异常在typeinfo中</p>
+<h3 id="使用typeid"><a href="#使用typeid" class="headerlink" title="使用typeid"></a>使用typeid</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if(typeid(*bp)&#x3D;&#x3D;typeid(Derived))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	---------</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>实参是对象，而不是指针<br>作用于数组和函数时不会执行到指针的转换<br>当运算对象是带有虚函数的类时，编译器才会在运行时对表达式进行求值，此时指针必须是有效指针，空指针的话会抛出bad_typeid异常<br>其他情况不会对表达式进行求值，直接返回静态类型</p>
+<h3 id="type-info类"><a href="#type-info类" class="headerlink" title="type_info类"></a>type_info类</h3><p>定义在typeinfo头文件中<br>操作</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">t1&#x3D;t2	t1!&#x3D;t2</span></pre></td></tr><tr><td class="code"><pre><span class="line">t.name()	t1.before(t2)&#x2F;&#x2F;返回bool</span></pre></td></tr></table></figure>
+<p>没有默认构造函数，type_info类的拷贝、移动、赋值函数都被定义成删除的，只能通过typeid创建它的对象</p>
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum color&#123;red,yellow,green&#125;;&#x2F;&#x2F;不限定作用域</span></pre></td></tr><tr><td class="code"><pre><span class="line">enum class peppers&#123;red,yellow,green&#125;&#x2F;&#x2F;限定作用域</span></pre></td></tr><tr><td class="code"><pre><span class="line">color eyes&#x3D;green;</span></pre></td></tr><tr><td class="code"><pre><span class="line">peppers p&#x3D;peppers::red;</span></pre></td></tr></table></figure>
+<p>默认情况下，枚举值从0开始，依次加1<br>可以定义枚举类型的constexpr变量<br>可以作为case标签，也能将枚举类型作为非类型模板形参，还能在类的定义中初始化枚举类型的静态数据成员<br>只能用该类型的一个枚举成员或者另一个对象来赋值</p>
+<h3 id="指定enum的大小"><a href="#指定enum的大小" class="headerlink" title="指定enum的大小"></a>指定enum的大小</h3><p>不限定作用域的枚举类型的对象或枚举成员会自动隐式转换为int，而限定作用域的枚举类型不会进行这样的隐式转换<br>不限定作用域的枚举类型，它的枚举成员不存在默认类型，我们指定潜在类型时要注意，枚举成员的值必须在指定的类型取值范围内，不然就会出错<br>而限定作用域默认情况下是int</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum a:unsigned long long&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	-------</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="前置声明"><a href="#前置声明" class="headerlink" title="前置声明"></a>前置声明</h3><p>前置声明必须与它的定义一致，无论是作用域是否限定还是指定的潜在类型，不然就会报错</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -60,6 +61,46 @@
 <h3 id="noexcept-运算符"><a href="#noexcept-运算符" class="headerlink" title="noexcept 运算符"></a>noexcept 运算符</h3><p>返回bool类型的右值常量表达式，不会求其运算对象的值</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void f()noexcept (noexcept(g()));</span></pre></td></tr></table></figure>
 <h3 id="一致的异常说明"><a href="#一致的异常说明" class="headerlink" title="一致的异常说明"></a>一致的异常说明</h3><p>函数指针和指针指向的函数<br>虚函数和它的派生函数<br>合成拷贝控制成员时</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>语言</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Primer 18(下)</title>
+    <url>/2019/12/04/C++%20Primer%2018(%E4%B8%8B)/</url>
+    <content><![CDATA[<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace x&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span></pre></td></tr></table></figure>
+<p>不能定义在函数或类的内部<br>命名空间成员的定义可以在外部，但是必须在所属命名空间的外层命名空间中</p>
+<a id="more"></a>
+<h3 id="模板特例化"><a href="#模板特例化" class="headerlink" title="模板特例化"></a>模板特例化</h3><p>模板特例化必须定义在原始模板所属的命名空间中，只要在该命名空间中声明了特例化，就可以在外部定义它了</p>
+<h3 id="内联命名空间"><a href="#内联命名空间" class="headerlink" title="内联命名空间"></a>内联命名空间</h3><p>可以直接被外层命名空间使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">inline namespace x&#123;--------&#125;</span></pre></td></tr></table></figure>
+<p>inline必须出现在第一次定义的时候，后续打开可不写</p>
+<h3 id="未命名的命名空间"><a href="#未命名的命名空间" class="headerlink" title="未命名的命名空间"></a>未命名的命名空间</h3><p>静态生命周期，第一次使用前创建，直到程序结束销毁</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#123;--------&#125;</span></pre></td></tr></table></figure>
+<p>不能跨越多个文件，一个包含了未命名的命名空间的头文件被多个文件使用时，在这多个文件里的名字将对应不同的实体<br>它的名字可以直接使用，因此当处于最外层作用域时，它里面的名字要区分于全局作用域中的名字</p>
+<h3 id="using-声明"><a href="#using-声明" class="headerlink" title="using 声明"></a>using 声明</h3><p>一次引入一个命名空间的一个成员名字<br>当它出现在类的作用域中时，这个声明只能指向基类成员</p>
+<h3 id="using-指示"><a href="#using-指示" class="headerlink" title="using 指示"></a>using 指示</h3><p>一次引入一个命名空间所有名字，可以说是将名字都注入到外层作用域中，using指示不能出现在类的作用域中</p>
+<h3 id="头文件与using"><a href="#头文件与using" class="headerlink" title="头文件与using"></a>头文件与using</h3><p>头文件应该只负责定义接口的名字，所以只能在它的函数或命名空间内使用using声明和指示</p>
+<h3 id="实参查找与类类型形参"><a href="#实参查找与类类型形参" class="headerlink" title="实参查找与类类型形参"></a>实参查找与类类型形参</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">operator&gt;&gt;(std::cin,s);</span></pre></td></tr></table></figure>
+<p>当编译器发现&gt;&gt;时，首先在当前作用域查找，然后在外层作用域查找，最后由于&gt;&gt;的形参是类类型的，所以编译器还会在cin和s的类所属的命名空间查找</p>
+<h3 id="实参查找与友元"><a href="#实参查找与友元" class="headerlink" title="实参查找与友元"></a>实参查找与友元</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace A&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	class C&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">			&#x2F;&#x2F;隐式成为命名空间A的成员</span></pre></td></tr><tr><td class="code"><pre><span class="line">		friend void f2();</span></pre></td></tr><tr><td class="code"><pre><span class="line">		friend void f(const C&amp;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">int main()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	A::C cobj;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	f(cobj);	&#x2F;&#x2F;正确，通过形参C找到A的命名空间</span></pre></td></tr><tr><td class="code"><pre><span class="line">	f2();	&#x2F;&#x2F;错误，找不到它的声明</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="使用using"><a href="#使用using" class="headerlink" title="使用using"></a>使用using</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">using NS::print(int);</span></pre></td></tr><tr><td class="code"><pre><span class="line">using NS::print;</span></pre></td></tr></table></figure>
+<p>using声明会引入函数到本作用域<br>如果using声明引入一个同名同参的函数，会报错<br>而using指示不会<br>using指示是将命名空间的成员提升到外层作用域</p>
+<h2 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h2><h3 id="继承构造函数"><a href="#继承构造函数" class="headerlink" title="继承构造函数"></a>继承构造函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">using Base1::Base1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">using Base2::Base2;</span></pre></td></tr></table></figure>
+<p>如果继承了相同形参列表的构造函数，会报错，这时我们需要为该形参再自己定义一个构造函数，既然定义了构造函数，那么这个时候最好也定义一个默认构造函数</p>
+<h3 id="派生类的控制成员"><a href="#派生类的控制成员" class="headerlink" title="派生类的控制成员"></a>派生类的控制成员</h3><p>如果定义了自己的拷贝/赋值构造函数和赋值运算符，必须在完整的对象上执行拷贝、移动、赋值操作<br>如果使用的是合成的，就会对其基类部分执行这些操作</p>
+<h3 id="静态类型与操作"><a href="#静态类型与操作" class="headerlink" title="静态类型与操作"></a>静态类型与操作</h3><p>对象、指针和引用的静态类型决定能够使用哪些成员，例如一个指向基类的指针，只能使用基类部分的成员</p>
+<h3 id="多重继承的二义性调用"><a href="#多重继承的二义性调用" class="headerlink" title="多重继承的二义性调用"></a>多重继承的二义性调用</h3><p>当从多个基类继承了同名函数时，调用需要指明哪个作用域下的函数，不然就会出现二义性错误，也可以再本作用域下再定义一个同名函数</p>
+<h3 id="使用虚继承"><a href="#使用虚继承" class="headerlink" title="使用虚继承"></a>使用虚继承</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Bear:virtual public zoo&#123;------&#125;;</span></pre></td></tr></table></figure>
+<p>派生类中只有虚继承的类一个实例</p>
+<h3 id="虚基类的构造"><a href="#虚基类的构造" class="headerlink" title="虚基类的构造"></a>虚基类的构造</h3><p>虚基类是由最低层的派生类初始化的，如果有多个虚基类，则按照在派生列表中中出现的顺序初始化，然后才按顺序初始化其他基类<br>析构顺序与构造顺序相反</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
