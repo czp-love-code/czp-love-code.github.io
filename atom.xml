@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-06T03:35:19.458Z</updated>
+  <updated>2019-12-08T03:59:22.330Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>QT01</title>
+    <link href="http://yoursite.com/2019/12/07/QT01/"/>
+    <id>http://yoursite.com/2019/12/07/QT01/</id>
+    <published>2019-12-07T11:27:09.000Z</published>
+    <updated>2019-12-08T03:59:22.330Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="QT简介"><a href="#QT简介" class="headerlink" title="QT简介"></a>QT简介</h2><h3 id="什么是QT"><a href="#什么是QT" class="headerlink" title="什么是QT"></a>什么是QT</h3><p>一个跨平台的C++图形用户界面应用程序框架，面对对象且容易扩展，允许真正的组件编程<br>图形用户界面：GUI，采用图形方式显示的计算机操作用户界面</p><a id="more"></a><h3 id="QT的优点"><a href="#QT的优点" class="headerlink" title="QT的优点"></a>QT的优点</h3><p>跨平台，简化了内存回收机制，开发效率高，可以进行嵌入式开发</p><h3 id="创建QT"><a href="#创建QT" class="headerlink" title="创建QT"></a>创建QT</h3><p>名称不能有中文和空格，保存路径不能有中文路径<br>默认创建有窗口类：myWidget<br>基类有三种选择：QWidget,QMainWindow,QDialog</p><h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">#include &lt;QApplication&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;程序入口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">int main(int argc, char *argv[])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    QApplication a(argc, argv);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    Widget w;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    w.show();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    return a.exec();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><p>argc:命令行变量的数量<br>argv:命令行变量的数组<br>QApplication a:应用程序对象，有且仅有一个<br>maWidget w:实例化窗口对象<br>w.show():调用show函数，显示窗口<br>return a.exec():让应用程序进入消息循环机制，代码阻塞到当前行</p><h3 id="widget头文件"><a href="#widget头文件" class="headerlink" title="widget头文件"></a>widget头文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#ifndef WIDGET_H</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">#define WIDGET_H</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">#include &lt;QWidget&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">class Widget : public QWidget</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    Q_OBJECT&#x2F;&#x2F;宏，允许类中使用信号和槽的机制</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    Widget(QWidget *parent &#x3D; nullptr);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    ~Widget();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">#endif &#x2F;&#x2F; WIDGET_H</span></pre></td></tr></table></figure><h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>注释：ctrl+/<br>查找：ctrl+f<br>整行移动：ctrl+shift+上下<br>帮助文档：F1<br>自动对齐：ctrl+i<br>同名文件切换：F4</p><h3 id="按钮空间常用API"><a href="#按钮空间常用API" class="headerlink" title="按钮空间常用API"></a>按钮空间常用API</h3><p>什么是API：Application Programming Interface ，应用程序接口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">#include &lt;QPushButton&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Widget::Widget(QWidget *parent)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    : QWidget(parent)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;创建一个按钮</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; QPushButton *btn&#x3D;new QPushButton;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;btn-&gt;show();&#x2F;&#x2F;以顶层方式弹出窗口控件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;让btn对象依赖在widget窗口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; btn-&gt;setParent(this);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;设置文本</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; btn-&gt;setText(&quot;第一个按钮&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">     &#x2F;&#x2F;创建第二个按钮,按照控件大小创建窗口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    QPushButton *btn&#x3D;new QPushButton(&quot;第二个按钮&quot;,this);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置窗口大小</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    resize(600,400);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置固定窗口大小</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    setFixedSize(600,400);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;移动按钮</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    btn-&gt;move(100,100);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置窗口标题</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    setWindowTitle(&quot;第一个窗口&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;QT简介&quot;&gt;&lt;a href=&quot;#QT简介&quot; class=&quot;headerlink&quot; title=&quot;QT简介&quot;&gt;&lt;/a&gt;QT简介&lt;/h2&gt;&lt;h3 id=&quot;什么是QT&quot;&gt;&lt;a href=&quot;#什么是QT&quot; class=&quot;headerlink&quot; title=&quot;什么是QT&quot;&gt;&lt;/a&gt;什么是QT&lt;/h3&gt;&lt;p&gt;一个跨平台的C++图形用户界面应用程序框架，面对对象且容易扩展，允许真正的组件编程&lt;br&gt;图形用户界面：GUI，采用图形方式显示的计算机操作用户界面&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="QT使用" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/QT%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="QT" scheme="http://yoursite.com/tags/QT/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ Primer 19(下)</title>
@@ -305,9 +330,9 @@
       <category term="排序算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
-    
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
     
   </entry>
   

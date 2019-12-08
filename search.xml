@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>QT01</title>
+    <url>/2019/12/07/QT01/</url>
+    <content><![CDATA[<h2 id="QT简介"><a href="#QT简介" class="headerlink" title="QT简介"></a>QT简介</h2><h3 id="什么是QT"><a href="#什么是QT" class="headerlink" title="什么是QT"></a>什么是QT</h3><p>一个跨平台的C++图形用户界面应用程序框架，面对对象且容易扩展，允许真正的组件编程<br>图形用户界面：GUI，采用图形方式显示的计算机操作用户界面</p>
+<a id="more"></a>
+<h3 id="QT的优点"><a href="#QT的优点" class="headerlink" title="QT的优点"></a>QT的优点</h3><p>跨平台，简化了内存回收机制，开发效率高，可以进行嵌入式开发</p>
+<h3 id="创建QT"><a href="#创建QT" class="headerlink" title="创建QT"></a>创建QT</h3><p>名称不能有中文和空格，保存路径不能有中文路径<br>默认创建有窗口类：myWidget<br>基类有三种选择：QWidget,QMainWindow,QDialog</p>
+<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;QApplication&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;程序入口</span></pre></td></tr><tr><td class="code"><pre><span class="line">int main(int argc, char *argv[])</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    QApplication a(argc, argv);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Widget w;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    w.show();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return a.exec();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>argc:命令行变量的数量<br>argv:命令行变量的数组<br>QApplication a:应用程序对象，有且仅有一个<br>maWidget w:实例化窗口对象<br>w.show():调用show函数，显示窗口<br>return a.exec():让应用程序进入消息循环机制，代码阻塞到当前行</p>
+<h3 id="widget头文件"><a href="#widget头文件" class="headerlink" title="widget头文件"></a>widget头文件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#ifndef WIDGET_H</span></pre></td></tr><tr><td class="code"><pre><span class="line">#define WIDGET_H</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;QWidget&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">class Widget : public QWidget</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Q_OBJECT	&#x2F;&#x2F;宏，允许类中使用信号和槽的机制</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Widget(QWidget *parent &#x3D; nullptr);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    ~Widget();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#endif &#x2F;&#x2F; WIDGET_H</span></pre></td></tr></table></figure>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>注释：ctrl+/<br>查找：ctrl+f<br>整行移动：ctrl+shift+上下<br>帮助文档：F1<br>自动对齐：ctrl+i<br>同名文件切换：F4</p>
+<h3 id="按钮空间常用API"><a href="#按钮空间常用API" class="headerlink" title="按钮空间常用API"></a>按钮空间常用API</h3><p>什么是API：Application Programming Interface ，应用程序接口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;QPushButton&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">Widget::Widget(QWidget *parent)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    : QWidget(parent)</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;创建一个按钮</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; QPushButton *btn&#x3D;new QPushButton;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;btn-&gt;show();&#x2F;&#x2F;以顶层方式弹出窗口控件</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;让btn对象依赖在widget窗口</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; btn-&gt;setParent(this);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;设置文本</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; btn-&gt;setText(&quot;第一个按钮&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">     &#x2F;&#x2F;创建第二个按钮,按照控件大小创建窗口</span></pre></td></tr><tr><td class="code"><pre><span class="line">    QPushButton *btn&#x3D;new QPushButton(&quot;第二个按钮&quot;,this);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置窗口大小</span></pre></td></tr><tr><td class="code"><pre><span class="line">    resize(600,400);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置固定窗口大小</span></pre></td></tr><tr><td class="code"><pre><span class="line">    setFixedSize(600,400);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;移动按钮</span></pre></td></tr><tr><td class="code"><pre><span class="line">    btn-&gt;move(100,100);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;设置窗口标题</span></pre></td></tr><tr><td class="code"><pre><span class="line">    setWindowTitle(&quot;第一个窗口&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>QT使用</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++ Primer 19(下)</title>
     <url>/2019/12/05/C++%20Primer%2019(%E4%B8%8B)/</url>
     <content><![CDATA[<h2 id="成员指针"><a href="#成员指针" class="headerlink" title="成员指针"></a>成员指针</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义</span></pre></td></tr><tr><td class="code"><pre><span class="line">auto pdata&#x3D;&amp;Screen::contents;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;解引用</span></pre></td></tr><tr><td class="code"><pre><span class="line">auto s&#x3D;myScreen.*pdata;</span></pre></td></tr><tr><td class="code"><pre><span class="line">s&#x3D;pScreen-&gt;*pdata;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;指向const限定的成员函数</span></pre></td></tr><tr><td class="code"><pre><span class="line">char(Screen::*pmf2)(Screen::pos,Screen::pos)const;</span></pre></td></tr></table></figure>
@@ -401,8 +425,8 @@
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>堆</tag>
         <tag>排序</tag>
+        <tag>堆</tag>
       </tags>
   </entry>
   <entry>
