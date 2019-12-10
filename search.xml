@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>编译原理01引论1</title>
+    <url>/2019/12/10/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA/</url>
+    <content><![CDATA[<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p>将高级语言翻译为低级语言的程序<br>工作流程：源代码-&gt;预处理器-&gt;编译器-&gt;目标代码-&gt;链接器-&gt;可执行程序</p>
+<a id="more"></a>
+<p>源程序可能被分割称为多个模块，并存放于独立的文件，此时由预处理器来将源程序聚合在一起<br>（预处理器是在真正的编译开始之前由编译器调用的独立程序。预处理器可以删除注释、包含其他文件以及执行宏替代。）</p>
+<p><em>宏是一种抽象，它根据一系列预定义的规则替换一定的文本模式。解释器或编译器在遇到宏时会自动进行这一模式替换。对于编译语言，宏展开在编译时发生，进行宏展开的工具常被称为宏展开器。</em></p>
+<p>汇编语言比较容易输出和调试，所以编译器（可能）产生一个汇编语言程序作为其输出，这个程序由汇编器程序进行处理，并生成<strong>可重定位的机器代码</strong></p>
+<p>因为大型程序经常分为多个部分进行编译，所以可重定位的机器代码有必要和其他可重定位的目标文件以及库文件连接到一起，从而形成真正在机器上运行的代码</p>
+<p>一个文件中的代码可能指向另一个文件中的位置，而链接器能够解决外部内存地址的问题</p>
+<p>最后加载器把所有的可执行目标文件放到内存中执行</p>
+<p>对于C#、VB等高级语言而言，此时编译器完成的功能是把源码编译成通用中间语言（MSIL/CIL）的字节码（ByteCode）。最后运行的时候通过通用语言运行库（虚拟机）的转换，编程最终可以被CPU直接计算的机器码（NativeCode）</p>
+<p>字节码是可以发送给任何平台并且能在那个平台上运行的独立于平台的代码。</p>
+<h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><p>又称为直译器，是一种电脑程序，能够把高级编程语言一行一行直接转译运行。解释器的程序运行速度比较缓慢，但错误诊断效果通常比编译器好</p>
+<h3 id="关于Java"><a href="#关于Java" class="headerlink" title="关于Java"></a>关于Java</h3><p>大多数用任何语言写的程序在每个电脑平台上都必须重编译，甚至有时需要重写。而Java最大的优点之一就是你只需要写和编译一次程序。在任何平台上，Java都会将编译好的字节码解释成能被特定的处理器所理解的指令(即一次编译，到处运行)。Java虚拟机一次只能处理一条字节码指令。</p>
+<h3 id="Java语言处理器"><a href="#Java语言处理器" class="headerlink" title="Java语言处理器"></a>Java语言处理器</h3><p>工作流程：源程序-&gt;（编译）-&gt;字节码-&gt;（虚拟机）-&gt;解释执行<br>即时编译器（JIT compiler）：随虚拟机一起供给的，并可选使用。它把字节码编译成可立即执行的指定平台的可执行代码。选择JIT编译器选项通常会使程序运行地更快，尤其是当某个可执行的方法被重复使用时。<br>（一旦代码被JIT编译器（重）编译后，它在电脑上通常就会运行地更快。）</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>编译原理</category>
+      </categories>
+      <tags>
+        <tag>编译</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>QT04</title>
     <url>/2019/12/10/QT04/</url>
     <content><![CDATA[<h2 id="ListWidget"><a href="#ListWidget" class="headerlink" title="ListWidget"></a>ListWidget</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;使用ListWidget</span></pre></td></tr><tr><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    : QMainWindow(parent)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    , ui(new Ui::MainWindow)</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    ui-&gt;setupUi(this);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    QListWidgetItem *item&#x3D;new QListWidgetItem(&quot;锄禾日当午&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    ui-&gt;ListWidget-&gt;addItem(item);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    item-&gt;setTextAlignment(Qt::AlignHCenter);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    QStringList list;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    list&lt;&lt;&quot;锄禾日当午&quot;&lt;&lt;&quot;汗滴禾下土&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    ui-&gt;ListWidget-&gt;addItems(list);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
@@ -294,8 +319,8 @@
 <h3 id="随机数引擎操作"><a href="#随机数引擎操作" class="headerlink" title="随机数引擎操作"></a>随机数引擎操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Engine e(s)		&#x2F;&#x2F;使用整型值s作为种子</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.seed(s)		&#x2F;&#x2F;使用种子s重置引擎的状态</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#x2F;&#x2F;使用相同种子的引擎将生成相同的序列</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.min()		e.max()</span></pre></td></tr><tr><td class="code"><pre><span class="line">Engine::result_type		&#x2F;&#x2F;此引擎可生成的值类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">e.discard(ull)	&#x2F;&#x2F;将引擎推进Ull步，这个值是unsigned long long</span></pre></td></tr></table></figure>
 <h3 id="使用分布类"><a href="#使用分布类" class="headerlink" title="使用分布类"></a>使用分布类</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uniform_int_distribution&lt;unsigned&gt; u(0,9);</span></pre></td></tr><tr><td class="code"><pre><span class="line">default_random_engine e;</span></pre></td></tr><tr><td class="code"><pre><span class="line">u(e);</span></pre></td></tr></table></figure>
 <p>对于一个给定的随机数发生器，每次运行程序它都会返回相同的数值序列，可以通过将e和u定义为static，然后就可以在函数调用中保持状态</p>
-<h3 id="使用系统函数time"><a href="#使用系统函数time" class="headerlink" title="使用系统函数time"></a>使用系统函数time</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义在ctime头文件中，返回从一个特定时刻到当前经过了多少秒</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;函数time接受单个指针参数，指向用于写入时间的数据结构</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果此指针为空，则简单地返回时间</span></pre></td></tr><tr><td class="code"><pre><span class="line">default_random_engine e(time(0));</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果程序作为自动过程地一部分，则种子不变</span></pre></td></tr></table></figure>
-<h3 id="生成随机实数"><a href="#生成随机实数" class="headerlink" title="生成随机实数"></a>生成随机实数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;double&gt; u(0,1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;&gt;	u(0,1)	&#x2F;&#x2F;默认生成double类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">u(e);</span></pre></td></tr></table></figure>
+<h3 id="使用系统函数time"><a href="#使用系统函数time" class="headerlink" title="使用系统函数time"></a>使用系统函数time</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义在ctime头文件中，返回从一个特定时刻到当前经过了多少秒</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;函数time接受单个指针参数，指向用于写入时间的数据结构</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果此指针为空，则简单地返回时间</span></pre></td></tr><tr><td class="code"><pre><span class="line">default_random_engine e(time(0));</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;如果程序作为自动过程的一部分，则种子不变</span></pre></td></tr></table></figure>
+<h3 id="生成随机实数"><a href="#生成随机实数" class="headerlink" title="生成随机实数"></a>生成随机实数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;double&gt; u(0,1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">uniform_real_distribution&lt;&gt;u(0,1);	&#x2F;&#x2F;默认生成double类型</span></pre></td></tr><tr><td class="code"><pre><span class="line">u(e);</span></pre></td></tr></table></figure>
 <h3 id="分布类型的操作"><a href="#分布类型的操作" class="headerlink" title="分布类型的操作"></a>分布类型的操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">d.min()		d.max()</span></pre></td></tr><tr><td class="code"><pre><span class="line">d.reset();&#x2F;&#x2F;重建d的状态，使得随后对d的使用不依赖于d已经生成的值</span></pre></td></tr></table></figure>
 <h3 id="生成非均匀分布的随机数"><a href="#生成非均匀分布的随机数" class="headerlink" title="生成非均匀分布的随机数"></a>生成非均匀分布的随机数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">normal_distribution&lt;&gt; n(4,1.5);</span></pre></td></tr><tr><td class="code"><pre><span class="line">n(e);</span></pre></td></tr></table></figure>
 <h3 id="使用lround函数"><a href="#使用lround函数" class="headerlink" title="使用lround函数"></a>使用lround函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义在cmath中</span></pre></td></tr><tr><td class="code"><pre><span class="line">unsigned v&#x3D;lround(n(e));</span></pre></td></tr></table></figure>
@@ -532,8 +557,8 @@
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>堆</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
