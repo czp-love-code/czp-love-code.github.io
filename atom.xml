@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-10T15:11:57.305Z</updated>
+  <updated>2019-12-11T04:18:47.846Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,9 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>编译原理01引论2</title>
+    <link href="http://yoursite.com/2019/12/11/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2/"/>
+    <id>http://yoursite.com/2019/12/11/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2/</id>
+    <published>2019-12-11T03:25:59.000Z</published>
+    <updated>2019-12-11T04:18:47.846Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p><a id="more"></a><h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span></pre></td></tr></table></figure><h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p><h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p><p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p><h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p><h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p><h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;编译器的结构&quot;&gt;&lt;a href=&quot;#编译器的结构&quot; class=&quot;headerlink&quot; title=&quot;编译器的结构&quot;&gt;&lt;/a&gt;编译器的结构&lt;/h2&gt;&lt;p&gt;分析部分+综合部分&lt;br&gt;（即前端+优化+后端）&lt;br&gt;分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分&lt;br&gt;综合部分：利用符号表和中间表示形式来构造用户想要的目标程序&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="编译原理" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="编译" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>编译原理01引论1</title>
-    <link href="http://yoursite.com/2019/12/10/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA/"/>
-    <id>http://yoursite.com/2019/12/10/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA/</id>
+    <link href="http://yoursite.com/2019/12/10/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA1/"/>
+    <id>http://yoursite.com/2019/12/10/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA1/</id>
     <published>2019-12-10T13:56:50.000Z</published>
     <updated>2019-12-10T15:11:57.305Z</updated>
     
@@ -485,9 +510,9 @@
       <category term="排序算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
-    
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
     
   </entry>
   
@@ -528,32 +553,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前置知识&quot;&gt;&lt;a href=&quot;#前置知识&quot; class=&quot;headerlink&quot; title=&quot;前置知识&quot;&gt;&lt;/a&gt;前置知识&lt;/h2&gt;&lt;p&gt;因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法&lt;br&gt;&lt;a href=&quot;https://czp-love-code.github.io/2019/12/01/朴素字符串匹配算法/#more&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;朴素字符串匹配算法&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="字符串匹配" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"/>
-    
-    
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>朴素字符串匹配算法</title>
-    <link href="http://yoursite.com/2019/12/01/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2019/12/01/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</id>
-    <published>2019-12-01T05:10:02.000Z</published>
-    <updated>2019-12-01T05:43:17.209Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定两个字符串A和B，我们要判断A中是否包含B，并找到A与B相等的第一个位置下标</p><h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>我们将两个字符串都从头开始扫描，然后若是扫描的两个位置字符相同，则两个字符串继续往后扫描。若是扫描的位置字符不相同，那么我们就将字符串B从头开始扫描，而字符串A就从刚才扫描它的初始位置往后挪一位接着扫描</p><a id="more"></a><h2 id="算法实现（C-）"><a href="#算法实现（C-）" class="headerlink" title="算法实现（C++）"></a>算法实现（C++）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;朴素字符串匹配算法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int match(string A, string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">int m &#x3D; A.size(), i &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">while (i &lt; m &amp;&amp; j &lt; n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">if (A[i] &#x3D;&#x3D; B[j]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">j++;&#x2F;&#x2F;若匹配，两个字符串同时往后扫描</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">else &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">i &#x3D; i-j+1;&#x2F;&#x2F;字符串A扫描回到原点并后移一位</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">j &#x3D; 0;&#x2F;&#x2F;重置字符串B的扫描</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">return i - j;&#x2F;&#x2F;若值大于m-n时不存在匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;                             </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>朴素算法至多迭代m-n+1轮，各轮至多n次比对，因n&gt;&gt;m，所以其时间复杂度为O（nm)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;给定两个字符串A和B，我们要判断A中是否包含B，并找到A与B相等的第一个位置下标&lt;/p&gt;
-&lt;h2 id=&quot;算法原理&quot;&gt;&lt;a href=&quot;#算法原理&quot; class=&quot;headerlink&quot; title=&quot;算法原理&quot;&gt;&lt;/a&gt;算法原理&lt;/h2&gt;&lt;p&gt;我们将两个字符串都从头开始扫描，然后若是扫描的两个位置字符相同，则两个字符串继续往后扫描。若是扫描的位置字符不相同，那么我们就将字符串B从头开始扫描，而字符串A就从刚才扫描它的初始位置往后挪一位接着扫描&lt;/p&gt;
     
     </summary>
     
