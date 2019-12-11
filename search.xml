@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>计数排序</title>
+    <url>/2019/12/11/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>对于每一个元素，确定小于它的元素个数，然后将该元素放置在对应的位置上。</p>
+<a id="more"></a>
+<h2 id="代码实现（C-）"><a href="#代码实现（C-）" class="headerlink" title="代码实现（C++）"></a>代码实现（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void CountSort(vector&lt;int&gt;&amp; arr, int maxVal) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	int len &#x3D; arr.size();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	if (len &lt; 1)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		return;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	vector&lt;int&gt; count(maxVal + 1, 0);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	vector&lt;int&gt; tmp(arr);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (auto x : arr)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		count[x]++;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int i &#x3D; 1; i &lt;&#x3D; maxVal; ++i)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		count[i] +&#x3D; count[i - 1];</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int i &#x3D; len - 1; i &gt;&#x3D; 0; --i) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		arr[count[tmp[i]] - 1] &#x3D; tmp[i];</span></pre></td></tr><tr><td class="code"><pre><span class="line">		count[tmp[i]]--;				&#x2F;&#x2F;注意这里要减1</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），<br>快于任何比较排序算法。</p>
+<p>而且当O(k)&gt;O(nlogn)的时候其效率反而不如基于比较的排序（<br>基于比较的排序的时间复杂度在理论上的下限是O(nlogn), 如归并排序，堆排序）</p>
+<p>稳定性：稳定<br>注意：计数排序算法不是一个基于比较的排序算法，从而它的计算时间下界不再是O(nlogn)。<br>计数排序算法之所以能取得线性计算时间的上界是因为对元素的取值范围作了一定限制，<br>即k=O(n)。如果k=n2,n3,..，就得不到线性时间的上界。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>算法导论</category>
+        <category>排序算法</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>编译原理01引论2</title>
     <url>/2019/12/11/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2/</url>
     <content><![CDATA[<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p>
@@ -13,6 +32,10 @@
 <h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p>
 <h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p>
 <h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p>
+<h2 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h2><p>又称为扩建的语言，或者动态语言，是一种编程语言。<br>脚本语言是为了缩短传统的编写-编译-链接-运行过程而创建的计算机编程语言。用来控制软件应用程序，脚本通常以文本（如ASCII)保存，只在被调用时进行解释或编译。</p>
+<p>一个脚本通常是解释执行而非编译。脚本语言通常都有简单、易学、易用的特性，目的就是希望能让程序员快速完成程序的编写工作。而宏语言则可视为脚本语言的分支，两者也有实质上的相同之处。</p>
+<h2 id="并行性"><a href="#并行性" class="headerlink" title="并行性"></a>并行性</h2><p>指令层次：多个运算可以同时执行<br>处理器层次：同一应用的多个不同线程在不同的处理器上运行</p>
+<p>这种并行性可以对程序员隐藏起来，硬件动态地检测顺序指令流之间的依赖关系，并且在可能的时候并法地发出指令。<br>硬件调度器：改变指令地顺序以提高程序的并行性</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -579,8 +602,8 @@
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>堆</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>

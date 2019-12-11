@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-11T04:18:47.846Z</updated>
+  <updated>2019-12-11T12:37:13.032Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>计数排序</title>
+    <link href="http://yoursite.com/2019/12/11/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2019/12/11/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/</id>
+    <published>2019-12-11T12:14:46.000Z</published>
+    <updated>2019-12-11T12:37:13.032Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>对于每一个元素，确定小于它的元素个数，然后将该元素放置在对应的位置上。</p><a id="more"></a><h2 id="代码实现（C-）"><a href="#代码实现（C-）" class="headerlink" title="代码实现（C++）"></a>代码实现（C++）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">void CountSort(vector&lt;int&gt;&amp; arr, int maxVal) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int len &#x3D; arr.size();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">if (len &lt; 1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">return;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; count(maxVal + 1, 0);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; tmp(arr);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">for (auto x : arr)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">count[x]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; maxVal; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">count[i] +&#x3D; count[i - 1];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">for (int i &#x3D; len - 1; i &gt;&#x3D; 0; --i) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">arr[count[tmp[i]] - 1] &#x3D; tmp[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">count[tmp[i]]--;&#x2F;&#x2F;注意这里要减1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），<br>快于任何比较排序算法。</p><p>而且当O(k)&gt;O(nlogn)的时候其效率反而不如基于比较的排序（<br>基于比较的排序的时间复杂度在理论上的下限是O(nlogn), 如归并排序，堆排序）</p><p>稳定性：稳定<br>注意：计数排序算法不是一个基于比较的排序算法，从而它的计算时间下界不再是O(nlogn)。<br>计数排序算法之所以能取得线性计算时间的上界是因为对元素的取值范围作了一定限制，<br>即k=O(n)。如果k=n2,n3,..，就得不到线性时间的上界。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a&gt;基本思想&lt;/h2&gt;&lt;p&gt;对于每一个元素，确定小于它的元素个数，然后将该元素放置在对应的位置上。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="算法导论" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="排序算法" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>编译原理01引论2</title>
     <link href="http://yoursite.com/2019/12/11/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2/"/>
     <id>http://yoursite.com/2019/12/11/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2/</id>
     <published>2019-12-11T03:25:59.000Z</published>
-    <updated>2019-12-11T04:18:47.846Z</updated>
+    <updated>2019-12-11T12:20:31.045Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p><a id="more"></a><h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span></pre></td></tr></table></figure><h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p><h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p><p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p><h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p><h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p><h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p><a id="more"></a><h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span></pre></td></tr></table></figure><h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p><h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p><p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p><h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p><h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p><h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p><h2 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h2><p>又称为扩建的语言，或者动态语言，是一种编程语言。<br>脚本语言是为了缩短传统的编写-编译-链接-运行过程而创建的计算机编程语言。用来控制软件应用程序，脚本通常以文本（如ASCII)保存，只在被调用时进行解释或编译。</p><p>一个脚本通常是解释执行而非编译。脚本语言通常都有简单、易学、易用的特性，目的就是希望能让程序员快速完成程序的编写工作。而宏语言则可视为脚本语言的分支，两者也有实质上的相同之处。</p><h2 id="并行性"><a href="#并行性" class="headerlink" title="并行性"></a>并行性</h2><p>指令层次：多个运算可以同时执行<br>处理器层次：同一应用的多个不同线程在不同的处理器上运行</p><p>这种并行性可以对程序员隐藏起来，硬件动态地检测顺序指令流之间的依赖关系，并且在可能的时候并法地发出指令。<br>硬件调度器：改变指令地顺序以提高程序的并行性</p>]]></content>
     
     <summary type="html">
     
@@ -510,9 +537,9 @@
       <category term="排序算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
       <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
+    
+      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
@@ -538,31 +565,6 @@
     
     
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>KMP算法</title>
-    <link href="http://yoursite.com/2019/12/01/KMP%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2019/12/01/KMP%E7%AE%97%E6%B3%95/</id>
-    <published>2019-12-01T05:48:18.000Z</published>
-    <updated>2019-12-01T12:48:54.851Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法<br><a href="https://czp-love-code.github.io/2019/12/01/朴素字符串匹配算法/#more" target="_blank" rel="noopener">朴素字符串匹配算法</a></p><a id="more"></a><h2 id="分析朴素算法"><a href="#分析朴素算法" class="headerlink" title="分析朴素算法"></a>分析朴素算法</h2><p> 朴素算法在进行扫描的时候每次不匹配都是将A的初始扫描点后移一位，再重新进行扫描，而在这个过程中会有很多没有必要的比对情况出现。比如我们对字符串“REGRET”和“REGROW”，在第一次扫描失配的时候，我们就已经知道<code>A[1]</code>必然不等于<code>B[0]</code>，那么就没有必要再进行这两个字符的比对了</p><p>想象A上B下进行比对，此时我们就应该跳过<code>A[1]</code>跟<code>B[0]</code>这样已经知道结果的比对。既然我们知道了<code>A[3]=B[0]</code>,那么我们再继续比对<code>A[4]</code>和<code>B[1]</code>就OK了</p><h2 id="KMP算法思想"><a href="#KMP算法思想" class="headerlink" title="KMP算法思想"></a>KMP算法思想</h2><p> A字符串的扫描位置不断后移，而B字符串的扫描位置 j 若是不匹配就寻找下一个 j 进行比对， 这次比对是对从失配的A[ i ]开始的，我们就要找到B[ j ]（失配位置）前面子串的前后两个相等的两个真子串，比如B串中子串“REGR”的前后两个相等的真子串就是”R“，然后将B串右移使得A[ i ] 前面的子串跟B[next[ j ] ] （此时即为B[1]）前面的子串匹配，再开始进行比对</p><h2 id="构造next表"><a href="#构造next表" class="headerlink" title="构造next表"></a>构造next表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">int* N &#x3D; new int[n];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">int t &#x3D; N[0] &#x3D; -1;&#x2F;&#x2F;这里记得先初始化N[0]为-1；</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">while (j &lt; n - 1) &#123;&#x2F;&#x2F;这里不取最后一个元素是因为讨论的是“当前元素不匹配，然后要找前面的子串自匹配的情况，然后找到下一个j值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;&#x2F;&#x2F;注意这里的短路求值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">j++; t++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">N[j] &#x3D; t;&#x2F;&#x2F;此代码可以优化</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">else t &#x3D; N[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">return N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="next表构造优化"><a href="#next表构造优化" class="headerlink" title="next表构造优化"></a>next表构造优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">int* N &#x3D; new int[n];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">int t &#x3D; N[0] &#x3D; -1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">while (j &lt; n - 1) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">j++; t++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">N[j] &#x3D; (B[j] !&#x3D; B[t]) ? t : N[t];&#x2F;&#x2F;修改了next表的定义</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;&#x2F;&#x2F;最后的元素不与之前匹配失败的元素相等</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">else t &#x3D; N[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">return N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;KMP主算法 O（m) 模式串长度</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int match(string A, string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">int m &#x3D; A.size();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">int n &#x3D; B.size();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">int i &#x3D; 0, j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">while (i &lt; m &amp;&amp; j &lt; n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">if ( j &lt; 0 || A[i] &#x3D;&#x3D; B[j]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">i++; j++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">else j &#x3D; next[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">delete[ ] next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">return i - j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>O（n+m）</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前置知识&quot;&gt;&lt;a href=&quot;#前置知识&quot; class=&quot;headerlink&quot; title=&quot;前置知识&quot;&gt;&lt;/a&gt;前置知识&lt;/h2&gt;&lt;p&gt;因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法&lt;br&gt;&lt;a href=&quot;https://czp-love-code.github.io/2019/12/01/朴素字符串匹配算法/#more&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;朴素字符串匹配算法&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="字符串匹配" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"/>
-    
-    
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
