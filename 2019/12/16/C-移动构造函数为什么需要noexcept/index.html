@@ -48,16 +48,18 @@
   };
 </script>
 
-  <meta name="description" content="一个热爱技术与生活的geek">
-<meta property="og:type" content="website">
-<meta property="og:title" content="门内技墓">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;categories&#x2F;%E7%AE%97%E6%B3%95&#x2F;%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D&#x2F;index.html">
+  <meta name="description" content="在C++中，类的移动操作通常“窃取”资源而不分配资源，所以通常不会抛出任何异常。在编写一个不抛出异常的操作时，我们应该实现通知标准库以避免一些额外的工作。此时我们要在移动操作的声明和定义中添加noexcept来告知标准库。">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++移动构造函数为什么需要noexcept">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;16&#x2F;C-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81noexcept&#x2F;index.html">
 <meta property="og:site_name" content="门内技墓">
-<meta property="og:description" content="一个热爱技术与生活的geek">
+<meta property="og:description" content="在C++中，类的移动操作通常“窃取”资源而不分配资源，所以通常不会抛出任何异常。在编写一个不抛出异常的操作时，我们应该实现通知标准库以避免一些额外的工作。此时我们要在移动操作的声明和定义中添加noexcept来告知标准库。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-16T06:29:13.255Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">
+<link rel="canonical" href="http://yoursite.com/2019/12/16/C-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81noexcept/">
 
 
 <script id="page-configurations">
@@ -65,13 +67,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: 字符串匹配 | 门内技墓</title>
+  <title>C++移动构造函数为什么需要noexcept | 门内技墓</title>
   
 
 
@@ -197,70 +199,113 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">字符串匹配
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/C-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81noexcept/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/weixintouxiang.jpg">
+      <meta itemprop="name" content="耐清">
+      <meta itemprop="description" content="一个热爱技术与生活的geek">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="门内技墓">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++移动构造函数为什么需要noexcept
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-16 14:15:26 / 修改时间：14:29:13" itemprop="dateCreated datePublished" datetime="2019-12-16T14:15:26+08:00">2019-12-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-01T13:48:18+08:00"
-              content="2019-12-01">
-          12-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/01/KMP%E7%AE%97%E6%B3%95/" itemprop="url">
-            <span itemprop="name">KMP算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-01T13:10:02+08:00"
-              content="2019-12-01">
-          12-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/01/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" itemprop="url">
-            <span itemprop="name">朴素字符串匹配算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+        <p>在C++中，类的移动操作通常“窃取”资源而不分配资源，所以通常不会抛出任何异常。在编写一个不抛出异常的操作时，我们应该实现通知标准库以避免一些额外的工作。此时我们要在移动操作的声明和定义中添加noexcept来告知标准库。</p>
+<a id="more"></a>
+<p>虽然移动操作通常不会抛出异常，但是抛出异常也是允许的。那么当移动操作抛出异常时会发生什么呢？</p>
+<p>举例来说，标准库要求容器能对异常发生时其自身的行为提供保障，如vector保证如果调用push_back然后分配内存的过程发生异常的话，vector自身不会发生改变。</p>
+<p>而在vector重新分配内存的过程中，如果使用的是拷贝构造函数，即使异常发生了，那么只需要销毁新构造的对象然后释放刚分配的内存即可，vector本身自然不会发生任何改变。</p>
+<p>如果使用的是移动构造函数，而这个移动构造函数发生了异常，那么对象可能移动了一部分，而此时明显无法满足vector本身不发生任何改变的要求。也就是说，我们必须把移动构造函数声明为noexcept来告知标准库这个移动操作可以安全使用，不然就必须使用拷贝构造函数。</p>
 
     </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/11/QT05/" rel="prev" title="QT05">
+      <i class="fa fa-chevron-left"></i> QT05
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
