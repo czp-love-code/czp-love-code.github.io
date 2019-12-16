@@ -46,7 +46,8 @@
 <p>如果使用的是移动构造函数，而这个移动构造函数发生了异常，那么对象可能移动了一部分，而此时明显无法满足vector本身不发生任何改变的要求。也就是说，我们必须把移动构造函数声明为noexcept来告知标准库这个移动操作可以安全使用，不然就必须使用拷贝构造函数。</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -193,6 +194,7 @@
       <categories>
         <category>学习笔记</category>
         <category>算法导论</category>
+        <category>树</category>
       </categories>
       <tags>
         <tag>数据结构</tag>
@@ -240,6 +242,7 @@
       <categories>
         <category>学习笔记</category>
         <category>算法导论</category>
+        <category>树</category>
       </categories>
       <tags>
         <tag>数据结构</tag>
@@ -661,18 +664,19 @@
 <h2 id="堆性质维护算法（C-）"><a href="#堆性质维护算法（C-）" class="headerlink" title="堆性质维护算法（C++）"></a>堆性质维护算法（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;堆的性质维护算法</span></pre></td></tr><tr><td class="code"><pre><span class="line">void max_heapify(int arr[], int n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	int left_child, right_child, largest;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	left_child &#x3D; 2 * n;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	right_child &#x3D; 2 * n + 1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	if (left_child &lt;&#x3D; len &amp;&amp; arr[left_child - 1] &gt; arr[n - 1]) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		largest &#x3D; left_child;	&#x2F;&#x2F;len表示堆的有效元素数量</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	else largest &#x3D; n;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	if (right_child &lt;&#x3D; len &amp;&amp; arr[right_child - 1] &gt; arr[largest - 1]) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		largest &#x3D; right_child;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	if (largest !&#x3D; n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		swap(arr[n - 1], arr[largest - 1]);</span></pre></td></tr><tr><td class="code"><pre><span class="line">		max_heapify(arr, largest);	&#x2F;&#x2F;largest处的值变小了，所以要对他进行维护</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <h2 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h2><p>建堆时在n/2处可能交换某个元素，而在n/2-1处三个元素中那个相同的元素却没有被交换，此时元素的相对次序发生改变，所以是不稳定的</p>
 <h2 id="建堆（C-）"><a href="#建堆（C-）" class="headerlink" title="建堆（C++）"></a>建堆（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;建立最大堆</span></pre></td></tr><tr><td class="code"><pre><span class="line">void build_max_heap(int arr[], int n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int i &#x3D; n &#x2F; 2; i &gt; 0; i--) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		max_heapify(arr, i);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;	&#x2F;&#x2F;叶节点集合为A【n&#x2F;2+1---n】，性质维护是从n&#x2F;2到1；</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h2 id="堆排序（C-）"><a href="#堆排序（C-）" class="headerlink" title="堆排序（C++）"></a>堆排序（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;堆排序算法</span></pre></td></tr><tr><td class="code"><pre><span class="line">void heap_sort(int arr[], int n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	build_max_heap(arr, n);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int i &#x3D; len; i &gt; 1; i--) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		swap(arr[0], arr[i-1]);</span></pre></td></tr><tr><td class="code"><pre><span class="line">		len--;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		max_heapify(arr, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="堆排序（C-）"><a href="#堆排序（C-）" class="headerlink" title="堆排序（C++）"></a>堆排序（C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;堆排序算法</span></pre></td></tr><tr><td class="code"><pre><span class="line">void heap_sort(int arr[], int n) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	build_max_heap(arr, n);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int i &#x3D; len; i &gt; 1; i--) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		swap(arr[0], arr[i-1]);</span></pre></td></tr><tr><td class="code"><pre><span class="line">		len--;	</span></pre></td></tr><tr><td class="code"><pre><span class="line">		max_heapify(arr, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <h2 id="测试-（C-）"><a href="#测试-（C-）" class="headerlink" title="测试 （C++）"></a>测试 （C++）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;测试代码</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">using namespace std;</span></pre></td></tr><tr><td class="code"><pre><span class="line">void heap_sort(int arr[], int n);</span></pre></td></tr><tr><td class="code"><pre><span class="line">void build_max_heap(int arr[], int n);</span></pre></td></tr><tr><td class="code"><pre><span class="line">void max_heapify(int arr[], int n);</span></pre></td></tr><tr><td class="code"><pre><span class="line">int len;	&#x2F;&#x2F;用一个全局的len来表示有效长度</span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	int arr[] &#x3D; &#123; 1,5,3,11,4,6,7,9,8 &#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	len &#x3D; sizeof(arr) &#x2F; 4;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	heap_sort(arr, len);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (auto x : arr) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		cout &lt;&lt; x &lt;&lt; endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
+        <category>算法导论</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>堆</tag>
         <tag>排序</tag>
+        <tag>堆</tag>
       </tags>
   </entry>
   <entry>
@@ -690,7 +694,8 @@
 <p>最好的情况下，即快速排序的每一趟排序都将元素序列均匀地分割成长度相近的两个子表，所需栈的最大深度为log(n+1)；此时空间复杂度为O（logn)<br>但最坏的情况下，栈的最大深度为n。此时，快速排序的空间复杂度为O(n)。</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
+        <category>算法导论</category>
         <category>排序算法</category>
       </categories>
       <tags>
@@ -711,7 +716,8 @@
 <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>O（n+m）</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
+        <category>算法导论</category>
         <category>字符串匹配</category>
       </categories>
       <tags>
@@ -728,7 +734,8 @@
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>朴素算法至多迭代m-n+1轮，各轮至多n次比对，因n&gt;&gt;m，所以其时间复杂度为O（nm)</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
+        <category>算法导论</category>
         <category>字符串匹配</category>
       </categories>
       <tags>
@@ -755,7 +762,8 @@
 <p>空间复杂度上， 二分插入排序也是就地排序算法，它的空间复杂度为O（1）.</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
+        <category>算法导论</category>
         <category>排序算法</category>
       </categories>
       <tags>
