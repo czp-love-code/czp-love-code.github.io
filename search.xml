@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>对string调用swap迭代器失效的原因</title>
+    <url>/2019/12/17/%E5%AF%B9string%E8%B0%83%E7%94%A8swap%E4%BC%9A%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>在《C++ Primer》中提到，除string外的容器在swap后指向容器的迭代器、引用和指针都不会失效，但却没有说明string调用swap后会失效的原因。</p>
+<a id="more"></a>
+<p>在查阅资料后发现，C++中存在对短字符串的优化，即Short String Optimization（SSO)。</p>
+<p>因为在默认情况下，C++的string都是存储在堆中，导致访问std::string需要经过一次寻址过程，速度较慢，并且这种实现的空间局部性不好，对cache的利用较低。而且很多string的字符串长度很小，这个时候，就可以把字符串存储到栈上，从而不需要进行内存分配，优化创建速度，并且访问栈上数据的局部性很好，速度比较快。</p>
+<p>即C++会自动把较短的字符串放到对象内部，较长的字符串放到动态内存。假如string 用 SSO 实现，而待交换的两个对象中的字符串恰好一长一短，则原先指向短字符串中的迭代器会全部失效。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>实现空间配置器（allocator)</title>
     <url>/2019/12/16/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%A9%BA%E9%97%B4%E9%85%8D%E7%BD%AE%E5%99%A8/</url>
     <content><![CDATA[<p>allocator 是一个空间配置器而不是内存配置器，因为空间也可以是磁盘或其他辅助存储介质，我们可以写一个allocator直接向磁盘取空间</p>
