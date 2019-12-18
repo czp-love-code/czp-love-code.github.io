@@ -21,7 +21,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
+    hostname: new URL('https://czp-love-code.github.io').hostname,
     root: '/',
     scheme: 'Pisces',
     version: '7.5.0',
@@ -52,14 +52,14 @@
 <meta name="keywords" content="字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KMP算法">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;01&#x2F;KMP%E7%AE%97%E6%B3%95&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;2019&#x2F;12&#x2F;01&#x2F;KMP%E7%AE%97%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="前置知识因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法朴素字符串匹配算法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-16T14:24:41.346Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/01/KMP%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="https://czp-love-code.github.io/2019/12/01/KMP%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/KMP%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://czp-love-code.github.io/2019/12/01/KMP%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/weixintouxiang.jpg">
@@ -278,7 +278,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法<br><a href="https://czp-love-code.github.io/2019/12/01/朴素字符串匹配算法/#more" target="_blank" rel="noopener">朴素字符串匹配算法</a></p>
+        <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法<br><a href="https://czp-love-code.github.io/2019/12/01/朴素字符串匹配算法/#more">朴素字符串匹配算法</a></p>
 <a id="more"></a>
 <h2 id="分析朴素算法"><a href="#分析朴素算法" class="headerlink" title="分析朴素算法"></a>分析朴素算法</h2><p> 朴素算法在进行扫描的时候每次不匹配都是将A的初始扫描点后移一位，再重新进行扫描，而在这个过程中会有很多没有必要的比对情况出现。比如我们对字符串“REGRET”和“REGROW”，在第一次扫描失配的时候，我们就已经知道<code>A[1]</code>必然不等于<code>B[0]</code>，那么就没有必要再进行这两个字符的比对了</p>
 <p>想象A上B下进行比对，此时我们就应该跳过<code>A[1]</code>跟<code>B[0]</code>这样已经知道结果的比对。既然我们知道了<code>A[3]=B[0]</code>,那么我们再继续比对<code>A[4]</code>和<code>B[1]</code>就OK了</p>
