@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -49,14 +49,16 @@
 </script>
 
   <meta name="description" content="前置知识因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法朴素字符串匹配算法">
-<meta name="keywords" content="字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KMP算法">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;KMP%E7%AE%97%E6%B3%95.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="前置知识因为KMP算法优化了朴素字符串匹配算法，所以在看KMP算法之前建议先看一下朴素字符串匹配算法朴素字符串匹配算法">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-16T14:24:41.346Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-01T05:48:18.000Z">
+<meta property="article:modified_time" content="2019-12-16T14:24:41.346Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="字符串">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/KMP%E7%AE%97%E6%B3%95.html">
@@ -122,7 +124,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +219,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           KMP算法
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -283,9 +286,9 @@
 <h2 id="分析朴素算法"><a href="#分析朴素算法" class="headerlink" title="分析朴素算法"></a>分析朴素算法</h2><p> 朴素算法在进行扫描的时候每次不匹配都是将A的初始扫描点后移一位，再重新进行扫描，而在这个过程中会有很多没有必要的比对情况出现。比如我们对字符串“REGRET”和“REGROW”，在第一次扫描失配的时候，我们就已经知道<code>A[1]</code>必然不等于<code>B[0]</code>，那么就没有必要再进行这两个字符的比对了</p>
 <p>想象A上B下进行比对，此时我们就应该跳过<code>A[1]</code>跟<code>B[0]</code>这样已经知道结果的比对。既然我们知道了<code>A[3]=B[0]</code>,那么我们再继续比对<code>A[4]</code>和<code>B[1]</code>就OK了</p>
 <h2 id="KMP算法思想"><a href="#KMP算法思想" class="headerlink" title="KMP算法思想"></a>KMP算法思想</h2><p> A字符串的扫描位置不断后移，而B字符串的扫描位置 j 若是不匹配就寻找下一个 j 进行比对， 这次比对是对从失配的A[ i ]开始的，我们就要找到B[ j ]（失配位置）前面子串的前后两个相等的两个真子串，比如B串中子串“REGR”的前后两个相等的真子串就是”R“，然后将B串右移使得A[ i ] 前面的子串跟B[next[ j ] ] （此时即为B[1]）前面的子串匹配，再开始进行比对</p>
-<h2 id="构造next表"><a href="#构造next表" class="headerlink" title="构造next表"></a>构造next表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	int* N &#x3D; new int[n];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	int t &#x3D; N[0] &#x3D; -1;	&#x2F;&#x2F;这里记得先初始化N[0]为-1；</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	while (j &lt; n - 1) &#123;	&#x2F;&#x2F;这里不取最后一个元素是因为讨论的是“当前元素不匹配，然后要找前面的子串自匹配的情况，然后找到下一个j值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;		&#x2F;&#x2F;注意这里的短路求值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">			j++; t++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">			N[j] &#x3D; t;		&#x2F;&#x2F;此代码可以优化</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		else t &#x3D; N[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	return N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h2 id="next表构造优化"><a href="#next表构造优化" class="headerlink" title="next表构造优化"></a>next表构造优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	int n &#x3D; B.size(), j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	int* N &#x3D; new int[n];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	int t &#x3D; N[0] &#x3D; -1;	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	while (j &lt; n - 1) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">			j++; t++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">			N[j] &#x3D; (B[j] !&#x3D; B[t]) ? t : N[t];	&#x2F;&#x2F;修改了next表的定义</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		&#125;	&#x2F;&#x2F;最后的元素不与之前匹配失败的元素相等</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		else t &#x3D; N[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	return N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h2 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;KMP主算法 O（m) 模式串长度</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int match(string A, string B) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	int m &#x3D; A.size();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	int n &#x3D; B.size();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	int i &#x3D; 0, j &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	while (i &lt; m &amp;&amp; j &lt; n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">		if ( j &lt; 0 || A[i] &#x3D;&#x3D; B[j]) &#123;	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">			i++; j++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		else j &#x3D; next[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	delete[ ] next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	return i - j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="构造next表"><a href="#构造next表" class="headerlink" title="构造next表"></a>构造next表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span><br><span class="line">	int n &#x3D; B.size(), j &#x3D; 0;</span><br><span class="line">	int* N &#x3D; new int[n];</span><br><span class="line">	int t &#x3D; N[0] &#x3D; -1;	&#x2F;&#x2F;这里记得先初始化N[0]为-1；</span><br><span class="line">	while (j &lt; n - 1) &#123;	&#x2F;&#x2F;这里不取最后一个元素是因为讨论的是“当前元素不匹配，然后要找前面的子串自匹配的情况，然后找到下一个j值</span><br><span class="line">		if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;		&#x2F;&#x2F;注意这里的短路求值</span><br><span class="line">			j++; t++;</span><br><span class="line">			N[j] &#x3D; t;		&#x2F;&#x2F;此代码可以优化</span><br><span class="line">		&#125;</span><br><span class="line">		else t &#x3D; N[t];</span><br><span class="line">	&#125;</span><br><span class="line">	return N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="next表构造优化"><a href="#next表构造优化" class="headerlink" title="next表构造优化"></a>next表构造优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span><br><span class="line">	int n &#x3D; B.size(), j &#x3D; 0;</span><br><span class="line">	int* N &#x3D; new int[n];</span><br><span class="line">	int t &#x3D; N[0] &#x3D; -1;	</span><br><span class="line">	while (j &lt; n - 1) &#123;</span><br><span class="line">		if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;	</span><br><span class="line">			j++; t++;</span><br><span class="line">			N[j] &#x3D; (B[j] !&#x3D; B[t]) ? t : N[t];	&#x2F;&#x2F;修改了next表的定义</span><br><span class="line">		&#125;	&#x2F;&#x2F;最后的元素不与之前匹配失败的元素相等</span><br><span class="line">		else t &#x3D; N[t];</span><br><span class="line">	&#125;</span><br><span class="line">	return N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;KMP主算法 O（m) 模式串长度</span><br><span class="line">int match(string A, string B) &#123;</span><br><span class="line">	int m &#x3D; A.size();</span><br><span class="line">	int n &#x3D; B.size();</span><br><span class="line">	int i &#x3D; 0, j &#x3D; 0;</span><br><span class="line">	while (i &lt; m &amp;&amp; j &lt; n) &#123;</span><br><span class="line">		if ( j &lt; 0 || A[i] &#x3D;&#x3D; B[j]) &#123;	</span><br><span class="line">			i++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">		else j &#x3D; next[j];</span><br><span class="line">	&#125;</span><br><span class="line">	delete[ ] next;</span><br><span class="line">	return i - j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>O（n+m）</p>
 
     </div>
@@ -475,9 +478,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -486,7 +497,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

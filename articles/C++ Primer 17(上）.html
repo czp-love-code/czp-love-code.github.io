@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -48,15 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="tupletuple类型和它的伴随类型都在tuple头文件中初始化tuple 1tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#x3D;&amp;#123;1,2,3&amp;#125;;&amp;#x2F;&amp;#x2F;错误2tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#123;1,2,3&amp;#125;&amp;#x2F;&amp;#x2F;正确，也可值初始化">
-<meta name="keywords" content="C++,语言,笔记">
+  <meta name="description" content="tupletuple类型和它的伴随类型都在tuple头文件中初始化tuple 12tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&amp;#123;1,2,3&amp;#125;;&#x2F;&#x2F;错误tuple&lt;size_t,size_t,size_t&gt;threeD&amp;#123;1,2,3&amp;#125;&#x2F;&#x2F;正确，也可值初始化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer 17(上）">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;C++%20Primer%2017(%E4%B8%8A%EF%BC%89.html">
 <meta property="og:site_name" content="门内技墓">
-<meta property="og:description" content="tupletuple类型和它的伴随类型都在tuple头文件中初始化tuple 1tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#x3D;&amp;#123;1,2,3&amp;#125;;&amp;#x2F;&amp;#x2F;错误2tuple&amp;lt;size_t,size_t,size_t&amp;gt;threeD&amp;#123;1,2,3&amp;#125;&amp;#x2F;&amp;#x2F;正确，也可值初始化">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-03T14:47:33.793Z">
+<meta property="og:description" content="tupletuple类型和它的伴随类型都在tuple头文件中初始化tuple 12tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&amp;#123;1,2,3&amp;#125;;&#x2F;&#x2F;错误tuple&lt;size_t,size_t,size_t&gt;threeD&amp;#123;1,2,3&amp;#125;&#x2F;&#x2F;正确，也可值初始化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-03T07:30:31.000Z">
+<meta property="article:modified_time" content="2019-12-03T14:47:33.793Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="语言">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/C++%20Primer%2017(%E4%B8%8A%EF%BC%89.html">
@@ -122,7 +126,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +221,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           C++ Primer 17(上）
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -267,44 +272,44 @@
 
       
         <h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>tuple类型和它的伴随类型都在tuple头文件中<br>初始化tuple</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span><br><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>访问tuple</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">get&lt;i&gt;(t)&#x2F;&#x2F;返回引用，若t为左值，则左值引用，否则右值引用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;i必须是一个常量表达式</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get&lt;i&gt;(t)&#x2F;&#x2F;返回引用，若t为左值，则左值引用，否则右值引用</span><br><span class="line">&#x2F;&#x2F;i必须是一个常量表达式</span><br></pre></td></tr></table></figure>
 <p>tuple成员的数量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple_size&lt;tupleType&gt;::value;&#x2F;&#x2F;返回size_t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">		&#x2F;&#x2F;注意：tupleType不是tuple对象，而是类型</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">typedef decltype(item) trans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">size_t sz&#x3D;tuple_size&lt;trans&gt;::value;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tuple_size&lt;tupleType&gt;::value;&#x2F;&#x2F;返回size_t</span><br><span class="line">		&#x2F;&#x2F;注意：tupleType不是tuple对象，而是类型</span><br><span class="line">typedef decltype(item) trans;</span><br><span class="line">size_t sz&#x3D;tuple_size&lt;trans&gt;::value;</span><br></pre></td></tr></table></figure>
 <p>tuple成员的类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple_element&lt;i,tupleType&gt;::type;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tuple_element&lt;i,tupleType&gt;::type;</span><br></pre></td></tr></table></figure>
 <p>只有两个tuple具有相同数量成员才可以进行比较<br>默认情况下，equal_range使用&lt;运算符来比较元素</p>
 <h2 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h2><p>定义在头文件bitset中<br>初始化bitset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(u);	&#x2F;&#x2F;这两个是constexpr的构造函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(s,pos,m,zero,one);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b(cp,pos,m,zero,one);</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bitset&lt;n&gt; b;</span><br><span class="line">bitset&lt;n&gt; b(u);	&#x2F;&#x2F;这两个是constexpr的构造函数</span><br><span class="line">bitset&lt;n&gt; b(s,pos,m,zero,one);</span><br><span class="line">bitset&lt;n&gt; b(cp,pos,m,zero,one);</span><br></pre></td></tr></table></figure>
 <p>当用一个整型值来初始化bitset时，它会被转换为unsigned long long类型并当作位模式处理<br>操作bitset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">b.any();	b.all();	b.none();	b.count()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">b.size();&#x2F;&#x2F;constexpr函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">b.text(pos);	b.set(pos,v)	b.set()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">b.reset(pos)	b.reset()	b.flip(pos)		b.flip();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">b[pos]	&#x2F;&#x2F;若b为const，返回bool值，否则可用来操作位</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">b.to_ulong()	b.to_ullong()	b.to_string(zero,one)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">os&lt;&lt;b	is&gt;&gt;b;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b.any();	b.all();	b.none();	b.count()</span><br><span class="line">b.size();&#x2F;&#x2F;constexpr函数</span><br><span class="line">b.text(pos);	b.set(pos,v)	b.set()</span><br><span class="line">b.reset(pos)	b.reset()	b.flip(pos)		b.flip();</span><br><span class="line">b[pos]	&#x2F;&#x2F;若b为const，返回bool值，否则可用来操作位</span><br><span class="line">b.to_ulong()	b.to_ullong()	b.to_string(zero,one)</span><br><span class="line">os&lt;&lt;b	is&gt;&gt;b;</span><br></pre></td></tr></table></figure>
 <h2 id="正则表达式（RE）"><a href="#正则表达式（RE）" class="headerlink" title="正则表达式（RE）"></a>正则表达式（RE）</h2><p>RE库定义在头文件regex中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string pattern(&quot;[^c]ei&quot;);&#x2F;&#x2F;任意非c后接ei</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">pattern&#x3D;&quot;[[:alpha:]]*&quot;+pattern+&quot;[[:alpha:]]*&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;0个或多个，若*换+，则表示1个或多个</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">regex r(pattern);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">smatch results;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">string test_str&#x3D;&quot;receipt freind theif receive&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">if(regex_search(test_str,results,r))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		cout&lt;&lt;result.str()&lt;&lt;endl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		&#x2F;&#x2F;输出freind</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string pattern(&quot;[^c]ei&quot;);&#x2F;&#x2F;任意非c后接ei</span><br><span class="line">pattern&#x3D;&quot;[[:alpha:]]*&quot;+pattern+&quot;[[:alpha:]]*&quot;</span><br><span class="line">&#x2F;&#x2F;0个或多个，若*换+，则表示1个或多个</span><br><span class="line">regex r(pattern);</span><br><span class="line">smatch results;</span><br><span class="line">string test_str&#x3D;&quot;receipt freind theif receive&quot;;</span><br><span class="line">if(regex_search(test_str,results,r))</span><br><span class="line">		cout&lt;&lt;result.str()&lt;&lt;endl;</span><br><span class="line">		&#x2F;&#x2F;输出freind</span><br></pre></td></tr></table></figure>
 <p>regex_search 找到一个匹配子串就会停止查找</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">regex(re,f)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">r1.assign(re,f)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">r.mark_count()	&#x2F;&#x2F;r中子表达式的数目</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">r.flags() &#x2F;&#x2F;返回r的标志集</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">regex(re,f)</span><br><span class="line">r1.assign(re,f)</span><br><span class="line">r.mark_count()	&#x2F;&#x2F;r中子表达式的数目</span><br><span class="line">r.flags() &#x2F;&#x2F;返回r的标志集</span><br></pre></td></tr></table></figure>
 <p>三个标志特别记忆</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">icase</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">nosubs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">optimize	&#x2F;&#x2F;执行速度优先于构造速度</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">icase</span><br><span class="line">nosubs</span><br><span class="line">optimize	&#x2F;&#x2F;执行速度优先于构造速度</span><br></pre></td></tr></table></figure>
 <p>使用标志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">regex r(&quot;[[:alnum:]]+\\.(cpp|cxx|cc)$&quot;,regex::icase);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;反斜线和点在C++中都是特殊字符，需要先用一个反斜线去掉其特殊含义</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">regex r(&quot;[[:alnum:]]+\\.(cpp|cxx|cc)$&quot;,regex::icase);</span><br><span class="line">&#x2F;&#x2F;反斜线和点在C++中都是特殊字符，需要先用一个反斜线去掉其特殊含义</span><br></pre></td></tr></table></figure>
 <p>正则表达式是在运行时，当一个regex对象被初始化或赋予一个新模式才被“编译”的，即是说，一个正则表达式的语法是否正确是在运行时解析的（特别耗时）<br>若是编写的正则表达式存在错误，那么在运行时标准库会抛出regex_error的异常，它有what()和code()成员，来描述错误和某个错误类型对应的数值编码</p>
 <p>容器参数的类型要与输入序列的类型一致</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string-&gt;regex,smatch,ssub_match,sregex_iterator</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">const char*-&gt;regex,cmatch,csub_match,cregex_iterator</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string-&gt;regex,smatch,ssub_match,sregex_iterator</span><br><span class="line">const char*-&gt;regex,cmatch,csub_match,cregex_iterator</span><br></pre></td></tr></table></figure>
 <p>使用sregex_iterator</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">for(sregex_iterator it(file.begin(),file.end(),r),end_it;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">		it!&#x3D;end_it;++it)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		cout&lt;&lt;it-&gt;str()&lt;&lt;endl;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(sregex_iterator it(file.begin(),file.end(),r),end_it;</span><br><span class="line">		it!&#x3D;end_it;++it)</span><br><span class="line">		cout&lt;&lt;it-&gt;str()&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
 <p>查找上下文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">for....</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">		auto pos &#x3D; it-&gt;prefix().length();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		pos&#x3D;pos&gt;40?pos-40:0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		cout&lt;&lt;it-&gt;prefix().str().substr(pos)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">				&lt;&lt;&quot;\n\t\t&gt;&gt;&gt;&quot;&lt;&lt;it-&gt;str()&lt;&lt;&quot;&lt;&lt;&lt;\n&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">				&lt;&lt;it-&gt;suffix().str().substr(0,40)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">				&lt;&lt;endl;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for....</span><br><span class="line">		auto pos &#x3D; it-&gt;prefix().length();</span><br><span class="line">		pos&#x3D;pos&gt;40?pos-40:0;</span><br><span class="line">		cout&lt;&lt;it-&gt;prefix().str().substr(pos)</span><br><span class="line">				&lt;&lt;&quot;\n\t\t&gt;&gt;&gt;&quot;&lt;&lt;it-&gt;str()&lt;&lt;&quot;&lt;&lt;&lt;\n&quot;</span><br><span class="line">				&lt;&lt;it-&gt;suffix().str().substr(0,40)</span><br><span class="line">				&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
 <p>smatch操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">m.ready()	m.size()	m.empty()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">m.prefix()	m.suffix()	m.format(...)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">m.length(n)	m.position(n)	&#x2F;&#x2F;第n个子表达式序列距开始的距离</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">m.str(n)	m[n]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;m.str(0) 保存完整的匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">m.begin(),m.end()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">m.cbegin(),m.cend()</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">m.ready()	m.size()	m.empty()</span><br><span class="line">m.prefix()	m.suffix()	m.format(...)</span><br><span class="line">m.length(n)	m.position(n)	&#x2F;&#x2F;第n个子表达式序列距开始的距离</span><br><span class="line">m.str(n)	m[n]</span><br><span class="line">&#x2F;&#x2F;m.str(0) 保存完整的匹配</span><br><span class="line">m.begin(),m.end()</span><br><span class="line">m.cbegin(),m.cend()</span><br></pre></td></tr></table></figure>
 <p>？sub_match操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">matched		first	second		length()	str()</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matched		first	second		length()	str()</span><br></pre></td></tr></table></figure>
 <p>使用regex_replace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">string fmt&#x3D;&quot;$2.$5.$7&quot;	&#x2F;&#x2F;表某个子表达式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;regex_replace(s,r,fmt)&lt;&lt;endl;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string fmt&#x3D;&quot;$2.$5.$7&quot;	&#x2F;&#x2F;表某个子表达式</span><br><span class="line">cout&lt;&lt;regex_replace(s,r,fmt)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
 <p>匹配和格式化标志的类型为match_flag_type，定义在regex_constants的命名空间，也在std中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">using std::regex_constants::format_no_copy;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using std::regex_constants::format_no_copy;</span><br></pre></td></tr></table></figure>
 <p>使用格式标志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;regex_replace(s,r,fmt,format_no_copy)&lt;&lt;endl;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;regex_replace(s,r,fmt,format_no_copy)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -494,9 +499,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -505,7 +518,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

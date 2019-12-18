@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -54,7 +54,9 @@
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;page&#x2F;2&#x2F;index.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="一个热爱技术与生活的geek">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="czp-love-code">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/page/2/">
@@ -120,7 +122,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -214,10 +217,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/QT04.html" class="post-title-link" itemprop="url">QT基础04</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -264,7 +267,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="ListWidget"><a href="#ListWidget" class="headerlink" title="ListWidget"></a>ListWidget</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用ListWidget</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    : QMainWindow(parent)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    , ui(new Ui::MainWindow)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    ui-&gt;setupUi(this);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    QListWidgetItem *item&#x3D;new QListWidgetItem(&quot;锄禾日当午&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ui-&gt;ListWidget-&gt;addItem(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    item-&gt;setTextAlignment(Qt::AlignHCenter);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    QStringList list;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    list&lt;&lt;&quot;锄禾日当午&quot;&lt;&lt;&quot;汗滴禾下土&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    ui-&gt;ListWidget-&gt;addItems(list);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+          <h2 id="ListWidget"><a href="#ListWidget" class="headerlink" title="ListWidget"></a>ListWidget</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用ListWidget</span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    QListWidgetItem *item&#x3D;new QListWidgetItem(&quot;锄禾日当午&quot;);</span><br><span class="line">    ui-&gt;ListWidget-&gt;addItem(item);</span><br><span class="line">    item-&gt;setTextAlignment(Qt::AlignHCenter);</span><br><span class="line">    </span><br><span class="line">    QStringList list;</span><br><span class="line">    list&lt;&lt;&quot;锄禾日当午&quot;&lt;&lt;&quot;汗滴禾下土&quot;;</span><br><span class="line">    ui-&gt;ListWidget-&gt;addItems(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/QT04.html#more" rel="contents">
@@ -306,10 +309,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/QT03.html" class="post-title-link" itemprop="url">QT基础03</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -398,10 +401,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E7%BA%A2%E9%BB%91%E6%A0%91.html" class="post-title-link" itemprop="url">红黑树</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -496,10 +499,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/QT02.html" class="post-title-link" itemprop="url">QT基础02</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -547,7 +550,7 @@
 
       
           <h2 id="对象树"><a href="#对象树" class="headerlink" title="对象树"></a>对象树</h2><p>当创建的对象在堆区的时候，如果指定的父亲是QObject继承体系中的类，可以不用管理释放的操作，创建的对象会添加到对象树中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">btn-&gt;setParent(this);</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn-&gt;setParent(this);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/QT02.html#more" rel="contents">
@@ -589,10 +592,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html" class="post-title-link" itemprop="url">二叉搜索树</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -687,10 +690,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/QT01.html" class="post-title-link" itemprop="url">QT基础01</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -779,10 +782,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2019(%E4%B8%8B).html" class="post-title-link" itemprop="url">C++ Primer 19(下)</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -829,7 +832,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="成员指针"><a href="#成员指针" class="headerlink" title="成员指针"></a>成员指针</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">auto pdata&#x3D;&amp;Screen::contents;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;解引用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">auto s&#x3D;myScreen.*pdata;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">s&#x3D;pScreen-&gt;*pdata;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;指向const限定的成员函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">char(Screen::*pmf2)(Screen::pos,Screen::pos)const;</span></pre></td></tr></table></figure>
+          <h2 id="成员指针"><a href="#成员指针" class="headerlink" title="成员指针"></a>成员指针</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义</span><br><span class="line">auto pdata&#x3D;&amp;Screen::contents;</span><br><span class="line">&#x2F;&#x2F;解引用</span><br><span class="line">auto s&#x3D;myScreen.*pdata;</span><br><span class="line">s&#x3D;pScreen-&gt;*pdata;</span><br><span class="line">&#x2F;&#x2F;指向const限定的成员函数</span><br><span class="line">char(Screen::*pmf2)(Screen::pos,Screen::pos)const;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2019(%E4%B8%8B).html#more" rel="contents">
@@ -871,10 +874,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2019(%E4%B8%8A).html" class="post-title-link" itemprop="url">C++ Primer 19(上)</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -946,92 +949,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://czp-love-code.github.io/articles/C++%20Primer%2018(%E4%B8%8A).html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/weixintouxiang.jpg">
-      <meta itemprop="name" content="耐清">
-      <meta itemprop="description" content="一个热爱技术与生活的geek">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="门内技墓">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/articles/C++%20Primer%2018(%E4%B8%8A).html" class="post-title-link" itemprop="url">C++ Primer 18(上)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-04 12:22:55 / 修改时间：16:28:51" itemprop="dateCreated datePublished" datetime="2019-12-04T12:22:55+08:00">2019-12-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/" itemprop="url" rel="index">
-                    <span itemprop="name">C++ Primer</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/articles/C++%20Primer%2018(%E4%B8%8A).html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-<div>
-  
-</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://czp-love-code.github.io/articles/C++%20Primer%2018(%E4%B8%8B).html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1044,10 +961,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2018(%E4%B8%8B).html" class="post-title-link" itemprop="url">C++ Primer 18(下)</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1094,11 +1011,97 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">namespace x&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span></pre></td></tr></table></figure>
+          <h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">namespace x&#123;</span><br><span class="line">	------</span><br><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span><br></pre></td></tr></table></figure>
 <p>不能定义在函数或类的内部<br>命名空间成员的定义可以在外部，但是必须在所属命名空间的外层命名空间中</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2018(%E4%B8%8B).html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://czp-love-code.github.io/articles/C++%20Primer%2018(%E4%B8%8A).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/weixintouxiang.jpg">
+      <meta itemprop="name" content="耐清">
+      <meta itemprop="description" content="一个热爱技术与生活的geek">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="门内技墓">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/articles/C++%20Primer%2018(%E4%B8%8A).html" class="post-title-link" itemprop="url">C++ Primer 18(上)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-04 12:22:55 / 修改时间：16:28:51" itemprop="dateCreated datePublished" datetime="2019-12-04T12:22:55+08:00">2019-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/" itemprop="url" rel="index">
+                    <span itemprop="name">C++ Primer</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/articles/C++%20Primer%2018(%E4%B8%8A).html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1272,9 +1275,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -1283,7 +1294,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

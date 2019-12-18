@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -49,14 +49,16 @@
 </script>
 
   <meta name="description" content="快速排序原理首先通过一趟排序将数字分割两半，其中一半的元素全部小于另外一半，然后用同样的方式递归处理两边的数组，直到数组有序">
-<meta name="keywords" content="排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速排序">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="快速排序原理首先通过一趟排序将数字分割两半，其中一半的元素全部小于另外一半，然后用同样的方式递归处理两边的数组，直到数组有序">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-16T14:24:29.164Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-01T12:53:41.000Z">
+<meta property="article:modified_time" content="2019-12-16T14:24:29.164Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">
@@ -122,7 +124,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +219,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           快速排序
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -280,7 +283,7 @@
       
         <h2 id="快速排序原理"><a href="#快速排序原理" class="headerlink" title="快速排序原理"></a>快速排序原理</h2><p>首先通过一趟排序将数字分割两半，其中一半的元素全部小于另外一半，然后用同样的方式递归处理两边的数组，直到数组有序</p>
 <a id="more"></a>
-<h2 id="代码实现（C-）"><a href="#代码实现（C-）" class="headerlink" title="代码实现（C++）"></a>代码实现（C++）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">void quickSort(int a[], int low ,int high)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	if(low&lt;high)  &#x2F;&#x2F;递归的终止条件，只有数组内元素大于1时才进行排序</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		int i &#x3D; low, j &#x3D; high;   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		int x &#x3D; a[low];                                     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">		while(i&lt;j)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		  while(i&lt;j &amp;&amp; a[j] &gt;&#x3D; x) j--;  &#x2F;&#x2F;右边开始，找到不满足条件的j</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		  if(i&lt;j) a[i++] &#x3D; a[j];   &#x2F;&#x2F;若此时扫描未完成，将其代替哨兵，哨兵右移</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">		  while(i&lt;j &amp;&amp; a[i] &lt;&#x3D; x) i++; &#x2F;&#x2F;左边开始，找到不满足条件的i</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">		  if(i&lt;j) a[j--] &#x3D; a[i];  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">		&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	     a[i] &#x3D; x;   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">		quickSort(a, low ,i-1);  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		quickSort(a, i+1 ,high);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="代码实现（C-）"><a href="#代码实现（C-）" class="headerlink" title="代码实现（C++）"></a>代码实现（C++）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void quickSort(int a[], int low ,int high)</span><br><span class="line">&#123;</span><br><span class="line">	if(low&lt;high)  &#x2F;&#x2F;递归的终止条件，只有数组内元素大于1时才进行排序</span><br><span class="line">	&#123;</span><br><span class="line">		int i &#x3D; low, j &#x3D; high;   </span><br><span class="line">		int x &#x3D; a[low];                                     </span><br><span class="line">		while(i&lt;j)  </span><br><span class="line">		&#123;</span><br><span class="line">		  while(i&lt;j &amp;&amp; a[j] &gt;&#x3D; x) j--;  &#x2F;&#x2F;右边开始，找到不满足条件的j</span><br><span class="line">		  if(i&lt;j) a[i++] &#x3D; a[j];   &#x2F;&#x2F;若此时扫描未完成，将其代替哨兵，哨兵右移</span><br><span class="line">		  while(i&lt;j &amp;&amp; a[i] &lt;&#x3D; x) i++; &#x2F;&#x2F;左边开始，找到不满足条件的i</span><br><span class="line">		  if(i&lt;j) a[j--] &#x3D; a[i];  </span><br><span class="line">		&#125; </span><br><span class="line">	     a[i] &#x3D; x;   </span><br><span class="line">		quickSort(a, low ,i-1);  </span><br><span class="line">		quickSort(a, i+1 ,high);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>最坏情况下的时间复杂度：O（n^2)<br>平均情况的时间复杂度：O（nLog2n)<br>最好的时间复杂度：O（nLog2n)<br>空间复杂度：  O(Log2n)-O(n)<br>稳定性：不稳定</p>
 <h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>快速排序的一次划分算法从两头交替搜索，直到low和high重合，因此其时间复杂度是O(n)；而整个快速排序算法的时间复杂度与划分的趟数有关。</p>
 <p>理想的情况，每次划分所选择的中间数恰好将当前序列几乎等分，经过logn趟划分，便可得到长度为1的子表。此时，整个算法的时间复杂度为O(nlogn)。 </p>
@@ -476,9 +479,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -487,7 +498,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

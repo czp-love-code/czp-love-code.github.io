@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -48,15 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="控制实例化通过显式实例化来避免在多个对象文件中实例化相同模板的开销 1extern template declaration;2template declaration;&amp;#x2F;&amp;#x2F;其中declaration的模板参数已被替换为实参">
-<meta name="keywords" content="C++,语言,笔记">
+  <meta name="description" content="控制实例化通过显式实例化来避免在多个对象文件中实例化相同模板的开销 12extern template declaration;template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer 16 (中）">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;C++%20Primer%2016(%E4%B8%AD).html">
 <meta property="og:site_name" content="门内技墓">
-<meta property="og:description" content="控制实例化通过显式实例化来避免在多个对象文件中实例化相同模板的开销 1extern template declaration;2template declaration;&amp;#x2F;&amp;#x2F;其中declaration的模板参数已被替换为实参">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-04T04:20:52.919Z">
+<meta property="og:description" content="控制实例化通过显式实例化来避免在多个对象文件中实例化相同模板的开销 12extern template declaration;template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-02T12:27:52.000Z">
+<meta property="article:modified_time" content="2019-12-04T04:20:52.919Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="语言">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/C++%20Primer%2016(%E4%B8%AD).html">
@@ -122,7 +126,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +221,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           C++ Primer 16 (中）
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -273,25 +278,25 @@
 
       
         <h2 id="控制实例化"><a href="#控制实例化" class="headerlink" title="控制实例化"></a>控制实例化</h2><p>通过显式实例化来避免在多个对象文件中实例化相同模板的开销</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">extern template declaration;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extern template declaration;</span><br><span class="line">template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>注意：要将两个对象文件链接在一起<br>其中实例化定义会实例化所有成员，不管是不是要用到，所以用来显式实例化一个类模板的类型，必须能用于模板的所有成员</p>
 <h2 id="智能指针模板"><a href="#智能指针模板" class="headerlink" title="智能指针模板"></a>智能指针模板</h2><p>shared_ptr 的删除器必须是指针或封装了指针的类，该删除器的类型直到运行时才知道，我们可以随时改变它的类型<br>通常，类成员的类型在运行时是不可以改变的，所以我们可以得知，shared_pte的删除器不是保存为成员的形式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">del? del(p):delete p;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del? del(p):delete p;</span><br></pre></td></tr></table></figure>
 <p>删除器的类型是unique_ptr对象类型的一部分，所以删除器的类型是编译时就知道的，就可以直接调用实例化的删除器，避免运行时开销<br>而shared_ptr使得用户重载删除器更加方便</p>
 <h2 id="模板与类型转换"><a href="#模板与类型转换" class="headerlink" title="模板与类型转换"></a>模板与类型转换</h2><p>非const可以传给const的形参<br>若形参不是引用，数组和函数可以转换为指针</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; T foun(const T&amp;,const T&amp;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">foun(a,b);&#x2F;&#x2F;a,b为数组名，错误</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; T foun(const T&amp;,const T&amp;);</span><br><span class="line">foun(a,b);&#x2F;&#x2F;a,b为数组名，错误</span><br></pre></td></tr></table></figure>
 <h2 id="模板显式实参"><a href="#模板显式实参" class="headerlink" title="模板显式实参"></a>模板显式实参</h2><p>当返回类型与参数列表中任何类型都不相同时，要用户控制模板实例化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T1,typename T2,typename T3&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">T1 sum(T2,T3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">auto val3&#x3D;sum&lt;long long&gt;(a,b);&#x2F;&#x2F;也可以显式指定3个参数</span></pre></td></tr></table></figure>
-<h2 id="尾置返回类型"><a href="#尾置返回类型" class="headerlink" title="尾置返回类型"></a>尾置返回类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">auto (T *beg,T *end)-&gt;decltype(*beg)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	return *beg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T1,typename T2,typename T3&gt;</span><br><span class="line">T1 sum(T2,T3)</span><br><span class="line"></span><br><span class="line">auto val3&#x3D;sum&lt;long long&gt;(a,b);&#x2F;&#x2F;也可以显式指定3个参数</span><br></pre></td></tr></table></figure>
+<h2 id="尾置返回类型"><a href="#尾置返回类型" class="headerlink" title="尾置返回类型"></a>尾置返回类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">auto (T *beg,T *end)-&gt;decltype(*beg)&#123;</span><br><span class="line">	return *beg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="使用类型转换模板"><a href="#使用类型转换模板" class="headerlink" title="使用类型转换模板"></a>使用类型转换模板</h2><p>头文件type_traits</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">remove_reference</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">remove_pointer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">remove_extent      &#x2F;&#x2F;X[n]-&gt;X </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">remove_all_extents	&#x2F;&#x2F;X[n1][n2]... -&gt;X</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">add_pointer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">add_const</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">add_lvalue_reference</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">add_rvalue_reference</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">make_signed</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">make_unsigned</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">remove_reference</span><br><span class="line">remove_pointer</span><br><span class="line">remove_extent      &#x2F;&#x2F;X[n]-&gt;X </span><br><span class="line">remove_all_extents	&#x2F;&#x2F;X[n1][n2]... -&gt;X</span><br><span class="line">add_pointer</span><br><span class="line">add_const</span><br><span class="line">add_lvalue_reference</span><br><span class="line">add_rvalue_reference</span><br><span class="line">make_signed</span><br><span class="line">make_unsigned</span><br></pre></td></tr></table></figure>
 <p>类型转换模板的使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">typename remove_reference&lt;decltype(*beg)&gt;::type</span></pre></td></tr></table></figure>
-<h2 id="指向函数模板实例的指针"><a href="#指向函数模板实例的指针" class="headerlink" title="指向函数模板实例的指针"></a>指向函数模板实例的指针</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; int compare(const T&amp;,const T&amp;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int (*ptf)(const int&amp;,const int&amp;)&#x3D;compare;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typename remove_reference&lt;decltype(*beg)&gt;::type</span><br></pre></td></tr></table></figure>
+<h2 id="指向函数模板实例的指针"><a href="#指向函数模板实例的指针" class="headerlink" title="指向函数模板实例的指针"></a>指向函数模板实例的指针</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; int compare(const T&amp;,const T&amp;);</span><br><span class="line">int (*ptf)(const int&amp;,const int&amp;)&#x3D;compare;</span><br></pre></td></tr></table></figure>
 <p>显式指定</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">func(compare&lt;int&gt;);&#x2F;&#x2F;接受一个函数指针，指向一个函数实例</span></pre></td></tr></table></figure>
-<h2 id="模板形参是引用"><a href="#模板形参是引用" class="headerlink" title="模板形参是引用"></a>模板形参是引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void f1(T&amp;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;传递进来的实参必须是左值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void f2(const T&amp;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;实参可以是任何类型（包括右值）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void f3(T&amp;&amp;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;实参可以是任何类型，若实参为右值，T为该右值的类型</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func(compare&lt;int&gt;);&#x2F;&#x2F;接受一个函数指针，指向一个函数实例</span><br></pre></td></tr></table></figure>
+<h2 id="模板形参是引用"><a href="#模板形参是引用" class="headerlink" title="模板形参是引用"></a>模板形参是引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void f1(T&amp;);</span><br><span class="line">&#x2F;&#x2F;传递进来的实参必须是左值</span><br><span class="line">template&lt;typename T&gt; void f2(const T&amp;);</span><br><span class="line">&#x2F;&#x2F;实参可以是任何类型（包括右值）</span><br><span class="line">template&lt;typename T&gt; void f3(T&amp;&amp;);</span><br><span class="line">&#x2F;&#x2F;实参可以是任何类型，若实参为右值，T为该右值的类型</span><br></pre></td></tr></table></figure>
 <p>若f3发生重载，则T绑定到非const右值<br>f3这样的右值引用形参通常用于模板转发其实参或模板被重载</p>
 <h2 id="引用折叠"><a href="#引用折叠" class="headerlink" title="引用折叠"></a>引用折叠</h2><p>若用一个int对象传入f3，此时T推断为int&amp;,发生引用折叠。<br>引用折叠除了T&amp;&amp; &amp;&amp;折叠为T&amp;&amp;，其他都是折叠为T&amp;</p>
 <p>可以通过类型别名或通过模板类型参数间接定义引用的引用，引用折叠只能应用于间接创建的引用的引用，如类型别名或模板参数</p>
@@ -485,9 +490,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -496,7 +509,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

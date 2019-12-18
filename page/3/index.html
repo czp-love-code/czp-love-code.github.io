@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -54,7 +54,9 @@
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;page&#x2F;3&#x2F;index.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="一个热爱技术与生活的geek">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="czp-love-code">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/page/3/">
@@ -120,7 +122,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -214,10 +217,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2017(%E4%B8%8B).html" class="post-title-link" itemprop="url">C++ Primer 17(下)</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -265,7 +268,7 @@
 
       
           <h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><h3 id="随机数引擎类"><a href="#随机数引擎类" class="headerlink" title="随机数引擎类"></a>随机数引擎类</h3><p>函数对象类，定义了调用运算符，不接受参数并返回一个随机数unsigned整数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">default_random_engine e;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;10;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	cout&lt;&lt;e()&lt;&lt;endl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">default_random_engine e;</span><br><span class="line">for(int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">	cout&lt;&lt;e()&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2017(%E4%B8%8B).html#more" rel="contents">
@@ -307,10 +310,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2017(%E4%B8%8A%EF%BC%89.html" class="post-title-link" itemprop="url">C++ Primer 17(上）</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -352,7 +355,7 @@
 
       
           <h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>tuple类型和它的伴随类型都在tuple头文件中<br>初始化tuple</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#x3D;&#123;1,2,3&#125;;&#x2F;&#x2F;错误</span><br><span class="line">tuple&lt;size_t,size_t,size_t&gt;threeD&#123;1,2,3&#125;&#x2F;&#x2F;正确，也可值初始化</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2017(%E4%B8%8A%EF%BC%89.html#more" rel="contents">
@@ -394,10 +397,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2016(%E4%B8%8B).html" class="post-title-link" itemprop="url">C++ Primer 16 (下)</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -445,7 +448,7 @@
 
       
           <h2 id="std-move"><a href="#std-move" class="headerlink" title="std::move"></a>std::move</h2><p>std::move是一个函数模板，它的定义如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">typename remove_reference&lt;T&gt;::type&amp;&amp; move(T&amp;&amp; t)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	return static_cast&lt;typename remove_reference&lt;T&gt;::type&amp;&amp;&gt;(t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">typename remove_reference&lt;T&gt;::type&amp;&amp; move(T&amp;&amp; t)&#123;</span><br><span class="line">	return static_cast&lt;typename remove_reference&lt;T&gt;::type&amp;&amp;&gt;(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2016(%E4%B8%8B).html#more" rel="contents">
@@ -487,10 +490,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2016(%E4%B8%AD).html" class="post-title-link" itemprop="url">C++ Primer 16 (中）</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -538,7 +541,7 @@
 
       
           <h2 id="控制实例化"><a href="#控制实例化" class="headerlink" title="控制实例化"></a>控制实例化</h2><p>通过显式实例化来避免在多个对象文件中实例化相同模板的开销</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">extern template declaration;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extern template declaration;</span><br><span class="line">template declaration;&#x2F;&#x2F;其中declaration的模板参数已被替换为实参</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/articles/C++%20Primer%2016(%E4%B8%AD).html#more" rel="contents">
@@ -580,10 +583,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/C++%20Primer%2016(%E4%B8%8A%EF%BC%89.html" class="post-title-link" itemprop="url">C++ Primer 16 （上）</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -673,10 +676,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E5%A0%86%E6%8E%92%E5%BA%8F.html" class="post-title-link" itemprop="url">堆排序</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -771,10 +774,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html" class="post-title-link" itemprop="url">快速排序</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -869,10 +872,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/KMP%E7%AE%97%E6%B3%95.html" class="post-title-link" itemprop="url">KMP算法</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -967,10 +970,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95.html" class="post-title-link" itemprop="url">朴素字符串匹配算法</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1066,10 +1069,10 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/articles/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.html" class="post-title-link" itemprop="url">插入排序</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1299,9 +1302,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -1310,7 +1321,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

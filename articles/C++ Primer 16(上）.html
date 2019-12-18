@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -49,14 +49,18 @@
 </script>
 
   <meta name="description" content="非类型参数在模板中可以通过一个特定的类型名定义非类型参数非类型参数：1、整型     （实参要求：常量表达式）2、指向对象或函数的指针 （实参要求：静态生存期）3、左值引用    （实参要求：静态生存期）实参要求的原因：模板转换成实例发生在编译的时候（指针参数也可以用nullptr或0来实例化） 模板非类型参数是一个常量值">
-<meta name="keywords" content="C++,语言,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer 16 （上）">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;C++%20Primer%2016(%E4%B8%8A%EF%BC%89.html">
 <meta property="og:site_name" content="门内技墓">
 <meta property="og:description" content="非类型参数在模板中可以通过一个特定的类型名定义非类型参数非类型参数：1、整型     （实参要求：常量表达式）2、指向对象或函数的指针 （实参要求：静态生存期）3、左值引用    （实参要求：静态生存期）实参要求的原因：模板转换成实例发生在编译的时候（指针参数也可以用nullptr或0来实例化） 模板非类型参数是一个常量值">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-04T04:20:40.312Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-02T08:14:03.000Z">
+<meta property="article:modified_time" content="2019-12-04T04:20:40.312Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="语言">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/C++%20Primer%2016(%E4%B8%8A%EF%BC%89.html">
@@ -122,7 +126,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +221,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           C++ Primer 16 （上）
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -276,42 +281,42 @@
 <p>模板非类型参数是一个常量值</p>
 <a id="more"></a>
 <h2 id="模板的声明和定义"><a href="#模板的声明和定义" class="headerlink" title="模板的声明和定义"></a>模板的声明和定义</h2><p>模板的inline和constexpr声明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;tepename T&gt; inline T min(const T&amp;,const T&amp;)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">template &lt;tepename T&gt; inline T min(const T&amp;,const T&amp;)</span><br></pre></td></tr></table></figure>
 <p>函数模板和类模板成员函数的定义都在头文件</p>
 <p>类模板成员函数的类外定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ret-type B&lt;T&gt;::member_name(parm-list)&#123;--------&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">ret-type B&lt;T&gt;::member_name(parm-list)&#123;--------&#125;</span><br></pre></td></tr></table></figure>
 <p>一个类模板的成员函数只有程序用到它时才进行实例化，因此即使某种类型不能完全符合模板操作的要求，我们仍然能使用该类型实例化类</p>
 <p>在类模板的作用域内，我们可以直接使用模板名而不用提供实参</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; class B&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	--------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	B&amp; operator++();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; class B&#123;</span><br><span class="line">	--------</span><br><span class="line">	B&amp; operator++();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在类模板外定义的成员函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">B&lt;T&gt;  B&lt;T&gt;::operator++(int) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	B ret &#x3D;*this;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; </span><br><span class="line">B&lt;T&gt;  B&lt;T&gt;::operator++(int) &#123;</span><br><span class="line">	------</span><br><span class="line">	B ret &#x3D;*this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="模板的友元"><a href="#模板的友元" class="headerlink" title="模板的友元"></a>模板的友元</h2><p>如果类模板有一个非模板友元，该友元可以访问所有类模板实例<br>如果友元本身是一个模板，类可以授权可以所有友元模板实例，也可以只授权给特定实例</p>
 <p>要使模板的一个实例作为友元，需要先声明这个模板</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename&gt; class A;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; class B&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	friend class A&lt;T&gt;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	friend class A&lt;B&gt;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	template &lt;typename X&gt; friend class C;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	friend T; &#x2F;&#x2F;将访问权限授予用来实例化B的类型，也可以用内置类型来实例化该类</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename&gt; class A;</span><br><span class="line">template &lt;typename T&gt; class B&#123;</span><br><span class="line">	friend class A&lt;T&gt;;</span><br><span class="line">	friend class A&lt;B&gt;;</span><br><span class="line">	template &lt;typename X&gt; friend class C;</span><br><span class="line">	friend T; &#x2F;&#x2F;将访问权限授予用来实例化B的类型，也可以用内置类型来实例化该类</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="模板的类型别名"><a href="#模板的类型别名" class="headerlink" title="模板的类型别名"></a>模板的类型别名</h2><p>可以定义一个typedef来引用实例化的类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">typedef B&lt;string&gt; BB;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef B&lt;string&gt; BB;</span><br></pre></td></tr></table></figure>
 <p>为类模板定义一个类型别名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; using twin&#x3D;pair&lt;T,T&gt;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">twin &lt;string&gt; authors;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; using twin&#x3D;pair&lt;T,T&gt;;</span><br><span class="line">twin &lt;string&gt; authors;</span><br></pre></td></tr></table></figure>
 <p>固定一个或多个模板参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; using parTo&#x3D;pair&lt;T,unsigned&gt;;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; using parTo&#x3D;pair&lt;T,unsigned&gt;;</span><br></pre></td></tr></table></figure>
 <h2 id="模板的Static数据成员"><a href="#模板的Static数据成员" class="headerlink" title="模板的Static数据成员"></a>模板的Static数据成员</h2><p>类模板的每个实例都有其自己的static数据成员<br>static数据成员的定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">size_t F&lt;T&gt;::ctr &#x3D; 0;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">size_t F&lt;T&gt;::ctr &#x3D; 0;</span><br></pre></td></tr></table></figure>
 <p>访问static数据成员</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Foo&lt;int&gt; f;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">auto ct&#x3D;Foo&lt;int&gt;::count();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ct&#x3D;f.count();</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Foo&lt;int&gt; f;</span><br><span class="line">auto ct&#x3D;Foo&lt;int&gt;::count();</span><br><span class="line">ct&#x3D;f.count();</span><br></pre></td></tr></table></figure>
 <p>用：：访问static成员和类型成员，默认情况下，C++假定通过：：访问的不是类型。可以通过显式说明访问的名字是类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">typename T::value_type top(const T&amp; c)-------</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">typename T::value_type top(const T&amp; c)-------</span><br></pre></td></tr></table></figure>
 <p>一个static成员函数只有在使用时才会实例化</p>
 <h2 id="模板参数名要求"><a href="#模板参数名要求" class="headerlink" title="模板参数名要求"></a>模板参数名要求</h2><p>在模板内不能重用模板参数名（用作变量名）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T,typename T&gt; &#x2F;&#x2F;错误</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T,typename T&gt; &#x2F;&#x2F;错误</span><br></pre></td></tr></table></figure>
 
-<h2 id="默认模板实参的使用"><a href="#默认模板实参的使用" class="headerlink" title="默认模板实参的使用"></a>默认模板实参的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T,typename F&#x3D;less&lt;T&gt;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int compare (const T&amp; a,const T&amp; b, F f&#x3D;F())--------</span></pre></td></tr></table></figure>
+<h2 id="默认模板实参的使用"><a href="#默认模板实参的使用" class="headerlink" title="默认模板实参的使用"></a>默认模板实参的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T,typename F&#x3D;less&lt;T&gt;&gt;</span><br><span class="line">int compare (const T&amp; a,const T&amp; b, F f&#x3D;F())--------</span><br></pre></td></tr></table></figure>
 <p>对于模板参数，只有当它右侧所有参数都有默认实参时，它才可以有默认实参，有默认实参的时候，我们可以这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">A&lt;&gt; a;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A&lt;&gt; a;</span><br></pre></td></tr></table></figure>
 <h2 id="成员模板"><a href="#成员模板" class="headerlink" title="成员模板"></a>成员模板</h2><p>本身是模板的成员函数不能是虚函数</p>
 <p>使用具有成员模板的类（调用运算符函数）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;int,DebugDelete&gt; p (new int , DebugDelete());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;string,DebugDelete&gt; p (new string , DebugDelete());</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;int,DebugDelete&gt; p (new int , DebugDelete());</span><br><span class="line">unique_ptr&lt;string,DebugDelete&gt; p (new string , DebugDelete());</span><br></pre></td></tr></table></figure>
 <p>类模板的成员模板的外定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">template &lt;typename A&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	B&lt;T&gt;::B(A a,A b)-------</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">template &lt;typename A&gt;</span><br><span class="line">	B&lt;T&gt;::B(A a,A b)-------</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -502,9 +507,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -513,7 +526,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

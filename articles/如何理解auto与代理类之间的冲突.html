@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.1.1">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -48,15 +48,17 @@
   };
 </script>
 
-  <meta name="description" content="代理类：指为了模拟或增广其他类型的类 1vector&amp;lt;bool&amp;gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&amp;lt;bool&amp;gt;::reference对象23std::bitset::reference也是同样的隐形代理类">
-<meta name="keywords" content="C++">
+  <meta name="description" content="代理类：指为了模拟或增广其他类型的类 123vector&lt;bool&gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&lt;bool&gt;::reference对象std::bitset::reference也是同样的隐形代理类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何理解auto与隐形代理类之间的冲突">
 <meta property="og:url" content="https:&#x2F;&#x2F;czp-love-code.github.io&#x2F;articles&#x2F;%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto%E4%B8%8E%E4%BB%A3%E7%90%86%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81.html">
 <meta property="og:site_name" content="门内技墓">
-<meta property="og:description" content="代理类：指为了模拟或增广其他类型的类 1vector&amp;lt;bool&amp;gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&amp;lt;bool&amp;gt;::reference对象23std::bitset::reference也是同样的隐形代理类">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-18T05:51:37.953Z">
+<meta property="og:description" content="代理类：指为了模拟或增广其他类型的类 123vector&lt;bool&gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&lt;bool&gt;::reference对象std::bitset::reference也是同样的隐形代理类">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-18T04:07:13.000Z">
+<meta property="article:modified_time" content="2019-12-18T05:51:37.953Z">
+<meta property="article:author" content="耐清">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://czp-love-code.github.io/articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto%E4%B8%8E%E4%BB%A3%E7%90%86%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81.html">
@@ -122,7 +124,8 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">Always keep it positive</p>
+        <h1 class="site-subtitle" itemprop="description">Always keep it positive</h1>
+      
   </div>
 
   <div class="site-nav-toggle">
@@ -216,9 +219,9 @@
       <meta itemprop="name" content="门内技墓">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           如何理解auto与隐形代理类之间的冲突
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -267,18 +270,18 @@
 
       
         <p>代理类：指为了模拟或增广其他类型的类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">vector&lt;bool&gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&lt;bool&gt;::reference对象</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">std::bitset::reference也是同样的隐形代理类</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;bool&gt;类下的operator[ ]返回一个隐形代理类对象，即std::vector&lt;bool&gt;::reference对象</span><br><span class="line"></span><br><span class="line">std::bitset::reference也是同样的隐形代理类</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>为什么说是隐形？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">std::vector&lt;bool&gt;是一个经过特例化的类，它的对象采用了一种压缩的方式表示其特有的bool元素，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">每一个bool元素用一个比特来表示。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">因为C++中禁止了比特的引用，所以它的operator[ ]不能返回bool&amp;。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">那么它就需要返回一个像bool&amp;的对象。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">即需要模拟bool&amp;，就是用std::vector&lt;bool&gt;::reference这个代理类对象来代理bool&amp;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">所以要保证它像bool&amp;，而且所有能用bool&amp;的地方都能用这个对象代替。</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;bool&gt;是一个经过特例化的类，它的对象采用了一种压缩的方式表示其特有的bool元素，</span><br><span class="line">每一个bool元素用一个比特来表示。</span><br><span class="line">因为C++中禁止了比特的引用，所以它的operator[ ]不能返回bool&amp;。</span><br><span class="line">那么它就需要返回一个像bool&amp;的对象。</span><br><span class="line">即需要模拟bool&amp;，就是用std::vector&lt;bool&gt;::reference这个代理类对象来代理bool&amp;,</span><br><span class="line">所以要保证它像bool&amp;，而且所有能用bool&amp;的地方都能用这个对象代替。</span><br></pre></td></tr></table></figure>
 <p>那么auto为什么会与隐形代理类有冲突呢？<br>考虑下面这个例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">std::vector&lt;bool&gt; reference(const Widget &amp;w);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Widget w;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">auto highPriority&#x3D;features(w)[5];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">processWidet(w,highPriority);&#x2F;&#x2F;未定义行为</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;bool&gt; reference(const Widget &amp;w);</span><br><span class="line">Widget w;</span><br><span class="line">auto highPriority&#x3D;features(w)[5];</span><br><span class="line">processWidet(w,highPriority);&#x2F;&#x2F;未定义行为</span><br></pre></td></tr></table></figure>
 <p>为什么最后会是未定义的行为呢？因为processWidget函数中的highPriority参数中接受的实参是一个指针，然后这个指针指向了一个临时对象。<br>下面来一步步剖析这个行为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">首先features(w)产生一个std::vector&lt;bool&gt;临时对象temp,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">执行opterator[ ]后产生一个std::vector&lt;bool&gt;::reference的代理类对象，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">这个对象中含有一个指向临时对象temp中的指针，然后再加上5个偏移量。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">而processWidget函数中的参数拷贝了这个指针的地址，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">在auto highPriority&#x3D;features(w)[5]这条表达式结束的时候，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">临时对象temp销毁，但我们却还在后面使用了一个指向这个临时对象temp的指针，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">该指针就变成了一个空悬指针，最后就导致了未定义行为。</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">首先features(w)产生一个std::vector&lt;bool&gt;临时对象temp,</span><br><span class="line">执行opterator[ ]后产生一个std::vector&lt;bool&gt;::reference的代理类对象，</span><br><span class="line">这个对象中含有一个指向临时对象temp中的指针，然后再加上5个偏移量。</span><br><span class="line">而processWidget函数中的参数拷贝了这个指针的地址，</span><br><span class="line">在auto highPriority&#x3D;features(w)[5]这条表达式结束的时候，</span><br><span class="line">临时对象temp销毁，但我们却还在后面使用了一个指向这个临时对象temp的指针，</span><br><span class="line">该指针就变成了一个空悬指针，最后就导致了未定义行为。</span><br></pre></td></tr></table></figure>
 <p>那么如何避免这种行为呢？<br>可以采用直接转换的方式，将产生的那个临时对象temp中的某个地址的bool值拷贝下来即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bool highPriority&#x3D;features(w)[5];</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool highPriority&#x3D;features(w)[5];</span><br></pre></td></tr></table></figure>
 <p>也同样可以使用auto+强制类型转换的方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">auto highPriority&#x3D;static_cast&lt;bool&gt;(features(w)[5]);</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto highPriority&#x3D;static_cast&lt;bool&gt;(features(w)[5]);</span><br></pre></td></tr></table></figure>
 
 <p>综上，auto表达式右边不能直接使用代理类对象，因为auto会推断出一个代理类对象的类型，而不是它想要的类型，就上面这个例子而言，它想要的是一个bool值，而不是一个指向临时对象中的bool的指针。</p>
 
@@ -465,9 +468,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -476,7 +487,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
