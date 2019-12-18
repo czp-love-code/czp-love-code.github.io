@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-18T05:51:37.953Z</updated>
+  <updated>2019-12-18T15:31:08.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为什么说vector的接口设计是败笔</title>
+    <link href="http://yoursite.com/articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html"/>
+    <id>http://yoursite.com/articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html</id>
+    <published>2019-12-18T15:03:09.000Z</published>
+    <updated>2019-12-18T15:31:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。</p><a id="more"></a><p>为什么会这样呢？<br>首先，使用大括号来进行初始化对象有三个特点，第一个特点就是它禁止了会损失精度的隐式转换</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double x,y,z;</span><br><span class="line">int sum&#123;x+y+z&#125;; &#x2F;&#x2F;错误</span><br></pre></td></tr></table></figure><p>第二个特点就是不会变成一个函数的声明，因为用小括号来调用不带参数的构造函数的时候就会变成一个函数的声明，而大括号则不会，依旧会调用没有形参的构造函数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Widget w1();&#x2F;&#x2F;这是一个函数声明</span><br><span class="line">Widget w2&#123; &#125;;&#x2F;&#x2F;这调用了没有形参的构造函数</span><br></pre></td></tr></table></figure><p>第三个特点就是在构造函数的重载决议期间，只要大括号内的实参能与带std::initializer_list类型的形参匹配或进行隐式转换，就会调用这个构造函数，而若是存在带std::initializer_list类型的形参的构造函数，而实参与形参之间需要进行转换且转换会损失精度，那么就会出错。此外如果该构造函数的形参与实参完全不匹配（无法进行隐式转换，如实参int形参string），才会考虑其他的候选函数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Widget(std::initializer_list&lt;bool&gt; il);&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w&#123;10,5.0&#125;;&#x2F;&#x2F;错误，bool无法精确表示这两个值中的任何一个</span><br><span class="line"></span><br><span class="line">Widget(std::initializer_list&lt;string&gt; il)&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w2&#123;10,5.0&#125;; &#x2F;&#x2F;考虑匹配其他构造函数</span><br></pre></td></tr></table></figure><p>还有一点需要注意的就是当实参为空的情况</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Widget w1&#123; &#125;;&#x2F;&#x2F;调用默认构造函数</span><br><span class="line">Widget w2 (&#123; &#125;);&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br><span class="line">Widget w2 &#123;&#123; &#125;&#125;;&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br></pre></td></tr></table></figure><p>我们知道vector中有一个带initializer_list的构造函数和一个不带initializer_list形参的构造函数，那么用大小括号来初始化它的对象的时候，就会出现完全不一样的结果，但是我们原先却是希望无论使用大小括号都不要影响到调用的重载版本的。所以才说vector的接口设计就是败笔</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Effective Modern C++" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Effective-Modern-C/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>如何理解auto与隐形代理类之间的冲突</title>
@@ -44,8 +69,8 @@
   
   <entry>
     <title>auto、decltype与模板类型推断的异同</title>
-    <link href="http://yoursite.com/articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD.html"/>
-    <id>http://yoursite.com/articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD.html</id>
+    <link href="http://yoursite.com/articles/auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E7%9A%84%E5%BC%82%E5%90%8C.html"/>
+    <id>http://yoursite.com/articles/auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E7%9A%84%E5%BC%82%E5%90%8C.html</id>
     <published>2019-12-17T13:22:32.000Z</published>
     <updated>2019-12-18T04:10:15.239Z</updated>
     
@@ -499,36 +524,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;异常处理&quot;&gt;&lt;a href=&quot;#异常处理&quot; class=&quot;headerlink&quot; title=&quot;异常处理&quot;&gt;&lt;/a&gt;异常处理&lt;/h2&gt;&lt;h3 id=&quot;栈展开&quot;&gt;&lt;a href=&quot;#栈展开&quot; class=&quot;headerlink&quot; title=&quot;栈展开&quot;&gt;&lt;/a&gt;栈展开&lt;/h3&gt;&lt;p&gt;异常发生在try语句块内–&amp;gt;在跟自己的try语句块关联的catch里找&lt;br&gt;若该try语句块嵌套在另一个try内–&amp;gt;继续在外面的这个try语句块找&lt;br&gt;若该函数被调用–&amp;gt;在调用它的函数找&lt;br&gt;若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序&lt;br&gt;最后找不到就会调用标准库函数terminate强行终止程序&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="C++ Primer" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/"/>
-    
-    
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-      <category term="语言" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++ Primer 18(下)</title>
-    <link href="http://yoursite.com/articles/C++%20Primer%2018(%E4%B8%8B).html"/>
-    <id>http://yoursite.com/articles/C++%20Primer%2018(%E4%B8%8B).html</id>
-    <published>2019-12-04T04:22:55.000Z</published>
-    <updated>2019-12-09T06:44:43.127Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">namespace x&#123;</span><br><span class="line">------</span><br><span class="line">&#125;&#x2F;&#x2F;不需要分号</span><br></pre></td></tr></table></figure><p>不能定义在函数或类的内部<br>命名空间成员的定义可以在外部，但是必须在所属命名空间的外层命名空间中</p><a id="more"></a><h3 id="模板特例化"><a href="#模板特例化" class="headerlink" title="模板特例化"></a>模板特例化</h3><p>模板特例化必须定义在原始模板所属的命名空间中，只要在该命名空间中声明了特例化，就可以在外部定义它了</p><h3 id="内联命名空间"><a href="#内联命名空间" class="headerlink" title="内联命名空间"></a>内联命名空间</h3><p>可以直接被外层命名空间使用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inline namespace x&#123;--------&#125;</span><br></pre></td></tr></table></figure><p>inline必须出现在第一次定义的时候，后续打开可不写</p><h3 id="未命名的命名空间"><a href="#未命名的命名空间" class="headerlink" title="未命名的命名空间"></a>未命名的命名空间</h3><p>静态生命周期，第一次使用前创建，直到程序结束销毁</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">namespace &#123;--------&#125;</span><br></pre></td></tr></table></figure><p>不能跨越多个文件，一个包含了未命名的命名空间的头文件被多个文件使用时，在这多个文件里的名字将对应不同的实体<br>它的名字可以直接使用，因此当处于最外层作用域时，它里面的名字要区分于全局作用域中的名字</p><h3 id="using-声明"><a href="#using-声明" class="headerlink" title="using 声明"></a>using 声明</h3><p>一次引入一个命名空间的一个成员名字<br>当它出现在类的作用域中时，这个声明只能指向基类成员</p><h3 id="using-指示"><a href="#using-指示" class="headerlink" title="using 指示"></a>using 指示</h3><p>一次引入一个命名空间所有名字，可以说是将名字都注入到外层作用域中，using指示不能出现在类的作用域中</p><h3 id="头文件与using"><a href="#头文件与using" class="headerlink" title="头文件与using"></a>头文件与using</h3><p>头文件应该只负责定义接口的名字，所以只能在它的函数或命名空间内使用using声明和指示</p><h3 id="实参查找与类类型形参"><a href="#实参查找与类类型形参" class="headerlink" title="实参查找与类类型形参"></a>实参查找与类类型形参</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">operator&gt;&gt;(std::cin,s);</span><br></pre></td></tr></table></figure><p>当编译器发现&gt;&gt;时，首先在当前作用域查找，然后在外层作用域查找，最后由于&gt;&gt;的形参是类类型的，所以编译器还会在cin和s的类所属的命名空间查找</p><h3 id="实参查找与友元"><a href="#实参查找与友元" class="headerlink" title="实参查找与友元"></a>实参查找与友元</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">namespace A&#123;</span><br><span class="line">class C&#123;</span><br><span class="line">&#x2F;&#x2F;隐式成为命名空间A的成员</span><br><span class="line">friend void f2();</span><br><span class="line">friend void f(const C&amp;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">A::C cobj;</span><br><span class="line">f(cobj);&#x2F;&#x2F;正确，通过形参C找到A的命名空间</span><br><span class="line">f2();&#x2F;&#x2F;错误，找不到它的声明</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="使用using"><a href="#使用using" class="headerlink" title="使用using"></a>使用using</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using NS::print(int);</span><br><span class="line">using NS::print;</span><br></pre></td></tr></table></figure><p>using声明会引入函数到本作用域<br>如果using声明引入一个同名同参的函数，会报错<br>而using指示不会<br>using指示是将命名空间的成员提升到外层作用域</p><h2 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h2><h3 id="继承构造函数"><a href="#继承构造函数" class="headerlink" title="继承构造函数"></a>继承构造函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using Base1::Base1;</span><br><span class="line">using Base2::Base2;</span><br></pre></td></tr></table></figure><p>如果继承了相同形参列表的构造函数，会报错，这时我们需要为该形参再自己定义一个构造函数，既然定义了构造函数，那么这个时候最好也定义一个默认构造函数</p><h3 id="派生类的控制成员"><a href="#派生类的控制成员" class="headerlink" title="派生类的控制成员"></a>派生类的控制成员</h3><p>如果定义了自己的拷贝/赋值构造函数和赋值运算符，必须在完整的对象上执行拷贝、移动、赋值操作<br>如果使用的是合成的，就会对其基类部分执行这些操作</p><h3 id="静态类型与操作"><a href="#静态类型与操作" class="headerlink" title="静态类型与操作"></a>静态类型与操作</h3><p>对象、指针和引用的静态类型决定能够使用哪些成员，例如一个指向基类的指针，只能使用基类部分的成员</p><h3 id="多重继承的二义性调用"><a href="#多重继承的二义性调用" class="headerlink" title="多重继承的二义性调用"></a>多重继承的二义性调用</h3><p>当从多个基类继承了同名函数时，调用需要指明哪个作用域下的函数，不然就会出现二义性错误，也可以再本作用域下再定义一个同名函数</p><h3 id="使用虚继承"><a href="#使用虚继承" class="headerlink" title="使用虚继承"></a>使用虚继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class Bear:virtual public zoo&#123;------&#125;;</span><br></pre></td></tr></table></figure><p>派生类中只有虚继承的类一个实例</p><h3 id="虚基类的构造"><a href="#虚基类的构造" class="headerlink" title="虚基类的构造"></a>虚基类的构造</h3><p>虚基类是由最低层的派生类初始化的，如果有多个虚基类，则按照在派生列表中中出现的顺序初始化，然后才按顺序初始化其他基类<br>析构顺序与构造顺序相反</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;命名空间&quot;&gt;&lt;a href=&quot;#命名空间&quot; class=&quot;headerlink&quot; title=&quot;命名空间&quot;&gt;&lt;/a&gt;命名空间&lt;/h2&gt;&lt;h3 id=&quot;新建命名空间&quot;&gt;&lt;a href=&quot;#新建命名空间&quot; class=&quot;headerlink&quot; title=&quot;新建命名空间&quot;&gt;&lt;/a&gt;新建命名空间&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;namespace x&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	------&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;	&amp;#x2F;&amp;#x2F;不需要分号&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;不能定义在函数或类的内部&lt;br&gt;命名空间成员的定义可以在外部，但是必须在所属命名空间的外层命名空间中&lt;/p&gt;
     
     </summary>
     

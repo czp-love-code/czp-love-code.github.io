@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>为什么说vector的接口设计是败笔</title>
+    <url>//articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html</url>
+    <content><![CDATA[<p>作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。</p>
+<a id="more"></a>
+<p>为什么会这样呢？<br>首先，使用大括号来进行初始化对象有三个特点，第一个特点就是它禁止了会损失精度的隐式转换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double x,y,z;</span><br><span class="line">int sum&#123;x+y+z&#125;; &#x2F;&#x2F;错误</span><br></pre></td></tr></table></figure>
+<p>第二个特点就是不会变成一个函数的声明，因为用小括号来调用不带参数的构造函数的时候就会变成一个函数的声明，而大括号则不会，依旧会调用没有形参的构造函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Widget w1();	&#x2F;&#x2F;这是一个函数声明</span><br><span class="line">Widget w2&#123; &#125;;	&#x2F;&#x2F;这调用了没有形参的构造函数</span><br></pre></td></tr></table></figure>
+<p>第三个特点就是在构造函数的重载决议期间，只要大括号内的实参能与带std::initializer_list类型的形参匹配或进行隐式转换，就会调用这个构造函数，而若是存在带std::initializer_list类型的形参的构造函数，而实参与形参之间需要进行转换且转换会损失精度，那么就会出错。此外如果该构造函数的形参与实参完全不匹配（无法进行隐式转换，如实参int形参string），才会考虑其他的候选函数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Widget(std::initializer_list&lt;bool&gt; il);&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w&#123;10,5.0&#125;;&#x2F;&#x2F;错误，bool无法精确表示这两个值中的任何一个</span><br><span class="line"></span><br><span class="line">Widget(std::initializer_list&lt;string&gt; il)	&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w2&#123;10,5.0&#125;; &#x2F;&#x2F;考虑匹配其他构造函数</span><br></pre></td></tr></table></figure>
+<p>还有一点需要注意的就是当实参为空的情况</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Widget w1&#123; &#125;;	&#x2F;&#x2F;调用默认构造函数</span><br><span class="line">Widget w2 (&#123; &#125;);	&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br><span class="line">Widget w2 &#123;&#123; &#125;&#125;;	&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br></pre></td></tr></table></figure>
+<p>我们知道vector中有一个带initializer_list的构造函数和一个不带initializer_list形参的构造函数，那么用大小括号来初始化它的对象的时候，就会出现完全不一样的结果，但是我们原先却是希望无论使用大小括号都不要影响到调用的重载版本的。所以才说vector的接口设计就是败笔</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>Effective Modern C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何理解auto与隐形代理类之间的冲突</title>
     <url>//articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto%E4%B8%8E%E4%BB%A3%E7%90%86%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81.html</url>
     <content><![CDATA[<p>代理类：指为了模拟或增广其他类型的类</p>
@@ -29,7 +52,7 @@
   </entry>
   <entry>
     <title>auto、decltype与模板类型推断的异同</title>
-    <url>//articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD.html</url>
+    <url>//articles/auto-decltype%E4%B8%8E%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E7%9A%84%E5%BC%82%E5%90%8C.html</url>
     <content><![CDATA[<p>auto和模板类型推断在一般情况下等价（除非遇到列表实参的情况），这两种推断方式同样会忽略掉初始化表达式的引用性，同样会在形参不是引用的情况下将数组名和函数名退化为指针，而在形参是引用的情况将类型推断为数组类型（包括数组大小）和函数类型。</p>
 <a id="more"></a>
 <p>但是在实参为列表的时候，auto会假定用大括号括起来的初始化表达式代表一个initializer_list，而模板类型推断则不会。</p>

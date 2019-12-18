@@ -48,17 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="一个热爱技术与生活的geek">
-<meta property="og:type" content="website">
-<meta property="og:title" content="门内技墓">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E5%AD%97%E7%AC%A6%E4%B8%B2&#x2F;index.html">
+  <meta name="description" content="作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么说vector的接口设计是败笔">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html">
 <meta property="og:site_name" content="门内技墓">
-<meta property="og:description" content="一个热爱技术与生活的geek">
+<meta property="og:description" content="作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-18T15:03:09.000Z">
+<meta property="article:modified_time" content="2019-12-18T15:31:08.000Z">
 <meta property="article:author" content="耐清">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+<link rel="canonical" href="http://yoursite.com/articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html">
 
 
 <script id="page-configurations">
@@ -66,13 +69,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: 字符串 | 门内技墓</title>
+  <title>为什么说vector的接口设计是败笔 | 门内技墓</title>
   
 
 
@@ -198,70 +201,124 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">字符串
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/weixintouxiang.jpg">
+      <meta itemprop="name" content="耐清">
+      <meta itemprop="description" content="一个热爱技术与生活的geek">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="门内技墓">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为什么说vector的接口设计是败笔
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-18 23:03:09 / 修改时间：23:31:08" itemprop="dateCreated datePublished" datetime="2019-12-18T23:03:09+08:00">2019-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Effective-Modern-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective Modern C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-01T13:48:18+08:00"
-              content="2019-12-01">
-          12-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/articles/KMP%E7%AE%97%E6%B3%95.html" itemprop="url">
-            <span itemprop="name">KMP算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-01T13:10:02+08:00"
-              content="2019-12-01">
-          12-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/articles/%E6%9C%B4%E7%B4%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95.html" itemprop="url">
-            <span itemprop="name">朴素字符串匹配算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+        <p>作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。</p>
+<a id="more"></a>
+<p>为什么会这样呢？<br>首先，使用大括号来进行初始化对象有三个特点，第一个特点就是它禁止了会损失精度的隐式转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double x,y,z;</span><br><span class="line">int sum&#123;x+y+z&#125;; &#x2F;&#x2F;错误</span><br></pre></td></tr></table></figure>
+<p>第二个特点就是不会变成一个函数的声明，因为用小括号来调用不带参数的构造函数的时候就会变成一个函数的声明，而大括号则不会，依旧会调用没有形参的构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Widget w1();	&#x2F;&#x2F;这是一个函数声明</span><br><span class="line">Widget w2&#123; &#125;;	&#x2F;&#x2F;这调用了没有形参的构造函数</span><br></pre></td></tr></table></figure>
+<p>第三个特点就是在构造函数的重载决议期间，只要大括号内的实参能与带std::initializer_list类型的形参匹配或进行隐式转换，就会调用这个构造函数，而若是存在带std::initializer_list类型的形参的构造函数，而实参与形参之间需要进行转换且转换会损失精度，那么就会出错。此外如果该构造函数的形参与实参完全不匹配（无法进行隐式转换，如实参int形参string），才会考虑其他的候选函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Widget(std::initializer_list&lt;bool&gt; il);&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w&#123;10,5.0&#125;;&#x2F;&#x2F;错误，bool无法精确表示这两个值中的任何一个</span><br><span class="line"></span><br><span class="line">Widget(std::initializer_list&lt;string&gt; il)	&#x2F;&#x2F;其中一个构造函数</span><br><span class="line"></span><br><span class="line">Widget w2&#123;10,5.0&#125;; &#x2F;&#x2F;考虑匹配其他构造函数</span><br></pre></td></tr></table></figure>
+<p>还有一点需要注意的就是当实参为空的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Widget w1&#123; &#125;;	&#x2F;&#x2F;调用默认构造函数</span><br><span class="line">Widget w2 (&#123; &#125;);	&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br><span class="line">Widget w2 &#123;&#123; &#125;&#125;;	&#x2F;&#x2F;调用带std::initializer_list的构造函数</span><br></pre></td></tr></table></figure>
+<p>我们知道vector中有一个带initializer_list的构造函数和一个不带initializer_list形参的构造函数，那么用大小括号来初始化它的对象的时候，就会出现完全不一样的结果，但是我们原先却是希望无论使用大小括号都不要影响到调用的重载版本的。所以才说vector的接口设计就是败笔</p>
 
     </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/articles/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3auto%E4%B8%8E%E4%BB%A3%E7%90%86%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81.html" rel="prev" title="如何理解auto与隐形代理类之间的冲突">
+      <i class="fa fa-chevron-left"></i> 如何理解auto与隐形代理类之间的冲突
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
