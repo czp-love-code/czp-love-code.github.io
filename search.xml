@@ -423,6 +423,37 @@
       </tags>
   </entry>
   <entry>
+    <title>C++ Primer 18(上)</title>
+    <url>//articles/C++%20Primer%2018(%E4%B8%8A).html</url>
+    <content><![CDATA[<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
+<a id="more"></a>
+<h3 id="析构函数与异常"><a href="#析构函数与异常" class="headerlink" title="析构函数与异常"></a>析构函数与异常</h3><p>栈展开可能使用析构函数–&gt;如果析构函数需要执行某个可能抛出异常的操作，这个操作应该在析构函数内部得到处理<br>因为如果最后没有捕获到catch，就会调用terminate，此前分配的资源就无法被释放，所以这个可能抛出异常的操作就应该在析构函数内部就得到处理</p>
+<h3 id="异常对象"><a href="#异常对象" class="headerlink" title="异常对象"></a>异常对象</h3><p>位于编译器管理的空间，由异常抛出表达式拷贝初始化，该表达式的静态编译时类型决定了异常对象的类型，如果一条throw表达式解引用了一个指向基类的指针，而该指针实际指向的是派生类对象，则抛出的对象被切掉一部分，只有基类部分被抛出（不要指向局部对象）</p>
+<h3 id="catch的异常声明"><a href="#catch的异常声明" class="headerlink" title="catch的异常声明"></a>catch的异常声明</h3><p>异常声明必须是完全类型，可以是左值引用，不能是右值引用<br>如果是基类的非引用类型，用派生类对象初始化时会切掉一部分<br>如果是基类的引用类型，以常规方式绑定异常对象，catch无法使用派生类特有的成员<br>异常声明用数组或函数初始化时，会转换为指针</p>
+<h3 id="重新抛出"><a href="#重新抛出" class="headerlink" title="重新抛出"></a>重新抛出</h3><p>catch处理了一部分异常，重新抛出，将异常对象沿着调用链向上传递</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">throw;</span><br></pre></td></tr></table></figure>
+<p>如果空throw出现在处理代码之外的区域，编译器j将调用terminate<br>只有当catch异常声明是引用类型时我们对参数作的改变才会被保留并继续传播</p>
+<h3 id="处理所有异常"><a href="#处理所有异常" class="headerlink" title="处理所有异常"></a>处理所有异常</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">catch(...)</span><br></pre></td></tr></table></figure>
+<p>通常与重新抛出一起使用</p>
+<h3 id="函数测试块"><a href="#函数测试块" class="headerlink" title="函数测试块"></a>函数测试块</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il) try:</span><br><span class="line">	data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)&#123;</span><br><span class="line">&#125;catch(const std::bad_alloc &amp;e)&#123;--------&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="不抛出声明"><a href="#不抛出声明" class="headerlink" title="不抛出声明"></a>不抛出声明</h3><p>noexcept在声明和定义中同时出现，也在尾置返回类型之前<br>在类型别名中不能出现noexcept<br>在成员函数中，noexcept在const和引用限定符之后，final，override或虚函数的=0之前</p>
+<p>异常说明的实参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void func1(int a)noexcept(true)&#x2F;&#x2F;不会抛出异常</span><br><span class="line">void func2(int b)noexcept(false)&#x2F;&#x2F;可能抛出异常</span><br></pre></td></tr></table></figure>
+<h3 id="noexcept-运算符"><a href="#noexcept-运算符" class="headerlink" title="noexcept 运算符"></a>noexcept 运算符</h3><p>返回bool类型的右值常量表达式，不会求其运算对象的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void f()noexcept (noexcept(g()));</span><br></pre></td></tr></table></figure>
+<h3 id="一致的异常说明"><a href="#一致的异常说明" class="headerlink" title="一致的异常说明"></a>一致的异常说明</h3><p>函数指针和指针指向的函数<br>虚函数和它的派生函数<br>合成拷贝控制成员时</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>语言</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++ Primer 18(下)</title>
     <url>//articles/C++%20Primer%2018(%E4%B8%8B).html</url>
     <content><![CDATA[<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace x&#123;</span><br><span class="line">	------</span><br><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span><br></pre></td></tr></table></figure>
@@ -451,37 +482,6 @@
 <h3 id="使用虚继承"><a href="#使用虚继承" class="headerlink" title="使用虚继承"></a>使用虚继承</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Bear:virtual public zoo&#123;------&#125;;</span><br></pre></td></tr></table></figure>
 <p>派生类中只有虚继承的类一个实例</p>
 <h3 id="虚基类的构造"><a href="#虚基类的构造" class="headerlink" title="虚基类的构造"></a>虚基类的构造</h3><p>虚基类是由最低层的派生类初始化的，如果有多个虚基类，则按照在派生列表中中出现的顺序初始化，然后才按顺序初始化其他基类<br>析构顺序与构造顺序相反</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>C++ Primer</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>语言</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++ Primer 18(上)</title>
-    <url>//articles/C++%20Primer%2018(%E4%B8%8A).html</url>
-    <content><![CDATA[<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
-<a id="more"></a>
-<h3 id="析构函数与异常"><a href="#析构函数与异常" class="headerlink" title="析构函数与异常"></a>析构函数与异常</h3><p>栈展开可能使用析构函数–&gt;如果析构函数需要执行某个可能抛出异常的操作，这个操作应该在析构函数内部得到处理<br>因为如果最后没有捕获到catch，就会调用terminate，此前分配的资源就无法被释放，所以这个可能抛出异常的操作就应该在析构函数内部就得到处理</p>
-<h3 id="异常对象"><a href="#异常对象" class="headerlink" title="异常对象"></a>异常对象</h3><p>位于编译器管理的空间，由异常抛出表达式拷贝初始化，该表达式的静态编译时类型决定了异常对象的类型，如果一条throw表达式解引用了一个指向基类的指针，而该指针实际指向的是派生类对象，则抛出的对象被切掉一部分，只有基类部分被抛出（不要指向局部对象）</p>
-<h3 id="catch的异常声明"><a href="#catch的异常声明" class="headerlink" title="catch的异常声明"></a>catch的异常声明</h3><p>异常声明必须是完全类型，可以是左值引用，不能是右值引用<br>如果是基类的非引用类型，用派生类对象初始化时会切掉一部分<br>如果是基类的引用类型，以常规方式绑定异常对象，catch无法使用派生类特有的成员<br>异常声明用数组或函数初始化时，会转换为指针</p>
-<h3 id="重新抛出"><a href="#重新抛出" class="headerlink" title="重新抛出"></a>重新抛出</h3><p>catch处理了一部分异常，重新抛出，将异常对象沿着调用链向上传递</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">throw;</span><br></pre></td></tr></table></figure>
-<p>如果空throw出现在处理代码之外的区域，编译器j将调用terminate<br>只有当catch异常声明是引用类型时我们对参数作的改变才会被保留并继续传播</p>
-<h3 id="处理所有异常"><a href="#处理所有异常" class="headerlink" title="处理所有异常"></a>处理所有异常</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">catch(...)</span><br></pre></td></tr></table></figure>
-<p>通常与重新抛出一起使用</p>
-<h3 id="函数测试块"><a href="#函数测试块" class="headerlink" title="函数测试块"></a>函数测试块</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il) try:</span><br><span class="line">	data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)&#123;</span><br><span class="line">&#125;catch(const std::bad_alloc &amp;e)&#123;--------&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="不抛出声明"><a href="#不抛出声明" class="headerlink" title="不抛出声明"></a>不抛出声明</h3><p>noexcept在声明和定义中同时出现，也在尾置返回类型之前<br>在类型别名中不能出现noexcept<br>在成员函数中，noexcept在const和引用限定符之后，final，override或虚函数的=0之前</p>
-<p>异常说明的实参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void func1(int a)noexcept(true)&#x2F;&#x2F;不会抛出异常</span><br><span class="line">void func2(int b)noexcept(false)&#x2F;&#x2F;可能抛出异常</span><br></pre></td></tr></table></figure>
-<h3 id="noexcept-运算符"><a href="#noexcept-运算符" class="headerlink" title="noexcept 运算符"></a>noexcept 运算符</h3><p>返回bool类型的右值常量表达式，不会求其运算对象的值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void f()noexcept (noexcept(g()));</span><br></pre></td></tr></table></figure>
-<h3 id="一致的异常说明"><a href="#一致的异常说明" class="headerlink" title="一致的异常说明"></a>一致的异常说明</h3><p>函数指针和指针指向的函数<br>虚函数和它的派生函数<br>合成拷贝控制成员时</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
