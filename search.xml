@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>别名声明与typedef的区别</title>
+    <url>//articles/%E5%88%AB%E5%90%8D%E5%A3%B0%E6%98%8E%E4%B8%8Etypedef%E7%9A%84%E5%8C%BA%E5%88%AB.html</url>
+    <content><![CDATA[<p>使用using的别名声明和typedef完成的是一模一样的工作，那么两个之间有什么区别呢？</p>
+<a id="more"></a>
+<p>一个最重要的区别就是使用using的别名声明可以直接进行模板化</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">using MyAllocList&#x3D;std::list&lt;T,MyAlooc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">MyAllocList&lt;Widget&gt; lw;</span><br></pre></td></tr></table></figure>
+<p>而使用typedef的话，就需要将类型放置在类中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">struct MyAllocList&#123;</span><br><span class="line">	typedef std::list&lt;T,MyAlloc&lt;T&gt;&gt; type;</span><br><span class="line">&#125;;</span><br><span class="line">&#x2F;&#x2F;使用模板实例下的类型别名;</span><br><span class="line">MyAllocList&lt;Widget&gt;::type lw;</span><br></pre></td></tr></table></figure>
+<p>此外，如果要在模板内使用typedef来创建一个成员，而且它的类型由模板形参指定的话，就需要添加前缀typename来告知编译器这是一个类型成员，而不是static成员(如果是使用using声明的别名则可以直接使用）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">class Widget&#123;</span><br><span class="line">private:</span><br><span class="line">	typename MyAllocList&lt;T&gt;::type list;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>Effective Modern C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用红黑树实现关联容器map</title>
+    <url>//articles/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%E5%AE%9E%E7%8E%B0%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8map(%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89.html</url>
+    <content><![CDATA[<p>关联容器map是一个pair&lt;const key_type,value_type&gt;，基于此建立了从key到value的映射，并且相关的复杂度是log(N)。那么如何使用红黑树来实现它呢？</p>
+<a id="more"></a>
+<p>首先建立一个红黑树的结点结构体，并且这个结点要关联到map的元素，即一个pair数据成员</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#pragma once</span><br><span class="line"></span><br><span class="line">#include &lt;utility&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">enum COLOR&#123;RED,BLACK&#125;;</span><br><span class="line"></span><br><span class="line">template &lt;typename Key_type,typename Value_type&gt;</span><br><span class="line">struct RBTreeNode&#123;</span><br><span class="line">	RBTreeNode&lt;Key_type, Value_type&gt;* left;</span><br><span class="line">	RBTreeNode&lt;Key_type, Value_type&gt;* right;</span><br><span class="line">	RBTreeNode&lt;Key_type, Value_type&gt;* parent;</span><br><span class="line">	pair&lt;Key_type, Value_type&gt; value;</span><br><span class="line">	COLOR color;</span><br><span class="line">	RBTreeNode(const Key_type&amp; key &#x3D; Key_type(), const Value_type&amp; value&#x3D;Value_type(),COLOR Color&#x3D;RED)</span><br><span class="line">		:left(NULL),right(NULL),parent(NULL),value(key,value),color(Color)&#123; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有了红黑树的结点，现在假想我们已经有了一颗以map元素类型为结点的红黑树。那么要遍历一个map容器来进行搜索的话我们就需要遍历这颗红黑树，即从它关键值最小的结点遍历到关键值最大的结点。那么我们就需要一种操作（一个类）来进行红黑树的遍历。不难想到可以构建一个红黑树的迭代器来实现这个遍历操作。</p>
+<p>我们知道，迭代器的begin()指向容器的首元素（最小元素），而end()指向容器的尾后元素（最大元素的后一个位置），那么对于一颗红黑树而言，我们就需要另外构建一个尾后结点来让迭代器的end()指向它。假设这个结点命名为header，因为这个结点不能破坏原先红黑树的性质，、所以不能是黑色，只能是红色。</p>
+<p>现在我们需要将这个游离的结点与原先的红黑树相连接，考虑到我们是打算构建一个迭代器，那么就需要将header与树中最小和最大结点连接，假设树中最小元素为minNode，最大元素为maxNode</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">header-&gt;left&#x3D;minNode;</span><br><span class="line">header-&gt;right&#x3D;maxNode;</span><br></pre></td></tr></table></figure>
+<p>即我们构建的迭代器的begin()指向header的左孩子，而end()指向header，end()后退一步就指向header的右孩子。</p>
+<p>最后这个header结点还需要连接parent，此时我们可以把它和原先树中的根节点互联</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">header-&gt;parent&#x3D;rootNode;</span><br><span class="line">rootNode-&gt;parent&#x3D;header;</span><br></pre></td></tr></table></figure>
+<p>接下来就可以开心地实现红黑树地迭代器了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename Key_type,typename Value_type&gt;</span><br><span class="line">class RBTreeIterator</span><br><span class="line">&#123;</span><br><span class="line">	typedef RBTreeNode&lt;Key_type, Value_type&gt; Node;</span><br><span class="line">	typedef node* NodePtr;</span><br><span class="line">	typedef RBTreeIterator&lt;Key_type, Value_type&gt; self;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	RBTreeIterator(NodePtr node_ptr&#x3D;nullptr):nodePtr(node_ptr)&#123;&#125;</span><br><span class="line">	RBTreeIterator(const self&amp; s) :nodePtr(s.nodePtr)&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	pair&lt;Key_type, Value_type&gt;&amp; operator*() &#123;</span><br><span class="line">		return nodePtr-&gt;value;</span><br><span class="line">	&#125;</span><br><span class="line">	pair&lt;Key_type, Value_type&gt;* operator-&gt;() &#123;</span><br><span class="line">		return &amp;(operator*()):</span><br><span class="line">	&#125;</span><br><span class="line">	self&amp; operator++() &#123;</span><br><span class="line">		RBTreeItIncrement();</span><br><span class="line">		return *this;</span><br><span class="line">	&#125;</span><br><span class="line">	self operator++(int) &#123;</span><br><span class="line">		self tmp(*this);</span><br><span class="line">		RBTreeItIncrement();</span><br><span class="line">		return tmp;</span><br><span class="line">	&#125;</span><br><span class="line">	self&amp; operator--() &#123;</span><br><span class="line">		RBTreeItDeCrement();</span><br><span class="line">		return *this;</span><br><span class="line">	&#125;</span><br><span class="line">	self operator--(int) &#123;</span><br><span class="line">		self tmp(*this);</span><br><span class="line">		RBTreeItDecrement();</span><br><span class="line">		return tmp;</span><br><span class="line">	&#125;</span><br><span class="line">	bool operator&#x3D;&#x3D;(const self&amp; s) &#123;</span><br><span class="line">		return nodePtr &#x3D;&#x3D; s.nodePtr;</span><br><span class="line">	&#125;</span><br><span class="line">	bool operator!&#x3D;(const self&amp; s) &#123;</span><br><span class="line">		return !(this &#x3D;&#x3D; s);</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	void RBTreeItIncrement() &#123;</span><br><span class="line">		if (nodePtr-&gt;right) &#123;</span><br><span class="line">			nodePtr &#x3D; nodePtr-&gt;right;</span><br><span class="line">			while (nodePtr-&gt;left)</span><br><span class="line">				nodePtr &#x3D; nodePtr-&gt;left;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			NodePtr nodeParent &#x3D; nodePtr-&gt;parent;</span><br><span class="line">			while (nodePtr &#x3D;&#x3D; nodeParent-&gt;right) &#123;</span><br><span class="line">				nodePtr &#x3D; nodeParent;</span><br><span class="line">				nodeParent &#x3D; nodePtr-&gt;parent;</span><br><span class="line">			&#125;</span><br><span class="line">			if (nodePtr-&gt;right !&#x3D; nodeParent)</span><br><span class="line">				nodePtr &#x3D; nodeParent;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	void RBTreeItDecrement() &#123;</span><br><span class="line">		if (nodePtr-&gt;parent-&gt;parent &#x3D;&#x3D; nodePtr &amp;&amp; nodePtr-&gt;color &#x3D;&#x3D; RED)</span><br><span class="line">			nodePtr &#x3D; nodePtr-&gt;right;</span><br><span class="line">		else if (nodePtr-&gt;left) &#123;</span><br><span class="line">			nodePtr &#x3D; nodePtr-&gt;left;</span><br><span class="line">			while (nodePtr-&gt;right)</span><br><span class="line">				nodePtr &#x3D; nodePtr-&gt;right;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			NodePtr nodeParent &#x3D; nodePtr-&gt;parent;</span><br><span class="line">			while (nodePtr &#x3D;&#x3D; nodePtr-&gt;left) &#123;</span><br><span class="line">				nodePtr &#x3D; nodeParent;</span><br><span class="line">				nodeParent &#x3D; nodePtr-&gt;parent;</span><br><span class="line">			&#125;</span><br><span class="line">			nodePtr &#x3D; nodeParent;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	NodePtr nodePtr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>STL源码剖析</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为什么说vector的接口设计是败笔</title>
     <url>//articles/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4vector%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%98%AF%E8%B4%A5%E7%AC%94.html</url>
     <content><![CDATA[<p>作为一个类的设计者，我们应该把构造函数设计成客户无论使用小括号还是大括号都不会影响要调用的重载版本，而vector的构造函数却恰恰破坏了这个隐性规定。我们知道，在构造一个vector的时候，使用大小括号来构造对象会产生完全不一样的结果。</p>
