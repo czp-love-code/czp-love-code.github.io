@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-22T03:19:49.290Z</updated>
+  <updated>2019-12-22T07:19:10.157Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>别名声明与typedef的区别</title>
+    <title>枚举类型使用注意事项</title>
+    <link href="http://yoursite.com/articles/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html"/>
+    <id>http://yoursite.com/articles/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html</id>
+    <published>2019-12-22T04:23:58.000Z</published>
+    <updated>2019-12-22T07:19:10.157Z</updated>
+    
+    <content type="html"><![CDATA[<p>未命名的enum只能在定义该enum时定义它的对象（分号前面）</p><a id="more"></a><p>枚举成员是const，提供初始值时必须是常量表达式，同时，我们也可以在任何需要常量表达式的地方使用枚举成员。如使用enum作为switch语句的表达式，而将枚举值作为case标签，也能将枚举类型作为非类型模板形参使用，或者在类的定义中初始化枚举类型的静态数据成员</p><p>初始化已命名的enum对象或对其赋值必须使用一个枚举成员或该类型的另一个对象，同时我们不能将整型值传给enum形参，但是可以将一个不限定作用域的枚举类型的对象或枚举成员传给整型形参，因为一个不限定作用域的枚举类型的对象或枚举成员自动转换为整型，而限定作用域的枚举类型则不会进行这样的隐式转换。<br>此时enum的值类型进行提升，但是永远不会提升成unsigned char，即使枚举值可以用unsigned char存储也是如此</p><p>默认情况下限定作用域的enum成员类型是int，我们可以进行指定</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enum adsa:unsigned long long&#123;</span><br><span class="line">-------</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>对于不限定作用域的枚举类型的枚举成员则不存在默认类型，一般认为足够大够容纳枚举值，如果我们再指定大小的话容易引发程序错误</p><p>枚举类型的前置声明必须指定其成员的大小</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enum adsa:unsigned long long;</span><br><span class="line">enum class opadsa;&#x2F;&#x2F;限定作用域默认为int</span><br></pre></td></tr></table></figure><p>我们不可以在同一个上下文先声明一个限定作用域的enum名字，再声明一个不限定作用域的同名enum；</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;未命名的enum只能在定义该enum时定义它的对象（分号前面）&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="C++ Primer" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用using的别名声明与typedef的区别</title>
     <link href="http://yoursite.com/articles/%E5%88%AB%E5%90%8D%E5%A3%B0%E6%98%8E%E4%B8%8Etypedef%E7%9A%84%E5%8C%BA%E5%88%AB.html"/>
     <id>http://yoursite.com/articles/%E5%88%AB%E5%90%8D%E5%A3%B0%E6%98%8E%E4%B8%8Etypedef%E7%9A%84%E5%8C%BA%E5%88%AB.html</id>
     <published>2019-12-22T03:09:25.000Z</published>
-    <updated>2019-12-22T03:19:49.290Z</updated>
+    <updated>2019-12-22T03:22:40.116Z</updated>
     
     <content type="html"><![CDATA[<p>使用using的别名声明和typedef完成的是一模一样的工作，那么两个之间有什么区别呢？</p><a id="more"></a><p>一个最重要的区别就是使用using的别名声明可以直接进行模板化</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">using MyAllocList&#x3D;std::list&lt;T,MyAlooc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">MyAllocList&lt;Widget&gt; lw;</span><br></pre></td></tr></table></figure><p>而使用typedef的话，就需要将类型放置在类中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">struct MyAllocList&#123;</span><br><span class="line">typedef std::list&lt;T,MyAlloc&lt;T&gt;&gt; type;</span><br><span class="line">&#125;;</span><br><span class="line">&#x2F;&#x2F;使用模板实例下的类型别名;</span><br><span class="line">MyAllocList&lt;Widget&gt;::type lw;</span><br></pre></td></tr></table></figure><p>此外，如果要在模板内使用typedef来创建一个成员，而且它的类型由模板形参指定的话，就需要添加前缀typename来告知编译器这是一个类型成员，而不是static成员(如果是使用using声明的别名则可以直接使用）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">class Widget&#123;</span><br><span class="line">private:</span><br><span class="line">typename MyAllocList&lt;T&gt;::type list;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -500,35 +525,6 @@
     
     
       <category term="QT" scheme="http://yoursite.com/tags/QT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++ Primer 19(下)</title>
-    <link href="http://yoursite.com/articles/C++%20Primer%2019(%E4%B8%8B).html"/>
-    <id>http://yoursite.com/articles/C++%20Primer%2019(%E4%B8%8B).html</id>
-    <published>2019-12-05T06:59:13.000Z</published>
-    <updated>2019-12-09T06:44:37.929Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="成员指针"><a href="#成员指针" class="headerlink" title="成员指针"></a>成员指针</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义</span><br><span class="line">auto pdata&#x3D;&amp;Screen::contents;</span><br><span class="line">&#x2F;&#x2F;解引用</span><br><span class="line">auto s&#x3D;myScreen.*pdata;</span><br><span class="line">s&#x3D;pScreen-&gt;*pdata;</span><br><span class="line">&#x2F;&#x2F;指向const限定的成员函数</span><br><span class="line">char(Screen::*pmf2)(Screen::pos,Screen::pos)const;</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="使用指针"><a href="#使用指针" class="headerlink" title="使用指针"></a>使用指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char c1&#x3D;(my.Screen.*pmf1)(0,0);</span><br><span class="line">char c2&#x3D;(pScreen-&gt;*pmf2)();</span><br></pre></td></tr></table></figure><h3 id="使用类型别名"><a href="#使用类型别名" class="headerlink" title="使用类型别名"></a>使用类型别名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using Action&#x3D;char(Screen::*)(Screen::pos,Screen::pos)const;</span><br><span class="line">Action get&#x3D;&amp;Screen::get;</span><br></pre></td></tr></table></figure><p>当成员函数指针用于形参的时候可以指定默认实参</p><h3 id="使用函数表"><a href="#使用函数表" class="headerlink" title="使用函数表"></a>使用函数表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum Directions&#123;-------&#125;;</span><br><span class="line">Screen&amp; move(Directions);</span><br><span class="line">static Action Menu[];</span><br><span class="line">Screen&amp; Screen::move(Directions cm)&#123;</span><br><span class="line">return (this-&gt;*Menu[cm])();</span><br><span class="line">&#125;</span><br><span class="line">Screen::Action Screen::Menu[]&#x3D;&#123;----------&#125;;</span><br></pre></td></tr></table></figure><h3 id="成员指针与可调用对象"><a href="#成员指针与可调用对象" class="headerlink" title="成员指针与可调用对象"></a>成员指针与可调用对象</h3><p>成员指针不是可调用对象，不能将其传递给算法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用function获取可调用对象</span><br><span class="line">function&lt;bool(const string&amp;)&gt;fcn&#x3D;&amp;string::empty;</span><br></pre></td></tr></table></figure><h3 id="使用mem-fn"><a href="#使用mem-fn" class="headerlink" title="使用mem_fn"></a>使用mem_fn</h3><p>定义在function头文件中，接受一个成员指针生成一个可调用对象</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find_if(vec.begin(),vec.end(),mem_fn(&amp;string::empty));</span><br><span class="line">&#x2F;&#x2F;生成的可调用对象可以接受string对象，string指针&#x2F;地址</span><br></pre></td></tr></table></figure><h3 id="使用bind"><a href="#使用bind" class="headerlink" title="使用bind"></a>使用bind</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find_if(vec.begin(),vec.end(),bind(&amp;string::empty,_1))</span><br></pre></td></tr></table></figure><h2 id="union类"><a href="#union类" class="headerlink" title="union类"></a>union类</h2><p>节省空间的类，在任意时刻只有一个数据成员可以有值，不能含有引用类型的成员，默认情况下，它的成员是public的，它不能继承自其他类，也不能作为基类使用，所以不能含有虚函数<br>匿名union的成员在本作用域可以直接访问，但不能包含protected和private成员，也不能定义成员函数<br>如果union含有定义了默认构造函数或拷贝控制成员，则编译器会为union合成对应的版本并声明为删除的<br>含有类类型的union常声明在类内，此时可以用enum在类内定义一个判别式，来追踪union的成员</p><h2 id="局部类"><a href="#局部类" class="headerlink" title="局部类"></a>局部类</h2><p>定义在函数内部，它的成员必须完整地定义在类的内部，所以不允许为它定义静态数据成员，并且它不能使用本作用域的普通变量，而本作用域对它的私有成员也没有访问权限<br>当局部类中有嵌套类时，嵌套类的定义可以在局部类的外部，但是必须在本作用域中</p><h2 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h2><p>类可以将其非静态数据成员定义成位域，通常用于程序需要向其他程序或硬件设备传递二进制数据时，通常用无符号类型保存一个位域</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">unsigned mode:2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在类的内部连续定义的位域压缩在同一个整数的相邻位，从而压缩存储<br>取地址符不能作用于位域，任何指针都无法指向类的位域</p><h2 id="volatile限定符"><a href="#volatile限定符" class="headerlink" title="volatile限定符"></a>volatile限定符</h2><p>表示对象的值可能程序的控制或检测之外改变，作用与const相似，区别在于类的拷贝控制成员对volatile对象无效，比如拷贝构造函数的形参是常量引用（非volatile），明显不能将一个非volatile形参绑定到一个volatile对象，此时需要自定义拷贝控制成员</p><h2 id="链接指示：extern-“C”"><a href="#链接指示：extern-“C”" class="headerlink" title="链接指示：extern “C”"></a>链接指示：extern “C”</h2><p>调用其他语言编写的函数时用，指出任意非C++函数所用的语言<br>链接指示可以嵌套</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extern &quot;C&quot;&#123;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>链接指示对整个声明都有效</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extern &quot;C&quot; void f(void(*)(int));</span><br><span class="line">&#x2F;&#x2F;形参是一个指向C函数的指针</span><br></pre></td></tr></table></figure><p>如果我们希望给C++函数传入一个指向C函数的指针，可以使用类型别名</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extern &quot;C&quot; typedef void FC(int);</span><br><span class="line">void f2(FC*);</span><br></pre></td></tr></table></figure><p>导出C++函数到其他语言</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extern &quot;C&quot; double calc(double bd)&#123;------&#125;</span><br><span class="line">&#x2F;&#x2F;该函数可被C程序调用</span><br></pre></td></tr></table></figure><p>在C和C++中编译头文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;预处理器定义了_ _cplusplus</span><br><span class="line">#ifdef _ _cpluscplus</span><br><span class="line">extern &quot;C&quot;</span><br><span class="line">#endif</span><br><span class="line">int strcmp(const char*,const char*);</span><br></pre></td></tr></table></figure><p>C语言不支持函数重载，所以一个C链接指示只能说明一组重载函数中的一个</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;成员指针&quot;&gt;&lt;a href=&quot;#成员指针&quot; class=&quot;headerlink&quot; title=&quot;成员指针&quot;&gt;&lt;/a&gt;成员指针&lt;/h2&gt;&lt;h3 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#x2F;&amp;#x2F;定义&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;auto pdata&amp;#x3D;&amp;amp;Screen::contents;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#x2F;&amp;#x2F;解引用&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;auto s&amp;#x3D;myScreen.*pdata;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;s&amp;#x3D;pScreen-&amp;gt;*pdata;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#x2F;&amp;#x2F;指向const限定的成员函数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char(Screen::*pmf2)(Screen::pos,Screen::pos)const;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="C++ Primer" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/"/>
-    
-    
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-      <category term="语言" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
