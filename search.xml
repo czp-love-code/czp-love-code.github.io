@@ -215,23 +215,6 @@
       </tags>
   </entry>
   <entry>
-    <title>QT基础05</title>
-    <url>//articles/QT05.html</url>
-    <content><![CDATA[<h2 id="移动Widget"><a href="#移动Widget" class="headerlink" title="移动Widget"></a>移动Widget</h2><p>建立一个Widget然后右键提升为，填写将要从其他地方移动过来的类名</p>
-<a id="more"></a>
-<h2 id="组装组件同时改变"><a href="#组装组件同时改变" class="headerlink" title="组装组件同时改变"></a>组装组件同时改变</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;QSpinBox移动，QSlider跟着移动</span><br><span class="line">void (QSpinBox::*spSignal)(int)&#x3D;&amp;QSpinBox::valueChanged;</span><br><span class="line">connect(ui-&gt;spinBox,spSignal,ui-&gt;horizontalSlider,&amp;QSlider::setValue);</span><br><span class="line">&#x2F;&#x2F;QSlider移动，QSpinBox跟着移动</span><br><span class="line">connect(ui-&gt;horizontalSlider,&amp;QSlider::valueChanged,ui-&gt;spinBox,&amp;QSpinBox::setValue);</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>QT使用</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计数排序</title>
     <url>//articles/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F.html</url>
     <content><![CDATA[<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>对于每一个元素，确定小于它的元素个数，然后将该元素放置在对应的位置上。</p>
@@ -251,34 +234,8 @@
       </tags>
   </entry>
   <entry>
-    <title>编译原理01引论2</title>
-    <url>//articles/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA2.html</url>
-    <content><![CDATA[<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p>
-<a id="more"></a>
-<h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span><br><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p>
-<h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p>
-<p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p>
-<h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p>
-<h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p>
-<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p>
-<h2 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h2><p>又称为扩建的语言，或者动态语言，是一种编程语言。<br>脚本语言是为了缩短传统的编写-编译-链接-运行过程而创建的计算机编程语言。用来控制软件应用程序，脚本通常以文本（如ASCII)保存，只在被调用时进行解释或编译。</p>
-<p>一个脚本通常是解释执行而非编译。脚本语言通常都有简单、易学、易用的特性，目的就是希望能让程序员快速完成程序的编写工作。而宏语言则可视为脚本语言的分支，两者也有实质上的相同之处。</p>
-<h2 id="并行性"><a href="#并行性" class="headerlink" title="并行性"></a>并行性</h2><p>指令层次：多个运算可以同时执行<br>处理器层次：同一应用的多个不同线程在不同的处理器上运行</p>
-<p>这种并行性可以对程序员隐藏起来，硬件动态地检测顺序指令流之间的依赖关系，并且在可能的时候并法地发出指令。<br>硬件调度器：改变指令地顺序以提高程序的并行性</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>编译原理</category>
-      </categories>
-      <tags>
-        <tag>编译</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编译原理01引论1</title>
-    <url>//articles/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA1.html</url>
+    <title>引论</title>
+    <url>//articles/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA.html</url>
     <content><![CDATA[<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p>将高级语言翻译为低级语言的程序<br>工作流程：源代码-&gt;预处理器-&gt;编译器-&gt;目标代码-&gt;链接器-&gt;可执行程序</p>
 <a id="more"></a>
 <p>源程序可能被分割称为多个模块，并存放于独立的文件，此时由预处理器来将源程序聚合在一起<br>（预处理器是在真正的编译开始之前由编译器调用的独立程序。预处理器可以删除注释、包含其他文件以及执行宏替代。）</p>
@@ -292,6 +249,20 @@
 <h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><p>又称为直译器，是一种电脑程序，能够把高级编程语言一行一行直接转译运行。解释器的程序运行速度比较缓慢，但错误诊断效果通常比编译器好</p>
 <h3 id="关于Java"><a href="#关于Java" class="headerlink" title="关于Java"></a>关于Java</h3><p>大多数用任何语言写的程序在每个电脑平台上都必须重编译，甚至有时需要重写。而Java最大的优点之一就是你只需要写和编译一次程序。在任何平台上，Java都会将编译好的字节码解释成能被特定的处理器所理解的指令(即一次编译，到处运行)。Java虚拟机一次只能处理一条字节码指令。</p>
 <h3 id="Java语言处理器"><a href="#Java语言处理器" class="headerlink" title="Java语言处理器"></a>Java语言处理器</h3><p>工作流程：源程序-&gt;（编译）-&gt;字节码-&gt;（虚拟机）-&gt;解释执行<br>即时编译器（JIT compiler）：随虚拟机一起供给的，并可选使用。它把字节码编译成可立即执行的指定平台的可执行代码。选择JIT编译器选项通常会使程序运行地更快，尤其是当某个可执行的方法被重复使用时。<br>（一旦代码被JIT编译器（重）编译后，它在电脑上通常就会运行地更快。）</p>
+<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p>
+<!--more-->
+<h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span><br><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p>
+<h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p>
+<p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p>
+<h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p>
+<h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p>
+<h2 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h2><p>又称为扩建的语言，或者动态语言，是一种编程语言。<br>脚本语言是为了缩短传统的编写-编译-链接-运行过程而创建的计算机编程语言。用来控制软件应用程序，脚本通常以文本（如ASCII)保存，只在被调用时进行解释或编译。</p>
+<p>一个脚本通常是解释执行而非编译。脚本语言通常都有简单、易学、易用的特性，目的就是希望能让程序员快速完成程序的编写工作。而宏语言则可视为脚本语言的分支，两者也有实质上的相同之处。</p>
+<h2 id="并行性"><a href="#并行性" class="headerlink" title="并行性"></a>并行性</h2><p>指令层次：多个运算可以同时执行<br>处理器层次：同一应用的多个不同线程在不同的处理器上运行</p>
+<p>这种并行性可以对程序员隐藏起来，硬件动态地检测顺序指令流之间的依赖关系，并且在可能的时候并法地发出指令。<br>硬件调度器：改变指令的顺序以提高程序的并行性</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -299,41 +270,6 @@
       </categories>
       <tags>
         <tag>编译</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>QT基础04</title>
-    <url>//articles/QT04.html</url>
-    <content><![CDATA[<h2 id="ListWidget"><a href="#ListWidget" class="headerlink" title="ListWidget"></a>ListWidget</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;使用ListWidget</span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    QListWidgetItem *item&#x3D;new QListWidgetItem(&quot;锄禾日当午&quot;);</span><br><span class="line">    ui-&gt;ListWidget-&gt;addItem(item);</span><br><span class="line">    item-&gt;setTextAlignment(Qt::AlignHCenter);</span><br><span class="line">    </span><br><span class="line">    QStringList list;</span><br><span class="line">    list&lt;&lt;&quot;锄禾日当午&quot;&lt;&lt;&quot;汗滴禾下土&quot;;</span><br><span class="line">    ui-&gt;ListWidget-&gt;addItems(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="treeWidget"><a href="#treeWidget" class="headerlink" title="treeWidget"></a>treeWidget</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;使用treeWidget</span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    &#x2F;&#x2F;设置水平头</span><br><span class="line">    ui-&gt;treeWidget-&gt;setHeaderLabels(QStringList()&lt;&lt;&quot;英雄&quot;&lt;&lt;&quot;英雄介绍&quot;);</span><br><span class="line">    </span><br><span class="line">    QTreeWidgetItem *liItem&#x3D;new QTreeWidgetItem(QStringList()&lt;&lt;&quot;力量&quot;);</span><br><span class="line">    QTreeWidgetItem *minItem&#x3D;new QTreeWidgetItem(QStringList()&lt;&lt;&quot;敏捷&quot;);</span><br><span class="line">    QTreeWidgetItem *zhiItem&#x3D;new QTreeWidgetItem(QStringList()&lt;&lt;&quot;智力&quot;);</span><br><span class="line">    &#x2F;&#x2F;追加子节点</span><br><span class="line">    QStringList heroL1;</span><br><span class="line">    heroL1&lt;&lt;&quot;第一个英雄&quot;&lt;&lt;&quot;他的属性-----&quot;;</span><br><span class="line">    QTreeWidgetItem *l1&#x3D;new QTreeWidgetItem(heroL1);</span><br><span class="line">    liItem-&gt;addChild(l1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="tableWidget"><a href="#tableWidget" class="headerlink" title="tableWidget"></a>tableWidget</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;使用tableWidget</span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    ui-&gt;tableWidget-&gt;setColumnCount(3);</span><br><span class="line">    ui-&gt;tableWidget-&gt;setHorizontalHeaderLabels(QStringList()&lt;&lt;&quot;姓名&quot;&lt;&lt;&quot;性别&quot;&lt;&lt;&quot;年龄&quot;);</span><br><span class="line">    ui-&gt;tableWidget-&gt;setRowCount(5);</span><br><span class="line">    &#x2F;&#x2F;ui-&gt;tableWidget-&gt;setItem(0,0,new QTableWidgetItem(&quot;亚瑟&quot;));</span><br><span class="line">    </span><br><span class="line">    QStringList *nameList;</span><br><span class="line">    nameList&lt;&lt;&quot;张三&quot;&lt;&lt;&quot;王五&quot;&lt;&lt;&quot;李四&quot;&lt;&lt;&quot;关羽&quot;&lt;&lt;&quot;张飞&quot;;</span><br><span class="line">    QList&lt;QString&gt; sexList;</span><br><span class="line">    sexList&lt;&lt;&quot;男&quot;&lt;&lt;&quot;男&quot;&lt;&lt;&quot;女&quot;&lt;&lt;&quot;女&quot;&lt;&lt;&quot;女&quot;;</span><br><span class="line">    for(int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">        int col&#x3D;0;</span><br><span class="line">        ui-&gt;tableWidget-&gt;setItem(i,col++,new QTableWidgetItem(nameList[i]));</span><br><span class="line">        ui-&gt;tableWidget-&gt;setItem(i,col++,new QTableWidgetItem(sexList[i]));</span><br><span class="line">        ui-&gt;tableWidget-&gt;setItem(i,col++,new QTableWidgetItem(QString::number(i+18)));</span><br><span class="line">        &#x2F;&#x2F;这里将int转为QString</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用QLabel"><a href="#使用QLabel" class="headerlink" title="使用QLabel"></a>使用QLabel</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    &#x2F;&#x2F;利用QLabel显示图片和播放动图</span><br><span class="line">    ui-&gt;label1-&gt;setPixmap(QPixmap(&quot;文件的相对路径&quot;));</span><br><span class="line">    QMovie *movie&#x3D;new QMovie(&quot;文件的相对路径&quot;);</span><br><span class="line">    ui-&gt;label2-&gt;setMovie(movie);</span><br><span class="line">    movie-&gt;start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>QT使用</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>QT基础03</title>
-    <url>//articles/QT03.html</url>
-    <content><![CDATA[<h2 id="QMainWindow"><a href="#QMainWindow" class="headerlink" title="QMainWindow"></a>QMainWindow</h2><p>一个为用户提供主窗口程序的类， 包含一个菜单栏，多个工具栏，多个锚接部件，一个状态栏，及一个中心部件，是许多应用程序的基础</p>
-<a id="more"></a>
-<h2 id="窗口设置"><a href="#窗口设置" class="headerlink" title="窗口设置"></a>窗口设置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;mainwindow.h&quot;</span><br><span class="line">#include &lt;QMenuBar&gt;</span><br><span class="line">#include &lt;QToolBar&gt;</span><br><span class="line">#include &lt;QDebug&gt;</span><br><span class="line">#include &lt;QPushButton&gt;</span><br><span class="line">#include &lt;QStatusBar&gt;</span><br><span class="line">#include &lt;QLabel&gt;</span><br><span class="line">#include &lt;QDockWidget&gt;</span><br><span class="line">#include &lt;QTextEdit&gt;</span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">&#123;</span><br><span class="line">    resize(600,400);</span><br><span class="line">    &#x2F;&#x2F;菜单栏</span><br><span class="line">    QMenuBar *bar&#x3D;menuBar();&#x2F;&#x2F;默认new放到this下，不用管理释放</span><br><span class="line">    setMenuBar(bar);</span><br><span class="line">    QMenu *fileMenu&#x3D;bar-&gt;addMenu(&quot;文件&quot;);</span><br><span class="line">    QMenu *editMenu&#x3D;bar-&gt;addMenu(&quot;编辑&quot;);</span><br><span class="line">    QAction *newAction&#x3D;fileMenu-&gt;addAction(&quot;新建&quot;);</span><br><span class="line">    fileMenu-&gt;addSeparator();</span><br><span class="line">    QAction *openAction&#x3D;fileMenu-&gt;addAction(&quot;打开&quot;);</span><br><span class="line">    &#x2F;&#x2F;工具栏</span><br><span class="line">    QToolBar *toolBar&#x3D;new QToolBar(this);</span><br><span class="line">    addToolBar(Qt::LeftToolBarArea,toolBar);</span><br><span class="line">    toolBar-&gt;setAllowedAreas(Qt::LeftToolBarArea|Qt::RightToolBarArea);</span><br><span class="line">    toolBar-&gt;setFloatable(false);</span><br><span class="line">    toolBar-&gt;setMovable(false);</span><br><span class="line"></span><br><span class="line">    toolBar-&gt;addAction(newAction);</span><br><span class="line">    toolBar-&gt;addSeparator();</span><br><span class="line">    toolBar-&gt;addAction(openAction);</span><br><span class="line"></span><br><span class="line">    QPushButton *btn&#x3D;new QPushButton(&quot;aa&quot;,this);</span><br><span class="line">    toolBar-&gt;addWidget(btn);</span><br><span class="line">    &#x2F;&#x2F;状态栏</span><br><span class="line">    QStatusBar *stBar&#x3D;statusBar();</span><br><span class="line">    setStatusBar(stBar);</span><br><span class="line">    QLabel *label&#x3D;new QLabel(&quot;提示信息&quot;,this);</span><br><span class="line">    stBar-&gt;addWidget(label);</span><br><span class="line">    QLabel *label2&#x3D;new QLabel(&quot;右侧提示信息&quot;,this);</span><br><span class="line">    stBar-&gt;addPermanentWidget(label2);</span><br><span class="line">    &#x2F;&#x2F;锚接部件（浮动窗口）</span><br><span class="line">    QDockWidget *dockWidget&#x3D;new QDockWidget(&quot;浮动&quot;,this);</span><br><span class="line">    addDockWidget(Qt::BottomDockWidgetArea,dockWidget);</span><br><span class="line">    &#x2F;&#x2F;设置中心部件</span><br><span class="line">    QTextEdit *edit&#x3D;new QTextEdit(this);</span><br><span class="line">    setCentralWidget(edit);</span><br><span class="line">    &#x2F;&#x2F;只能有一个部件的就用set</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="资源文件添加"><a href="#资源文件添加" class="headerlink" title="资源文件添加"></a>资源文件添加</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;mainwindow.h&quot;</span><br><span class="line">#include &quot;ui_mainwindow.h&quot;</span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    &#x2F;&#x2F;ui-&gt;actionNew-&gt;setIcon(QIcon(&quot;------&quot;));&#x2F;&#x2F;图片的绝对路径</span><br><span class="line">    &#x2F;&#x2F;添加资源文件-&gt;源文件右键在Explorer中显示，将资源文件放入</span><br><span class="line">    &#x2F;&#x2F;右键总文件添加新文件-&gt;QT-&gt;QT Rresource file</span><br><span class="line">    &#x2F;&#x2F;右键res.qrc然后open in editor</span><br><span class="line">    &#x2F;&#x2F;使用添加Qt资源冒号加前缀加文件名</span><br><span class="line">    &#x2F;&#x2F;ui-&gt;actionNew-&gt;setIcon(QIcon(&quot;----&quot;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">    connect(ui-&gt;actionNew,&amp;QAction::triggered,[&#x3D;]()&#123;</span><br><span class="line">        &#x2F;&#x2F;模态对话框，不可以对其他窗口进行操作</span><br><span class="line">&#x2F;&#x2F;        QDialog dlg(this);</span><br><span class="line">&#x2F;&#x2F;        dlg.resize(200,100);</span><br><span class="line">&#x2F;&#x2F;        dlg.exec();   &#x2F;&#x2F;代码阻塞带当前行</span><br><span class="line">        &#x2F;&#x2F;非模态对话框，可以对其他窗口进行操作</span><br><span class="line">&#x2F;&#x2F;        QDialog dlg2(this);</span><br><span class="line">&#x2F;&#x2F;        dlg2.show();&#x2F;&#x2F;窗口会一闪而过，因为show完马上就被释放了</span><br><span class="line">        QDialog *dlg2&#x3D;new QDialog(this);</span><br><span class="line">        dlg2-&gt;show();</span><br><span class="line">        dlg2-&gt;setAttribute(Qt::WA_DeleteOnClose);&#x2F;&#x2F;55号属性，对话框关即释放内存，防止内存泄漏</span><br><span class="line">        &#x2F;&#x2F;消息对话框</span><br><span class="line">&#x2F;&#x2F;        QMessageBox::critical(this,&quot;critical&quot;,&quot;错误&quot;);&#x2F;&#x2F;这是静态成员函数</span><br><span class="line">&#x2F;&#x2F;        QMessageBox::information(this,&quot;info&quot;,&quot;信息&quot;);   &#x2F;&#x2F;返回的是standardButton类型</span><br><span class="line">        if(QMessageBox::Save&#x3D;&#x3D;QMessageBox::question(this,&quot;ques&quot;,&quot;提问&quot;,QMessageBox::Save|QMessageBox::Cancel,QMessageBox::Cancel))&#123;</span><br><span class="line">            qDebug()&lt;&lt;&quot;选择的是保存&quot;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            qDebug()&lt;&lt;&quot;选择的是取消&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;第四个参数是按键类型，最后一个参数的默认关联回车按键</span><br><span class="line">        QMessageBox::warning(this,&quot;warning&quot;,&quot;警告&quot;);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;颜色对话框</span><br><span class="line">        QColor color&#x3D;QColorDialog::getColor(QColor(255,0,0));</span><br><span class="line">        qDebug()&lt;&lt;&quot;r&#x3D;&quot;&lt;&lt;color.red()&lt;&lt;&quot;g&#x3D;&quot;&lt;&lt;color.green()&lt;&lt;&quot;b&#x3D;&quot;&lt;&lt;color.blue();</span><br><span class="line">        &#x2F;&#x2F;文件对话框,最后一个参数指出现的文件格式,返回值是路径</span><br><span class="line">        QString str&#x3D;QFileDialog::getOpenFileName(this,&quot;打开文件&quot;,&quot;------&quot;,&quot;(*.txt)&quot;);</span><br><span class="line">        qDebug()&lt;&lt;str;</span><br><span class="line">        &#x2F;&#x2F;字体对话框</span><br><span class="line">        bool flag;</span><br><span class="line">        QFont font&#x3D;QFontDialog::getFont(&amp;flag,QFont(&quot;华文彩云&quot;,36));</span><br><span class="line">        qDebug()&lt;&lt;&quot;字体：&quot;&lt;&lt;font.family().toUtf8().data()&lt;&lt;&quot;字号:&quot;&lt;&lt;font.pointSize()&lt;&lt;&quot;是否加粗&quot;&lt;&lt;font.bold()&lt;&lt;&quot;是否斜体&quot;&lt;&lt;font.italic();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>QT使用</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
       </tags>
   </entry>
   <entry>
@@ -363,29 +299,6 @@
       </tags>
   </entry>
   <entry>
-    <title>QT基础02</title>
-    <url>//articles/QT02.html</url>
-    <content><![CDATA[<h2 id="对象树"><a href="#对象树" class="headerlink" title="对象树"></a>对象树</h2><p>当创建的对象在堆区的时候，如果指定的父亲是QObject继承体系中的类，可以不用管理释放的操作，创建的对象会添加到对象树中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">btn-&gt;setParent(this);</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>为创建的QObject对象提供一个父对象，会自动将其添加到其父对象的children()列表，当父对象析构的时候，这个列表中的所有对象也会被析构<br>因此在一定程度上简化了内存回收机制</p>
-<h2 id="信号和槽"><a href="#信号和槽" class="headerlink" title="信号和槽"></a>信号和槽</h2><p>连接函数：connect(断开连接用disconnect）<br>参数：信号的发送者，发送的信号（函数地址)，信号的接收者，处理的槽函数（函数地址）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">connect(myBtn,&amp;QPushButton::clicked,this,&amp;QWidget::close);</span><br><span class="line">connect(myBtn,&amp;MyPushButton::clicked,this,&amp;MyWidget::close);</span><br><span class="line">&#x2F;&#x2F;信号的接收方如果是this的话可以省略</span><br></pre></td></tr></table></figure>
-<h2 id="自定义信号和槽"><a href="#自定义信号和槽" class="headerlink" title="自定义信号和槽"></a>自定义信号和槽</h2><p>自定义信号：写到signals下，返回void，需要声明但不需要实现，可以有参数也可以重载（触发信号使用emit）<br>自定义槽函数：写到public slots下或public或全局函数，返回void，需要声明也需要实现，可以有参数也可以重载<br>注意：当函数发生重载时，在connect中要用函数指针指向具体函数，信号函数和槽函数的参数类型要匹配，信号函数的参数可以多于槽函数的参数，但第一个参数类型要匹配</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void(Teacher::*teacherSignal)(QString)&#x3D;&amp;Teacher::hungry;</span><br><span class="line">void(Student::*studentSlot)(QString)&#x3D;&amp;Student::treat;</span><br><span class="line">connect(zt,teacherSignal,st,StudentSlot);</span><br><span class="line">classIsOver();</span><br></pre></td></tr></table></figure>
-<h2 id="QString转char"><a href="#QString转char" class="headerlink" title="QString转char *"></a>QString转char *</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void Student::treat(QString foodName)&#123;</span><br><span class="line">	&#x2F;&#x2F;先转为QByteArray再转为char *</span><br><span class="line">	qDebug()&lt;&lt;&quot;请吃饭，要吃：&quot;&lt;&lt;foodName.toUtf8().data();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>QT使用</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>二叉搜索树</title>
     <url>//articles/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>二叉搜索树的原理无非就是左孩子的值小于等于父节点，右孩子的值大于等于父节点，所有的操作都是围绕这个原理来实现的<br>随机构造一棵二叉搜索树的期望高度为O（lg n），因此二叉搜索树上的动态集合的基本操作平均运行时间为（lg n）</p>
@@ -408,30 +321,6 @@
       <tags>
         <tag>数据结构</tag>
         <tag>树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>QT基础01</title>
-    <url>//articles/QT01.html</url>
-    <content><![CDATA[<h2 id="QT简介"><a href="#QT简介" class="headerlink" title="QT简介"></a>QT简介</h2><h3 id="什么是QT"><a href="#什么是QT" class="headerlink" title="什么是QT"></a>什么是QT</h3><p>一个跨平台的C++图形用户界面应用程序框架，面对对象且容易扩展，允许真正的组件编程<br>图形用户界面：GUI，采用图形方式显示的计算机操作用户界面</p>
-<a id="more"></a>
-<h3 id="QT的优点"><a href="#QT的优点" class="headerlink" title="QT的优点"></a>QT的优点</h3><p>跨平台，简化了内存回收机制，开发效率高，可以进行嵌入式开发</p>
-<h3 id="创建QT"><a href="#创建QT" class="headerlink" title="创建QT"></a>创建QT</h3><p>名称不能有中文和空格，保存路径不能有中文路径<br>默认创建有窗口类：myWidget<br>基类有三种选择：QWidget,QMainWindow,QDialog</p>
-<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span><br><span class="line">#include &lt;QApplication&gt;</span><br><span class="line">&#x2F;&#x2F;程序入口</span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    QApplication a(argc, argv);</span><br><span class="line">    Widget w;</span><br><span class="line">    w.show();</span><br><span class="line">    return a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>argc:命令行变量的数量<br>argv:命令行变量的数组<br>QApplication a:应用程序对象，有且仅有一个<br>maWidget w:实例化窗口对象<br>w.show():调用show函数，显示窗口<br>return a.exec():让应用程序进入消息循环机制，代码阻塞到当前行</p>
-<h3 id="widget头文件"><a href="#widget头文件" class="headerlink" title="widget头文件"></a>widget头文件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#ifndef WIDGET_H</span><br><span class="line">#define WIDGET_H</span><br><span class="line">#include &lt;QWidget&gt;</span><br><span class="line">class Widget : public QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT	&#x2F;&#x2F;宏，允许类中使用信号和槽的机制</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    Widget(QWidget *parent &#x3D; nullptr);</span><br><span class="line">    ~Widget();</span><br><span class="line">&#125;;</span><br><span class="line">#endif &#x2F;&#x2F; WIDGET_H</span><br></pre></td></tr></table></figure>
-<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>注释：ctrl+/<br>查找：ctrl+f<br>整行移动：ctrl+shift+上下<br>帮助文档：F1<br>自动对齐：ctrl+i<br>同名文件切换：F4</p>
-<h3 id="按钮空间常用API"><a href="#按钮空间常用API" class="headerlink" title="按钮空间常用API"></a>按钮空间常用API</h3><p>什么是API：Application Programming Interface ，应用程序接口</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;widget.h&quot;</span><br><span class="line">#include &lt;QPushButton&gt;</span><br><span class="line">Widget::Widget(QWidget *parent)</span><br><span class="line">    : QWidget(parent)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;创建一个按钮</span><br><span class="line">&#x2F;&#x2F; QPushButton *btn&#x3D;new QPushButton;</span><br><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;btn-&gt;show();&#x2F;&#x2F;以顶层方式弹出窗口控件</span><br><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;让btn对象依赖在widget窗口</span><br><span class="line">&#x2F;&#x2F; btn-&gt;setParent(this);</span><br><span class="line">&#x2F;&#x2F; &#x2F;&#x2F;设置文本</span><br><span class="line">&#x2F;&#x2F; btn-&gt;setText(&quot;第一个按钮&quot;);</span><br><span class="line">     &#x2F;&#x2F;创建第二个按钮,按照控件大小创建窗口</span><br><span class="line">    QPushButton *btn&#x3D;new QPushButton(&quot;第二个按钮&quot;,this);</span><br><span class="line">    &#x2F;&#x2F;设置窗口大小</span><br><span class="line">    resize(600,400);</span><br><span class="line">    &#x2F;&#x2F;设置固定窗口大小</span><br><span class="line">    setFixedSize(600,400);</span><br><span class="line">    &#x2F;&#x2F;移动按钮</span><br><span class="line">    btn-&gt;move(100,100);</span><br><span class="line">    &#x2F;&#x2F;设置窗口标题</span><br><span class="line">    setWindowTitle(&quot;第一个窗口&quot;);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>QT使用</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
       </tags>
   </entry>
   <entry>
@@ -518,37 +407,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++ Primer 18(上)</title>
-    <url>//articles/C++%20Primer%2018(%E4%B8%8A).html</url>
-    <content><![CDATA[<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
-<a id="more"></a>
-<h3 id="析构函数与异常"><a href="#析构函数与异常" class="headerlink" title="析构函数与异常"></a>析构函数与异常</h3><p>栈展开可能使用析构函数–&gt;如果析构函数需要执行某个可能抛出异常的操作，这个操作应该在析构函数内部得到处理<br>因为如果最后没有捕获到catch，就会调用terminate，此前分配的资源就无法被释放，所以这个可能抛出异常的操作就应该在析构函数内部就得到处理</p>
-<h3 id="异常对象"><a href="#异常对象" class="headerlink" title="异常对象"></a>异常对象</h3><p>位于编译器管理的空间，由异常抛出表达式拷贝初始化，该表达式的静态编译时类型决定了异常对象的类型，如果一条throw表达式解引用了一个指向基类的指针，而该指针实际指向的是派生类对象，则抛出的对象被切掉一部分，只有基类部分被抛出（不要指向局部对象）</p>
-<h3 id="catch的异常声明"><a href="#catch的异常声明" class="headerlink" title="catch的异常声明"></a>catch的异常声明</h3><p>异常声明必须是完全类型，可以是左值引用，不能是右值引用<br>如果是基类的非引用类型，用派生类对象初始化时会切掉一部分<br>如果是基类的引用类型，以常规方式绑定异常对象，catch无法使用派生类特有的成员<br>异常声明用数组或函数初始化时，会转换为指针</p>
-<h3 id="重新抛出"><a href="#重新抛出" class="headerlink" title="重新抛出"></a>重新抛出</h3><p>catch处理了一部分异常，重新抛出，将异常对象沿着调用链向上传递</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">throw;</span><br></pre></td></tr></table></figure>
-<p>如果空throw出现在处理代码之外的区域，编译器j将调用terminate<br>只有当catch异常声明是引用类型时我们对参数作的改变才会被保留并继续传播</p>
-<h3 id="处理所有异常"><a href="#处理所有异常" class="headerlink" title="处理所有异常"></a>处理所有异常</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">catch(...)</span><br></pre></td></tr></table></figure>
-<p>通常与重新抛出一起使用</p>
-<h3 id="函数测试块"><a href="#函数测试块" class="headerlink" title="函数测试块"></a>函数测试块</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il) try:</span><br><span class="line">	data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)&#123;</span><br><span class="line">&#125;catch(const std::bad_alloc &amp;e)&#123;--------&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="不抛出声明"><a href="#不抛出声明" class="headerlink" title="不抛出声明"></a>不抛出声明</h3><p>noexcept在声明和定义中同时出现，也在尾置返回类型之前<br>在类型别名中不能出现noexcept<br>在成员函数中，noexcept在const和引用限定符之后，final，override或虚函数的=0之前</p>
-<p>异常说明的实参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void func1(int a)noexcept(true)&#x2F;&#x2F;不会抛出异常</span><br><span class="line">void func2(int b)noexcept(false)&#x2F;&#x2F;可能抛出异常</span><br></pre></td></tr></table></figure>
-<h3 id="noexcept-运算符"><a href="#noexcept-运算符" class="headerlink" title="noexcept 运算符"></a>noexcept 运算符</h3><p>返回bool类型的右值常量表达式，不会求其运算对象的值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void f()noexcept (noexcept(g()));</span><br></pre></td></tr></table></figure>
-<h3 id="一致的异常说明"><a href="#一致的异常说明" class="headerlink" title="一致的异常说明"></a>一致的异常说明</h3><p>函数指针和指针指向的函数<br>虚函数和它的派生函数<br>合成拷贝控制成员时</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>C++ Primer</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>语言</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++ Primer 18(下)</title>
     <url>//articles/C++%20Primer%2018(%E4%B8%8B).html</url>
     <content><![CDATA[<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><h3 id="新建命名空间"><a href="#新建命名空间" class="headerlink" title="新建命名空间"></a>新建命名空间</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace x&#123;</span><br><span class="line">	------</span><br><span class="line">&#125;	&#x2F;&#x2F;不需要分号</span><br></pre></td></tr></table></figure>
@@ -577,6 +435,37 @@
 <h3 id="使用虚继承"><a href="#使用虚继承" class="headerlink" title="使用虚继承"></a>使用虚继承</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Bear:virtual public zoo&#123;------&#125;;</span><br></pre></td></tr></table></figure>
 <p>派生类中只有虚继承的类一个实例</p>
 <h3 id="虚基类的构造"><a href="#虚基类的构造" class="headerlink" title="虚基类的构造"></a>虚基类的构造</h3><p>虚基类是由最低层的派生类初始化的，如果有多个虚基类，则按照在派生列表中中出现的顺序初始化，然后才按顺序初始化其他基类<br>析构顺序与构造顺序相反</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>语言</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Primer 18(上)</title>
+    <url>//articles/C++%20Primer%2018(%E4%B8%8A).html</url>
+    <content><![CDATA[<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="栈展开"><a href="#栈展开" class="headerlink" title="栈展开"></a>栈展开</h3><p>异常发生在try语句块内–&gt;在跟自己的try语句块关联的catch里找<br>若该try语句块嵌套在另一个try内–&gt;继续在外面的这个try语句块找<br>若该函数被调用–&gt;在调用它的函数找<br>若是找到catch，则在与原来try语句块关联的最后一个catch后的点继续执行程序<br>最后找不到就会调用标准库函数terminate强行终止程序</p>
+<a id="more"></a>
+<h3 id="析构函数与异常"><a href="#析构函数与异常" class="headerlink" title="析构函数与异常"></a>析构函数与异常</h3><p>栈展开可能使用析构函数–&gt;如果析构函数需要执行某个可能抛出异常的操作，这个操作应该在析构函数内部得到处理<br>因为如果最后没有捕获到catch，就会调用terminate，此前分配的资源就无法被释放，所以这个可能抛出异常的操作就应该在析构函数内部就得到处理</p>
+<h3 id="异常对象"><a href="#异常对象" class="headerlink" title="异常对象"></a>异常对象</h3><p>位于编译器管理的空间，由异常抛出表达式拷贝初始化，该表达式的静态编译时类型决定了异常对象的类型，如果一条throw表达式解引用了一个指向基类的指针，而该指针实际指向的是派生类对象，则抛出的对象被切掉一部分，只有基类部分被抛出（不要指向局部对象）</p>
+<h3 id="catch的异常声明"><a href="#catch的异常声明" class="headerlink" title="catch的异常声明"></a>catch的异常声明</h3><p>异常声明必须是完全类型，可以是左值引用，不能是右值引用<br>如果是基类的非引用类型，用派生类对象初始化时会切掉一部分<br>如果是基类的引用类型，以常规方式绑定异常对象，catch无法使用派生类特有的成员<br>异常声明用数组或函数初始化时，会转换为指针</p>
+<h3 id="重新抛出"><a href="#重新抛出" class="headerlink" title="重新抛出"></a>重新抛出</h3><p>catch处理了一部分异常，重新抛出，将异常对象沿着调用链向上传递</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">throw;</span><br></pre></td></tr></table></figure>
+<p>如果空throw出现在处理代码之外的区域，编译器j将调用terminate<br>只有当catch异常声明是引用类型时我们对参数作的改变才会被保留并继续传播</p>
+<h3 id="处理所有异常"><a href="#处理所有异常" class="headerlink" title="处理所有异常"></a>处理所有异常</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">catch(...)</span><br></pre></td></tr></table></figure>
+<p>通常与重新抛出一起使用</p>
+<h3 id="函数测试块"><a href="#函数测试块" class="headerlink" title="函数测试块"></a>函数测试块</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il) try:</span><br><span class="line">	data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)&#123;</span><br><span class="line">&#125;catch(const std::bad_alloc &amp;e)&#123;--------&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="不抛出声明"><a href="#不抛出声明" class="headerlink" title="不抛出声明"></a>不抛出声明</h3><p>noexcept在声明和定义中同时出现，也在尾置返回类型之前<br>在类型别名中不能出现noexcept<br>在成员函数中，noexcept在const和引用限定符之后，final，override或虚函数的=0之前</p>
+<p>异常说明的实参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void func1(int a)noexcept(true)&#x2F;&#x2F;不会抛出异常</span><br><span class="line">void func2(int b)noexcept(false)&#x2F;&#x2F;可能抛出异常</span><br></pre></td></tr></table></figure>
+<h3 id="noexcept-运算符"><a href="#noexcept-运算符" class="headerlink" title="noexcept 运算符"></a>noexcept 运算符</h3><p>返回bool类型的右值常量表达式，不会求其运算对象的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void f()noexcept (noexcept(g()));</span><br></pre></td></tr></table></figure>
+<h3 id="一致的异常说明"><a href="#一致的异常说明" class="headerlink" title="一致的异常说明"></a>一致的异常说明</h3><p>函数指针和指针指向的函数<br>虚函数和它的派生函数<br>合成拷贝控制成员时</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
