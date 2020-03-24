@@ -295,31 +295,6 @@
   </entry>
   
   <entry>
-    <title>引论</title>
-    <link href="http://yoursite.com/articles/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA.html"/>
-    <id>http://yoursite.com/articles/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%8601%E5%BC%95%E8%AE%BA.html</id>
-    <published>2019-12-10T13:56:50.000Z</published>
-    <updated>2019-12-23T02:55:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p>将高级语言翻译为低级语言的程序<br>工作流程：源代码-&gt;预处理器-&gt;编译器-&gt;目标代码-&gt;链接器-&gt;可执行程序</p><a id="more"></a><p>源程序可能被分割称为多个模块，并存放于独立的文件，此时由预处理器来将源程序聚合在一起<br>（预处理器是在真正的编译开始之前由编译器调用的独立程序。预处理器可以删除注释、包含其他文件以及执行宏替代。）</p><p><em>宏是一种抽象，它根据一系列预定义的规则替换一定的文本模式。解释器或编译器在遇到宏时会自动进行这一模式替换。对于编译语言，宏展开在编译时发生，进行宏展开的工具常被称为宏展开器。</em></p><p>汇编语言比较容易输出和调试，所以编译器（可能）产生一个汇编语言程序作为其输出，这个程序由汇编器程序进行处理，并生成<strong>可重定位的机器代码</strong></p><p>因为大型程序经常分为多个部分进行编译，所以可重定位的机器代码有必要和其他可重定位的目标文件以及库文件连接到一起，从而形成真正在机器上运行的代码</p><p>一个文件中的代码可能指向另一个文件中的位置，而链接器能够解决外部内存地址的问题</p><p>最后加载器把所有的可执行目标文件放到内存中执行</p><p>对于C#、VB等高级语言而言，此时编译器完成的功能是把源码编译成通用中间语言（MSIL/CIL）的字节码（ByteCode）。最后运行的时候通过通用语言运行库（虚拟机）的转换，编成最终可以被CPU直接计算的机器码（NativeCode）</p><p>字节码是可以发送给任何平台并且能在那个平台上运行的独立于平台的代码。</p><h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><p>又称为直译器，是一种电脑程序，能够把高级编程语言一行一行直接转译运行。解释器的程序运行速度比较缓慢，但错误诊断效果通常比编译器好</p><h3 id="关于Java"><a href="#关于Java" class="headerlink" title="关于Java"></a>关于Java</h3><p>大多数用任何语言写的程序在每个电脑平台上都必须重编译，甚至有时需要重写。而Java最大的优点之一就是你只需要写和编译一次程序。在任何平台上，Java都会将编译好的字节码解释成能被特定的处理器所理解的指令(即一次编译，到处运行)。Java虚拟机一次只能处理一条字节码指令。</p><h3 id="Java语言处理器"><a href="#Java语言处理器" class="headerlink" title="Java语言处理器"></a>Java语言处理器</h3><p>工作流程：源程序-&gt;（编译）-&gt;字节码-&gt;（虚拟机）-&gt;解释执行<br>即时编译器（JIT compiler）：随虚拟机一起供给的，并可选使用。它把字节码编译成可立即执行的指定平台的可执行代码。选择JIT编译器选项通常会使程序运行地更快，尤其是当某个可执行的方法被重复使用时。<br>（一旦代码被JIT编译器（重）编译后，它在电脑上通常就会运行地更快。）</p><h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p>分析部分+综合部分<br>（即前端+优化+后端）<br>分析部分：分解源程序，按语法结构创建中间表示，并收集源程序的信息存放在称为符号表的数据结构中。最后将符号表和中间表示形式一起传送给综合部分<br>综合部分：利用符号表和中间表示形式来构造用户想要的目标程序</p><!--more--><h3 id="词法分析-扫描"><a href="#词法分析-扫描" class="headerlink" title="词法分析/扫描"></a>词法分析/扫描</h3><p>词法分析器读入组成源程序的字符流，组织成词素的序列，最后将每个词素以词法单元的形式输出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">position &#x3D; initial + rate * 60;</span><br><span class="line">&lt;id,1&gt;&lt;&#x3D;&gt;&lt;id,2&gt;&lt;+&gt;&lt;id,3&gt;&lt;*&gt;&lt;60&gt;</span><br></pre></td></tr></table></figure><h3 id="语法分析-解析"><a href="#语法分析-解析" class="headerlink" title="语法分析/解析"></a>语法分析/解析</h3><p>语法分析器使用词法单元来创建树形的中间表示，最后将语法树输出</p><h3 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h3><p>语义分析器使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致。同时收集类型信息，并存放在语法树和符号表中，以便在随后的中间代码生成过程中使用</p><p>语义分析的一个重要部分：类型检查，即检查每个运算符是否具有匹配的运算分量（可能允许自动类型转换）</p><h3 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h3><p>特点：易于生成，且能够被轻松翻译为目标机器上的语言<br>三地址代码：由类似于汇编语言的指令组成，且每个指令（最多）具有三个运算分量，而每个运算分量就像一个寄存器<br>每个三地址赋值指令的右部最多只有一个运算符</p><h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>将源程序的中间表示形式映射到目标语言，如果目标语言是机器语言，则必须为程序使用的每个变量选择寄存器或内存位置（要合理分配寄存器以存放变量的值）<br>数字前面加井号表示将该数字当作立即数处理</p><h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>为每个变量创建一个记录条目，记录的字段就是名字的各个属性。<br><em>符号表可以让编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据</em></p><h2 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h2><p>又称为扩建的语言，或者动态语言，是一种编程语言。<br>脚本语言是为了缩短传统的编写-编译-链接-运行过程而创建的计算机编程语言。用来控制软件应用程序，脚本通常以文本（如ASCII)保存，只在被调用时进行解释或编译。</p><p>一个脚本通常是解释执行而非编译。脚本语言通常都有简单、易学、易用的特性，目的就是希望能让程序员快速完成程序的编写工作。而宏语言则可视为脚本语言的分支，两者也有实质上的相同之处。</p><h2 id="并行性"><a href="#并行性" class="headerlink" title="并行性"></a>并行性</h2><p>指令层次：多个运算可以同时执行<br>处理器层次：同一应用的多个不同线程在不同的处理器上运行</p><p>这种并行性可以对程序员隐藏起来，硬件动态地检测顺序指令流之间的依赖关系，并且在可能的时候并法地发出指令。<br>硬件调度器：改变指令的顺序以提高程序的并行性</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;编译器&quot;&gt;&lt;a href=&quot;#编译器&quot; class=&quot;headerlink&quot; title=&quot;编译器&quot;&gt;&lt;/a&gt;编译器&lt;/h2&gt;&lt;p&gt;将高级语言翻译为低级语言的程序&lt;br&gt;工作流程：源代码-&amp;gt;预处理器-&amp;gt;编译器-&amp;gt;目标代码-&amp;gt;链接器-&amp;gt;可执行程序&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="编译原理" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="编译" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91/"/>
-    
-  </entry>
-  
-  <entry>
     <title>红黑树</title>
     <link href="http://yoursite.com/articles/%E7%BA%A2%E9%BB%91%E6%A0%91.html"/>
     <id>http://yoursite.com/articles/%E7%BA%A2%E9%BB%91%E6%A0%91.html</id>
