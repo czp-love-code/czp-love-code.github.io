@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>GDB 基本应用</title>
+    <url>//articles/GDB-%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8.html</url>
+    <content><![CDATA[<p>GDB使用：编译的时候加 -g参数<br>启动GDB：gdb + app(可执行程序名)<br>在GDB里启动程序：<br>1、    r(un)启动    （后面可以接实参）<br>2、    start启动(停留在main函数，相当于分步调试)，再输入n(ext)下一条指令，或者s（tep）,可以进入函数内部，但是库函数不能进<br>退出GDB：q(quit)</p>
+<a id="more"></a>
+<p>设置启动参数：set args 10 6，set argv[2]=”adsa”;<br>list:显示10行代码，按enter显示下10行(默认主函数对应文件)<br>list func.c :1<br>设置断点：b(break) 17 在17行设置断点        b sum 在sum函数处设置断点<br>b main.c :25        指定文件行数<br>设置条件断点：b line if i==1<br>info b  查看断点相关信息（会显示断点序号）<br>d（el）+断点序号    删除断点<br>c 执行至下一个断点（continue）<br>p argc 打印参数<br>ptype i 查看i的类型<br>display argc    显示argc的信息（后面执行任何指令都会display argc）<br>info display    显示display过的信息（序号）<br>undisplay+序号    删除之前的display</p>
+<p>GDB跟踪core(段错误，核心已转储，会默认设置core大小为0，就看不到)<br>ulimit -c 设置生成core<br>ulimit -c unlimited<br>gdb app core查看是哪里出了问题(案发现场)，也可以再敲where<br>设置core文件格式：/proc/sys/kernel/core_pattern<br>文件不能vi，</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+        <category>GDB</category>
+      </categories>
+      <tags>
+        <tag>GDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>makefile</title>
     <url>//articles/makefile.html</url>
     <content><![CDATA[<p>makefile的用处：封装命令，一次编写，终身受益<br>命名规则：makefile/Makefile<br>三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）<br>写法：<br>目标：依赖<br>tab    规则命令</p>

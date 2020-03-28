@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/articles/GDB-%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8.html</loc>
+    
+    <lastmod>2020-03-28T05:59:22.703Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/articles/makefile.html</loc>
     
     <lastmod>2020-03-28T02:52:12.829Z</lastmod>
