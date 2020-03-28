@@ -48,20 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="未命名的enum只能在定义该enum时定义它的对象（分号前面）">
+  <meta name="description" content="makefile的用处：封装命令，一次编写，终身受益命名规则：makefile&#x2F;Makefile三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）写法：目标：依赖tab    规则命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="枚举类型使用注意事项">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">
+<meta property="og:title" content="makefile">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;makefile.html">
 <meta property="og:site_name" content="陈泽平的博客">
-<meta property="og:description" content="未命名的enum只能在定义该enum时定义它的对象（分号前面）">
+<meta property="og:description" content="makefile的用处：封装命令，一次编写，终身受益命名规则：makefile&#x2F;Makefile三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）写法：目标：依赖tab    规则命令">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-22T04:23:58.000Z">
-<meta property="article:modified_time" content="2019-12-22T07:19:12.000Z">
+<meta property="article:published_time" content="2020-03-28T02:50:36.000Z">
+<meta property="article:modified_time" content="2020-03-28T02:52:12.829Z">
 <meta property="article:author" content="耐清">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="makefile">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/articles/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">
+<link rel="canonical" href="http://yoursite.com/articles/makefile.html">
 
 
 <script id="page-configurations">
@@ -75,7 +75,7 @@
   };
 </script>
 
-  <title>枚举类型使用注意事项 | 陈泽平的博客</title>
+  <title>makefile | 陈泽平的博客</title>
   
 
 
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/articles/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/articles/makefile.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/weixintouxiang.jpg">
@@ -219,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          枚举类型使用注意事项
+          makefile
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-22 12:23:58 / 修改时间：15:19:12" itemprop="dateCreated datePublished" datetime="2019-12-22T12:23:58+08:00">2019-12-22</time>
+              <time title="创建时间：2020-03-28 10:50:36 / 修改时间：10:52:12" itemprop="dateCreated datePublished" datetime="2020-03-28T10:50:36+08:00">2020-03-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +238,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/C-Primer/" itemprop="url" rel="index">
-                    <span itemprop="name">C++ Primer</span>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/makefile/" itemprop="url" rel="index">
+                    <span itemprop="name">makefile</span>
                   </a>
                 </span>
             </span>
@@ -268,16 +268,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>未命名的enum只能在定义该enum时定义它的对象（分号前面）</p>
+        <p>makefile的用处：封装命令，一次编写，终身受益<br>命名规则：makefile/Makefile<br>三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）<br>写法：<br>目标：依赖<br>tab    规则命令</p>
 <a id="more"></a>
-<p>枚举成员是const，提供初始值时必须是常量表达式，同时，我们也可以在任何需要常量表达式的地方使用枚举成员。如使用enum作为switch语句的表达式，而将枚举值作为case标签，也能将枚举类型作为非类型模板形参使用，或者在类的定义中初始化枚举类型的静态数据成员</p>
-<p>初始化已命名的enum对象或对其赋值必须使用一个枚举成员或该类型的另一个对象，同时我们不能将整型值传给enum形参，但是可以将一个不限定作用域的枚举类型的对象或枚举成员传给整型形参，因为一个不限定作用域的枚举类型的对象或枚举成员自动转换为整型，而限定作用域的枚举类型则不会进行这样的隐式转换。<br>此时enum的值类型进行提升，但是永远不会提升成unsigned char，即使枚举值可以用unsigned char存储也是如此</p>
-<p>默认情况下限定作用域的enum成员类型是int，我们可以进行指定</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enum adsa:unsigned long long&#123;</span><br><span class="line">	-------</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>对于不限定作用域的枚举类型的枚举成员则不存在默认类型，一般认为足够大够容纳枚举值，如果我们再指定大小的话容易引发程序错误</p>
-<p>枚举类型的前置声明必须指定其成员的大小</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enum adsa:unsigned long long;</span><br><span class="line">enum class opadsa;&#x2F;&#x2F;限定作用域默认为int</span><br></pre></td></tr></table></figure>
-<p>我们不可以在同一个上下文先声明一个限定作用域的enum名字，再声明一个不限定作用域的同名enum；</p>
+<p>例：<br>app:main.c a.c b.c<br>    gcc -o app -I ./czp  main.c a.c b.c<br>此时的弊端：如果改变其中一个源码文件，所有的源码都需要重新编译<br>解决方案：可以考虑过程分解，先生成.o文件</p>
+<p>定义变量：<br>ObjFiles=main.c ,a.c,b.c<br>变量的使用：$(ObjFiles)<br>makefile的隐含规则：默认处理第一个目标<br>如果想处理某个目标：make app<br>使用函数：<br>SrcFiles=$(wildcard 星.c)        文件匹配<br>ObjFiles=$(patsubst %.c,%.o,$(SrcFiles))    内容替换    所有.c变成.o<br>test:<br>    echo $(SrcFiles)<br>    echo $(ObjFiles)</p>
+<p>makefile的变量：<br>$@ 代表目标<br>$^    代表全部依赖<br>$&lt;    代表第一个依赖<br>$?    第一个变化的依赖<br>例：<br>%.o:%.c<br>    gcc -c $&lt; -I ./czp -o $@<br>$&lt;和$&lt;只能在规则中出现<br>若是不想执行make 后看见指令，就在规则前加@<br>在规则前加-号，若是出了错误（如文件不存在）继续执行</p>
+<p>防止目录下有同名文件：<br>.PHONY:clean（表示clean为伪目标）</p>
 
     </div>
 
@@ -296,7 +292,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/makefile/" rel="tag"># makefile</a>
           </div>
 
         
@@ -305,13 +301,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/articles/%E5%88%AB%E5%90%8D%E5%A3%B0%E6%98%8E%E4%B8%8Etypedef%E7%9A%84%E5%8C%BA%E5%88%AB.html" rel="prev" title="使用using的别名声明与typedef的区别">
-      <i class="fa fa-chevron-left"></i> 使用using的别名声明与typedef的区别
+    <a href="/articles/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93.html" rel="prev" title="静态库和动态库">
+      <i class="fa fa-chevron-left"></i> 静态库和动态库
     </a></div>
-      <div class="post-nav-item">
-    <a href="/articles/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" rel="next" title="Linux 常用命令">
-      Linux 常用命令 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     

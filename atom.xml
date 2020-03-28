@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-27T16:23:40.106Z</updated>
+  <updated>2020-03-28T02:52:12.829Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>makefile</title>
+    <link href="http://yoursite.com/articles/makefile.html"/>
+    <id>http://yoursite.com/articles/makefile.html</id>
+    <published>2020-03-28T02:50:36.000Z</published>
+    <updated>2020-03-28T02:52:12.829Z</updated>
+    
+    <content type="html"><![CDATA[<p>makefile的用处：封装命令，一次编写，终身受益<br>命名规则：makefile/Makefile<br>三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）<br>写法：<br>目标：依赖<br>tab    规则命令</p><a id="more"></a><p>例：<br>app:main.c a.c b.c<br>    gcc -o app -I ./czp  main.c a.c b.c<br>此时的弊端：如果改变其中一个源码文件，所有的源码都需要重新编译<br>解决方案：可以考虑过程分解，先生成.o文件</p><p>定义变量：<br>ObjFiles=main.c ,a.c,b.c<br>变量的使用：$(ObjFiles)<br>makefile的隐含规则：默认处理第一个目标<br>如果想处理某个目标：make app<br>使用函数：<br>SrcFiles=$(wildcard 星.c)        文件匹配<br>ObjFiles=$(patsubst %.c,%.o,$(SrcFiles))    内容替换    所有.c变成.o<br>test:<br>    echo $(SrcFiles)<br>    echo $(ObjFiles)</p><p>makefile的变量：<br>$@ 代表目标<br>$^    代表全部依赖<br>$&lt;    代表第一个依赖<br>$?    第一个变化的依赖<br>例：<br>%.o:%.c<br>    gcc -c $&lt; -I ./czp -o $@<br>$&lt;和$&lt;只能在规则中出现<br>若是不想执行make 后看见指令，就在规则前加@<br>在规则前加-号，若是出了错误（如文件不存在）继续执行</p><p>防止目录下有同名文件：<br>.PHONY:clean（表示clean为伪目标）</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;makefile的用处：封装命令，一次编写，终身受益&lt;br&gt;命名规则：makefile/Makefile&lt;br&gt;三要素：目标，依赖，规则命令（依赖可以不写，规则也可以不写）&lt;br&gt;写法：&lt;br&gt;目标：依赖&lt;br&gt;tab    规则命令&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="基础知识" scheme="http://yoursite.com/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="makefile" scheme="http://yoursite.com/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/makefile/"/>
+    
+    
+      <category term="makefile" scheme="http://yoursite.com/tags/makefile/"/>
+    
+  </entry>
   
   <entry>
     <title>静态库和动态库</title>
@@ -507,33 +532,6 @@
     
     
       <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>KMP算法</title>
-    <link href="http://yoursite.com/articles/KMP%E7%AE%97%E6%B3%95.html"/>
-    <id>http://yoursite.com/articles/KMP%E7%AE%97%E6%B3%95.html</id>
-    <published>2019-12-01T05:48:18.000Z</published>
-    <updated>2020-03-24T07:29:51.868Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="分析朴素算法"><a href="#分析朴素算法" class="headerlink" title="分析朴素算法"></a>分析朴素算法</h2><p> 朴素算法在进行扫描的时候每次不匹配都是将A的初始扫描点后移一位，再重新进行扫描，而在这个过程中会有很多没有必要的比对情况出现。比如我们对字符串“REGRET”和“REGROW”，在第一次扫描失配的时候，我们就已经知道<code>A[1]</code>必然不等于<code>B[0]</code>，那么就没有必要再进行这两个字符的比对了</p><a id="more"></a><p>想象A上B下进行比对，此时我们就应该跳过<code>A[1]</code>跟<code>B[0]</code>这样已经知道结果的比对。既然我们知道了<code>A[3]=B[0]</code>,那么我们再继续比对<code>A[4]</code>和<code>B[1]</code>就OK了</p><h2 id="KMP算法思想"><a href="#KMP算法思想" class="headerlink" title="KMP算法思想"></a>KMP算法思想</h2><p> A字符串的扫描位置不断后移，而B字符串的扫描位置 j 若是不匹配就寻找下一个 j 进行比对， 这次比对是对从失配的A[ i ]开始的，我们就要找到B[ j ]（失配位置）前面子串的前后两个相等的两个真子串，比如B串中子串“REGR”的前后两个相等的真子串就是”R“，然后将B串右移使得A[ i ] 前面的子串跟B[next[ j ] ] （此时即为B[1]）前面的子串匹配，再开始进行比对</p><h2 id="构造next表"><a href="#构造next表" class="headerlink" title="构造next表"></a>构造next表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span><br><span class="line">int n &#x3D; B.size(), j &#x3D; 0;</span><br><span class="line">int* N &#x3D; new int[n];</span><br><span class="line">int t &#x3D; N[0] &#x3D; -1;&#x2F;&#x2F;这里记得先初始化N[0]为-1；</span><br><span class="line">while (j &lt; n - 1) &#123;&#x2F;&#x2F;这里不取最后一个元素是因为讨论的是“当前元素不匹配，然后要找前面的子串自匹配的情况，然后找到下一个j值</span><br><span class="line">if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;&#x2F;&#x2F;注意这里的短路求值</span><br><span class="line">j++; t++;</span><br><span class="line">N[j] &#x3D; t;&#x2F;&#x2F;此代码可以优化</span><br><span class="line">&#125;</span><br><span class="line">else t &#x3D; N[t];</span><br><span class="line">&#125;</span><br><span class="line">return N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="next表构造优化"><a href="#next表构造优化" class="headerlink" title="next表构造优化"></a>next表构造优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int* BuildNext(string B) &#123;</span><br><span class="line">int n &#x3D; B.size(), j &#x3D; 0;</span><br><span class="line">int* N &#x3D; new int[n];</span><br><span class="line">int t &#x3D; N[0] &#x3D; -1;</span><br><span class="line">while (j &lt; n - 1) &#123;</span><br><span class="line">if (t &lt; 0||B[j] &#x3D;&#x3D; B[t] ) &#123;</span><br><span class="line">j++; t++;</span><br><span class="line">N[j] &#x3D; (B[j] !&#x3D; B[t]) ? t : N[t];&#x2F;&#x2F;修改了next表的定义</span><br><span class="line">&#125;&#x2F;&#x2F;最后的元素不与之前匹配失败的元素相等</span><br><span class="line">else t &#x3D; N[t];</span><br><span class="line">&#125;</span><br><span class="line">return N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;KMP主算法 O（m) 模式串长度</span><br><span class="line">int match(string A, string B) &#123;</span><br><span class="line">int m &#x3D; A.size();</span><br><span class="line">int n &#x3D; B.size();</span><br><span class="line">int i &#x3D; 0, j &#x3D; 0;</span><br><span class="line">while (i &lt; m &amp;&amp; j &lt; n) &#123;</span><br><span class="line">if ( j &lt; 0 || A[i] &#x3D;&#x3D; B[j]) &#123;</span><br><span class="line">i++; j++;</span><br><span class="line">&#125;</span><br><span class="line">else j &#x3D; next[j];</span><br><span class="line">&#125;</span><br><span class="line">delete[ ] next;</span><br><span class="line">return i - j;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>O（n+m）</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;分析朴素算法&quot;&gt;&lt;a href=&quot;#分析朴素算法&quot; class=&quot;headerlink&quot; title=&quot;分析朴素算法&quot;&gt;&lt;/a&gt;分析朴素算法&lt;/h2&gt;&lt;p&gt; 朴素算法在进行扫描的时候每次不匹配都是将A的初始扫描点后移一位，再重新进行扫描，而在这个过程中会有很多没有必要的比对情况出现。比如我们对字符串“REGRET”和“REGROW”，在第一次扫描失配的时候，我们就已经知道&lt;code&gt;A[1]&lt;/code&gt;必然不等于&lt;code&gt;B[0]&lt;/code&gt;，那么就没有必要再进行这两个字符的比对了&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="算法导论" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
-    
-      <category term="字符串匹配" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"/>
-    
-    
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
