@@ -51,31 +51,31 @@
   <meta name="description" content="浏览器工作流程：    1、解析网址（URL），将域名解析成IP地址（通过DNS解析器）    2、从具有IP地址的内存中将IP地址取出    3、生成请求信息    4、并委托操作系统向Web服务器发送请求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器如何生成信息">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84.html">
 <meta property="og:site_name" content="陈泽平的博客">
 <meta property="og:description" content="浏览器工作流程：    1、解析网址（URL），将域名解析成IP地址（通过DNS解析器）    2、从具有IP地址的内存中将IP地址取出    3、生成请求信息    4、并委托操作系统向Web服务器发送请求">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;12.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;13.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;14.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;15.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;16.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;17.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;18.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;19.%5Bng">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;20.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;21.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;22.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;23.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;12.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;13.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;14.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;15.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;16.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;17.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;18.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;19.%5Bng">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;20.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;21.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;22.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;23.png">
 <meta property="article:published_time" content="2020-04-11T03:38:26.000Z">
-<meta property="article:modified_time" content="2020-04-11T03:48:34.836Z">
+<meta property="article:modified_time" content="2020-04-11T04:16:19.183Z">
 <meta property="article:author" content="耐清">
 <meta property="article:tag" content="网络">
 <meta property="article:tag" content="tcp&#x2F;ip">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;12.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;articles&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84&#x2F;12.png">
 
-<link rel="canonical" href="http://yoursite.com/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF.html">
+<link rel="canonical" href="http://yoursite.com/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84.html">
 
 
 <script id="page-configurations">
@@ -220,7 +220,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/weixintouxiang.jpg">
@@ -244,7 +244,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-11 11:38:26 / 修改时间：11:48:34" itemprop="dateCreated datePublished" datetime="2020-04-11T11:38:26+08:00">2020-04-11</time>
+              <time title="创建时间：2020-04-11 11:38:26 / 修改时间：12:16:19" itemprop="dateCreated datePublished" datetime="2020-04-11T11:38:26+08:00">2020-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,9 +285,9 @@
         <p>浏览器工作流程：<br>    1、解析网址（URL），将域名解析成IP地址（通过DNS解析器）<br>    2、从具有IP地址的内存中将IP地址取出<br>    3、生成请求信息<br>    4、并委托操作系统向Web服务器发送请求</p>
 <a id="more"></a>
 
-<p>Socket库：<br>    其中包含的程序组件可以让其他应用程序调用操作系统的网络功能<br>DNS解析器（gethostbyname）：<br>    1、一段程序，包含在操作系统的Socket库中，是一个用来向DNS服务器发出查询信息的DNS客户端<br>    2、可以直接从应用程序中调用，首先生成查询信息并发送到DNS服务器（发送和接收的操作会委托给操作系统中的协议栈来进行）<br>    3、然后接收DNS服务器返回的响应信息，取出其中的IP地址<br>    4、将IP地址写入浏览器指定的内存地址中<br><img src="12.png" alt=""></p>
-<p>具体流程<br><img src="13.png" alt=""><br>DNS服务器的基本工作：<br><img src="14.png" alt=""></p>
-<p>根域的DNS服务器：<br>    分配给根域DNS服务器的IP地址全世界仅有13个，其相关信息已包含在DNS服务器程序的配置文件中，用于从客户端找到根域服务器<br>DNS服务器之间的查询操作：<br><img src="15.png" alt=""><br>DNS服务器中的缓存：<br>    DNS服务器会记住之前查询过的域名，即存放在缓存中，但缓存的信息具备一个有效期<br>URL的格式：<br><img src="16.png" alt=""><br>IP地址的表示：<br><img src="17.png" alt=""><br>DNS服务器的IP地址：<br>    作为TCP/IP的一个设置项目事先设置好的，不需要再去查询<br>网络号和主机号：<br><img src="18.png" alt=""><br>端口号:<br>    用来识别要连接的服务器程序的编号<br>CGI：<br>    对Web服务器程序调用其他程序的规则所做的定义<br>CGI程序：<br>    按照CGI规范来工作的程序<br>HTTP协议：<br>    定义了客户端和服务器之间交互的信息内容和步骤<br>HTTP的基本思路：<br><img src="19.%5Bng" alt=""><br>请求信息：<br>    1、方法：<br>        指名让服务器完成怎样的工作<br>    2、URI（Uniform Resource indentifier）：<br>        各种访问目标，如存放数据的文件名或一个CGI程序的文件名<br>    3、头字段（可有可无的附加信息）<br>    4、数据<br>响应信息：<br>    1、状态码<br>        一个数字，用来向程序告知执行的结果<br>    2、头字段<br>    3、网页数据<br><img src="20.png" alt=""><br>两种信息的结构：<br><img src="21.png" alt=""><br>响应短语：<br>    一段文字，用来告诉人们执行的结果<br>HTTP的主要方法：<br><img src="22.png" alt=""><br>GET方法的特点：<br>    能够发送的数据只有几百个字节，超过的话就要用POST方法来发送<br>POST的工作流程：<br>    1、URI会指向服务器中运行的一个应用程序的文件名<br>    2、请求信息中加上传递给该应用程序或脚本的数据<br>    3、服务器将数据传递给该应用程序或脚本<br>    4、服务器接收应用程序输出的结构，并存放在响应信息中，返回给客户端<br><img src="23.png" alt=""><br>当网页有图片时的处理情况：<br>    1、当网页中包含图片时，会在网页中的相应位置嵌入表示图片文件的标签的控制信息。<br>    2、浏览器会在显示文字时搜索相应的标签，当遇到图片相关的标签时，会在屏幕上留出用来显示图片的空间，然后再次访问 Web 服务器，按照标签中指定的文件名向 Web 服务器请求获取相应的图片并显示在预留的空间中。<br>    3、这个步骤和获取网页文件时一样，只要在 URI 部分写上图 片的文件名并生成和发送请求消息就可以了。 由于每条请求消息中只能写 1 个 URI，所以每次只能获取 1 个文件， 如果需要获取多个文件，必须对每个文件单独发送 1 条请求。<br>    4、比如 1 个 网页中包含 3 张图片，那么获取网页加上获取图片，一共需要向 Web 服务 器发送 4 条请求。</p>
+<p>Socket库：<br>    其中包含的程序组件可以让其他应用程序调用操作系统的网络功能<br>DNS解析器（gethostbyname）：<br>    1、一段程序，包含在操作系统的Socket库中，是一个用来向DNS服务器发出查询信息的DNS客户端<br>    2、可以直接从应用程序中调用，首先生成查询信息并发送到DNS服务器（发送和接收的操作会委托给操作系统中的协议栈来进行）<br>    3、然后接收DNS服务器返回的响应信息，取出其中的IP地址<br>    4、将IP地址写入浏览器指定的内存地址中<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/12.png" alt></p>
+<p>具体流程<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/13.png" alt><br>DNS服务器的基本工作：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/14.png" alt></p>
+<p>根域的DNS服务器：<br>    分配给根域DNS服务器的IP地址全世界仅有13个，其相关信息已包含在DNS服务器程序的配置文件中，用于从客户端找到根域服务器<br>DNS服务器之间的查询操作：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/15.png" alt><br>DNS服务器中的缓存：<br>    DNS服务器会记住之前查询过的域名，即存放在缓存中，但缓存的信息具备一个有效期<br>URL的格式：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/16.png" alt><br>IP地址的表示：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/17.png" alt><br>DNS服务器的IP地址：<br>    作为TCP/IP的一个设置项目事先设置好的，不需要再去查询<br>网络号和主机号：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/18.png" alt><br>端口号:<br>    用来识别要连接的服务器程序的编号<br>CGI：<br>    对Web服务器程序调用其他程序的规则所做的定义<br>CGI程序：<br>    按照CGI规范来工作的程序<br>HTTP协议：<br>    定义了客户端和服务器之间交互的信息内容和步骤<br>HTTP的基本思路：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/19.%5Bng" alt><br>请求信息：<br>    1、方法：<br>        指名让服务器完成怎样的工作<br>    2、URI（Uniform Resource indentifier）：<br>        各种访问目标，如存放数据的文件名或一个CGI程序的文件名<br>    3、头字段（可有可无的附加信息）<br>    4、数据<br>响应信息：<br>    1、状态码<br>        一个数字，用来向程序告知执行的结果<br>    2、头字段<br>    3、网页数据<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/20.png" alt><br>两种信息的结构：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/21.png" alt><br>响应短语：<br>    一段文字，用来告诉人们执行的结果<br>HTTP的主要方法：<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/22.png" alt><br>GET方法的特点：<br>    能够发送的数据只有几百个字节，超过的话就要用POST方法来发送<br>POST的工作流程：<br>    1、URI会指向服务器中运行的一个应用程序的文件名<br>    2、请求信息中加上传递给该应用程序或脚本的数据<br>    3、服务器将数据传递给该应用程序或脚本<br>    4、服务器接收应用程序输出的结构，并存放在响应信息中，返回给客户端<br><img src="/articles/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BF%A1%E6%81%AF%E7%9A%84/23.png" alt><br>当网页有图片时的处理情况：<br>    1、当网页中包含图片时，会在网页中的相应位置嵌入表示图片文件的标签的控制信息。<br>    2、浏览器会在显示文字时搜索相应的标签，当遇到图片相关的标签时，会在屏幕上留出用来显示图片的空间，然后再次访问 Web 服务器，按照标签中指定的文件名向 Web 服务器请求获取相应的图片并显示在预留的空间中。<br>    3、这个步骤和获取网页文件时一样，只要在 URI 部分写上图 片的文件名并生成和发送请求消息就可以了。 由于每条请求消息中只能写 1 个 URI，所以每次只能获取 1 个文件， 如果需要获取多个文件，必须对每个文件单独发送 1 条请求。<br>    4、比如 1 个 网页中包含 3 张图片，那么获取网页加上获取图片，一共需要向 Web 服务 器发送 4 条请求。</p>
 <p>收发数据的流程：协议栈执行，每个过程都调用了Socket库中的程序组件<br>    （1）创建套接字（创建套接字阶段）<br>            调用Socket库中的socket程序组件来创建，创建完之后协议栈会返回一个描述符，应用程序会将收到的描述符存放在内存中。描述符是用来识别不同的套接字的<br>    （2）将管道连接到服务器端的套接字上（连接阶段）<br>            1、应用程序通过调用 Socket 库中的名为 connect 的程序组件来完成。这里的要点是当调用 connect 时，需要指定描述符、 服务器 IP 地址和端口号这 3 个参数（端口号大概可以理解为区分服务器上某个具体套接字）<br>            2、服务器上的端口号是事先规定好的<br>            3、客户端在创建套接字时，协议栈会为这个套接字随便分配一个端口号 A。接下来当协议栈执行连接操作时，会将这个随便分配的端口号通知给服务器<br>    （3）收发数据（通信阶段）<br>            1、发送：应用程序通过调用Socket库中的write程序组件来完成，当调用 write 时，需要指定描述符（确定是哪一个套接字）和发送数据，然后协议栈就会将数据发送到服务器。<br>            2、接收：调用Socket 库中的 read 程序组件委托协议栈来完成的，需要指定用于存放接收到的响应消息的内存地址，这一内存地址称为接收缓冲区。由于接收缓冲区是一块位于应用程序内部的内存空间，因此当消息被存放到接收缓冲区中时，就相当于已经转交给了应用程序。<br>    （4）断开管道并删除套接字（断开阶段）<br>            要调用 Socket 库的 close 程序组件进入断开阶段</p>
 
     </div>
